@@ -346,6 +346,15 @@
   .avatar .init{font-size:64px;color:var(--accent4)}
   .avatar .ph{font-size:11px;color:var(--muted)}
 
+  /* auto-panning flow chart */
+  .flowscroll{
+    position:relative;overflow:hidden;display:block;
+    border:1px solid var(--line);border-radius:12px;background:#0e0a14;
+  }
+  .flowscroll img{width:100%;max-width:none;display:block}
+  .slide.active .flowscroll img{animation:flowpan 40s ease-in-out 1s infinite alternate}
+  @keyframes flowpan{0%{transform:translateY(0)}100%{transform:translateY(-1530px)}}
+
   /* link grid (closing slide) */
   .lgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
   .lcard{
@@ -663,6 +672,26 @@
   </div>
 </section>
 
+<!-- 13 · THE LOOP (before the demos) -->
+<section class="slide" data-notes="The loop every jammer knows: theme, panic, core loop, cut scope to 30%, greybox, art, theme fit, upload at 4am. Both of my games lived this exact loop.">
+  <span class="kicker">01 · Why we jam</span>
+  <h2>The loop every jammer knows</h2>
+  <div class="bigshot">
+    <div class="shot contain"><img src="assets/jam-loop.jpg" alt="Eight-step game jam loop comic"></div>
+  </div>
+</section>
+
+<!-- 11 · THE SHIFT -->
+<section class="slide" data-notes="From GGJ 2025 to GMTK 2026 the room changed completely. With tools like Claude Code the panic is gone — you can physically SEE developers relaxing. Less 3am panic-typing, more time at the art table. (Swap the panels for your own meme image when ready: assets/shift-meme.png)">
+  <span class="kicker pink">02 · The shift</span>
+  <h2>The AI revolution in the jam room</h2>
+  <div class="meme">
+    <div class="half a"><span class="big">😴💤</span><span class="lbl">CODERS<br>(the AI is typing)</span></div>
+    <div class="half b"><span class="big">🎨🔥</span><span class="lbl">ARTISTS<br>(furiously painting)</span></div>
+  </div>
+  <p class="impact">GGJ 2025 → GMTK 2026: THE PANIC IS GONE</p>
+</section>
+
 <!-- 12 · GMTK @ XSOLLA CLUB -->
 <section class="slide" data-notes="And this summer the GMTK Game Jam came to Tel Aviv — I hosted the community site at Xsolla Club. 23-26 July, open to everyone, no experience needed, and the room was FULL. Huge thanks to Xsolla Club, GameDevelop{Her}, GameIS and GameDev Drinkup TLV — and to all the friends who helped make it happen.">
   <span class="kicker blue">Local pride 🇮🇱 · and then…</span>
@@ -681,23 +710,19 @@
   </div>
 </section>
 
-<!-- 11 · THE SHIFT -->
-<section class="slide" data-notes="From GGJ 2025 to GMTK 2026 the room changed completely. With tools like Claude Code the panic is gone — you can physically SEE developers relaxing. Less 3am panic-typing, more time at the art table. (Swap the panels for your own meme image when ready: assets/shift-meme.png)">
-  <span class="kicker pink">02 · The shift</span>
-  <h2>The AI revolution in the jam room</h2>
-  <div class="meme">
-    <div class="half a"><span class="big">😴💤</span><span class="lbl">CODERS<br>(the AI is typing)</span></div>
-    <div class="half b"><span class="big">🎨🔥</span><span class="lbl">ARTISTS<br>(furiously painting)</span></div>
-  </div>
-  <p class="impact">GGJ 2025 → GMTK 2026: THE PANIC IS GONE</p>
-</section>
-
-<!-- 13 · THE LOOP (before the demos) -->
-<section class="slide" data-notes="Before the demos — the loop every jammer knows: theme, panic, core loop, cut scope to 30%, greybox, art, theme fit, upload at 4am. Both of my games lived this exact loop.">
-  <span class="kicker orange">03 · Into the demos</span>
-  <h2>The loop every jammer knows</h2>
-  <div class="bigshot">
-    <div class="shot contain"><img src="assets/jam-loop.jpg" alt="Eight-step game jam loop comic"></div>
+<!-- 13b · GMTK 2026 · WHAT WE MADE -->
+<section class="slide" data-notes="The theme was COUNTDOWN. And here is everything our community site made that weekend — click the card to open the itch collection with ALL the games from our site, every one playable in the browser. Go play them, rate them, leave comments.">
+  <span class="kicker gold">…and what we made</span>
+  <h2>GMTK 2026 · theme: <span class="hl4">"COUNTDOWN"</span></h2>
+  <div class="cols" style="flex:1;min-height:0;align-items:center">
+    <div class="col" style="flex:.9;display:flex;align-self:stretch"><div class="shot contain" style="flex:1;background:#0d0312"><img src="assets/gmtk-2026.png" alt="GMTK Game Jam 2026"></div></div>
+    <div class="col" style="display:flex;flex-direction:column;gap:20px;justify-content:center">
+      <a class="lcard cloud" href="https://itch.io/c/7864301/gmtk-2026-open-community-site-game-jam-submissions" target="_blank" rel="noopener">
+        <span class="ic">🕹️</span>
+        <span class="tx"><b style="font-size:22px">Play ALL the games from our site</b><span class="lk">itch.io → GMTK 2026 community submissions</span></span>
+      </a>
+      <p class="small muted">Made in one weekend at Xsolla Club — every single one playable in the browser.</p>
+    </div>
   </div>
 </section>
 
@@ -803,7 +828,7 @@
   <h2>Game design was the hard part</h2>
   <div class="cols" style="flex:1;min-height:0">
     <div class="col" style="flex:.8;display:flex;flex-direction:column">
-      <a style="flex:1;min-height:0;display:flex" href="https://claude.ai/artifact/GKLMzZLFQuRcYeozt2T6rP" target="_blank" rel="noopener"><span class="shot contain" style="flex:1;background:#0e0a14"><img src="assets/bb-flow-chart.png" alt="Bunny Boo flow chart — tea party, teach, contradict, betray, two endings, petal costs"></span></a>
+      <a style="flex:1;min-height:0;display:flex" href="https://claude.ai/artifact/GKLMzZLFQuRcYeozt2T6rP" target="_blank" rel="noopener"><span class="flowscroll" style="flex:1"><img src="assets/bb-flow-page.png" alt="Bunny Boo Flow artifact — flow chart, room cards and open questions, auto-scrolling"></span></a>
       <p class="caption">the full flow, designed with Claude → <span class="mono" style="font-size:13px">claude.ai artifact · click to open</span></p>
     </div>
     <div class="col" style="display:flex;flex-direction:column;justify-content:center;gap:18px">
