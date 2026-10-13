@@ -697,6 +697,16 @@
   </div>
 </section>
 
+<!-- 14b · THE GAME ITSELF -->
+<section class="slide" data-notes="This is the game: Tavern Stew. Read the customer's outfit for clues, then click the menu book and serve the stew they'd want. The footage plays by itself — point at the outfit tells while it runs.">
+  <span class="kicker orange">03 · Tavern Stew</span>
+  <h2>The game 🍲</h2>
+  <div class="bigshot">
+    <div class="shot" style="background:#000"><video class="autovid" src="assets/clips/tavern-gameplay.mp4" muted loop playsinline preload="auto" style="width:100%;height:100%;object-fit:contain;display:block"></video></div>
+  </div>
+  <p class="caption">Read the customer's outfit → pick the menu → serve the right stew</p>
+</section>
+
 <!-- 13 · DEV TOOLS TO GAMEPLAY -->
 <section class="slide" data-notes="We didn't just build the game — we built the factory. TavernStewStudio: a bespoke EditorWindow where each customer is a LEVEL — pick a visitor, their portrait/order/napkin note load into the scene, editable without Play mode. AuditSlots linted every SerializeField; BuildWebGL shipped one-click itch builds. DEMO MOMENT: switch to Unity — Studio, flip Tavern/Kitchen, load a visitor, run Audit Slots, show PASS. (Replace gif with the editor→gameplay transition gif when ready)">
   <span class="kicker orange">03 · Tavern Stew</span>
@@ -903,6 +913,9 @@ Running <b>34</b> tests using 4 workers
       var pl=el.querySelector('.play'); if(pl) pl.style.display='';
       delete el.dataset.embedded; delete el.dataset.orig;
     });
+    document.querySelectorAll('video.autovid').forEach(function(v){v.pause()});
+    var av=slides[k].querySelector('video.autovid');
+    if(av){try{av.currentTime=0;av.play().catch(function(){});}catch(e){}}
     document.getElementById('pager').textContent=(k+1)+' / '+n;
     document.getElementById('hudbar').style.width=((k+1)/n*100)+'%';
     document.getElementById('notesbody').textContent=slides[k].dataset.notes||'—';
