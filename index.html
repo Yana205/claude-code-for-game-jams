@@ -136,11 +136,38 @@
   }
   .lesson h3{margin-bottom:6px}
 
-  table.ref{width:100%;border-collapse:collapse;font-size:19px}
+  table.ref{width:100%;border-collapse:collapse;font-size:17px}
   table.ref td{padding:8px 14px;border-bottom:1px solid var(--line);vertical-align:top}
   table.ref td:first-child{color:var(--accent2);font-weight:700;white-space:nowrap}
   a{color:var(--accent3);text-decoration:none}
   a:hover{text-decoration:underline}
+
+  /* tipping scale (new bottleneck) */
+  .scalewrap{position:relative;height:380px}
+  .scalewrap .beam{
+    position:absolute;left:50%;top:240px;width:720px;height:12px;margin-left:-360px;
+    background:var(--muted);border-radius:6px;transform:rotate(8deg);
+  }
+  .scalewrap .pivot{
+    position:absolute;left:50%;top:252px;margin-left:-30px;
+    border-left:30px solid transparent;border-right:30px solid transparent;
+    border-bottom:110px solid var(--panel);
+  }
+  .beam .pan{
+    position:absolute;bottom:12px;width:300px;display:flex;flex-direction:column;align-items:center;gap:4px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;
+    font-family:"Press Start 2P",monospace;font-size:14px;box-shadow:var(--shadow);text-align:center;
+    transform:rotate(-8deg);transform-origin:bottom center;
+  }
+  .beam .pan .pic{font-size:42px}
+  .beam .pan .small{font-family:"Rubik",sans-serif}
+  .beam .pan.up{left:-30px}
+  .beam .pan.down{right:-30px;border-color:var(--accent4)}
+
+  /* qr */
+  .qrcol{flex:none;display:flex;flex-direction:column;align-items:center;gap:12px;justify-content:center}
+  .qrbox{background:#fff;padding:14px;border-radius:12px;box-shadow:var(--shadow)}
+  .qrbox img,.qrbox canvas{display:block}
 
   /* gallery overview */
   #gallery{
@@ -312,16 +339,39 @@
   </div>
 </section>
 
-<!-- 7 · THE SHIFT -->
-<section class="slide" data-notes="GGJ 2025 → GGJ 2026 → GMTK 2026: you can physically SEE developers relaxing. Less 3am panic-typing, more time at the art table. Coding used to dictate scope; now artists and designers are the most precious resource.">
+<!-- 7 · THE VIBE SHIFT -->
+<section class="slide" data-notes="From GGJ 2025 to GMTK 2026, the atmosphere in the jam room has completely transformed. With tools like Claude Code the panic is gone — you can physically SEE developers relaxing. Less 3am panic-typing, more time at the art table.">
   <span class="kicker pink">02 · The shift</span>
-  <h2>The AI revolution in the jam room</h2>
-  <ul>
-    <li><b>GGJ 2025 → GGJ 2026 → GMTK 2026:</b> the vibe completely changed — less 3 a.m. panic-typing, more time at the art table</li>
-    <li><b>The roles have flipped:</b> coding was the bottleneck that dictated scope. Now <span class="hl4">artists &amp; designers are the most precious resource</span> in the room</li>
-    <li>AI writes the boilerplate; <b>humans write the soul</b></li>
-    <li><b>Tonight's evidence:</b> in both of my jam repos, the AI's best output was <span class="hl2">editor tools, build pipelines &amp; test instruments</span> — work a jam team never had time for before</li>
-  </ul>
+  <h2>The vibe shift</h2>
+  <div class="cols">
+    <div class="col card" style="text-align:center">
+      <span class="tag" style="color:var(--accent4)">GGJ 2025</span>
+      <p style="font-size:64px;line-height:1.2">😱⌨️🌙</p>
+      <h3>3 a.m. panic-typing</h3>
+      <p class="small muted">code is the clock, everyone waits on it</p>
+    </div>
+    <div class="col card" style="text-align:center;border-color:var(--accent2)">
+      <span class="tag" style="color:var(--accent2)">GGJ 2026 → GMTK 2026</span>
+      <p style="font-size:64px;line-height:1.2">☕🎨🤖</p>
+      <h3>Coffee while the tools run</h3>
+      <p class="small muted">you can physically <b style="color:var(--ink)">see</b> developers relaxing</p>
+    </div>
+  </div>
+  <p class="small"><span class="hl2">★ Tonight's evidence:</span> two of my own jam repos — where the AI's best output was <b>editor tools, build pipelines &amp; test instruments</b>, work a jam team never had time for before.</p>
+</section>
+
+<!-- 7b · THE NEW BOTTLENECK -->
+<section class="slide" data-notes="Coding used to dictate the entire scope of a jam game. Now artists and designers are the most precious resource in the room. The roles have flipped.">
+  <span class="kicker pink">02 · The shift</span>
+  <h2>The new bottleneck</h2>
+  <div class="scalewrap">
+    <div class="pivot"></div>
+    <div class="beam">
+      <div class="pan up"><span class="pic">⌨️</span><span>CODE</span><span class="small muted">boilerplate → AI</span></div>
+      <div class="pan down"><span class="pic">🎨</span><span>ART &amp; DESIGN</span><span class="small muted">the most precious resource in the room</span></div>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:30px"><b>AI writes the boilerplate.</b> <span class="hl">Humans write the soul.</span></p>
 </section>
 
 <!-- 8 · TAVERN STEW INTRO -->
@@ -400,7 +450,7 @@
   <h2>Bunny Boo <span class="muted">· Brackeys "Trust No One" · pure web</span></h2>
   <ul>
     <li>Trust-horror: <b>a bunny tells you things… that may be lies</b> 🐰</li>
-    <li>Sometimes Unity is too heavy → Claude helped build a <b>standalone web engine</b>: one <code>index.html</code>, playable on GitHub Pages &amp; itch.io</li>
+    <li><b class="hl3">Pure web engine. Zero bloat.</b> Sometimes Unity is too heavy → Claude helped build a <b>standalone engine</b>: one <code>index.html</code>, playable on GitHub Pages &amp; itch.io</li>
     <li>A <b>GDD skill</b> structured the design first: floors, the <i>teach → contradict → betray</i> arc, and an explicit list of <b class="hl3">open questions</b></li>
     <li class="win">The testbed exists to answer those questions — <b>every feature traces back to one</b></li>
   </ul>
@@ -481,13 +531,17 @@
 <!-- 18 · REFERENCES -->
 <section class="slide" data-notes="Reference sheet — this deck is online, link on screen. Q&A.">
   <span class="kicker">Thanks! · Q&amp;A</span>
-  <h2>Take the links home</h2>
+  <h2>Scan for tech, tooling &amp; repos</h2>
   <div class="cols">
+    <div class="qrcol">
+      <div class="qrbox" id="qr"></div>
+      <p class="mono small" style="font-size:14px">github.com/Yana205/<br>claude-code-for-game-jams</p>
+    </div>
     <div class="col">
       <table class="ref">
-        <tr><td>Unity CLI</td><td><a href="https://unity.com/blog/meet-the-unity-cli">unity.com/blog/meet-the-unity-cli</a></td></tr>
-        <tr><td>Unity × Claude Code</td><td><a href="https://github.com/Unity-Technologies/unity-agent-plugin">github.com/Unity-Technologies/unity-agent-plugin</a></td></tr>
-        <tr><td>Unity-MCP</td><td><a href="https://github.com/IvanMurzak/Unity-MCP">github.com/IvanMurzak/Unity-MCP</a> · Ivan Murzak</td></tr>
+        <tr><td>Unity CLI</td><td><a href="https://unity.com/blog/meet-the-unity-cli">Meet the Unity CLI</a></td></tr>
+        <tr><td>Unity × Claude Code</td><td><a href="https://github.com/Unity-Technologies/unity-agent-plugin">unity-agent-plugin</a></td></tr>
+        <tr><td>Unity-MCP</td><td><a href="https://github.com/IvanMurzak/Unity-MCP">IvanMurzak/Unity-MCP</a></td></tr>
         <tr><td>MCP</td><td><a href="https://modelcontextprotocol.io">modelcontextprotocol.io</a></td></tr>
         <tr><td>Claude Code</td><td><a href="https://docs.claude.com/en/docs/claude-code/overview">docs.claude.com</a></td></tr>
         <tr><td>GDD skills</td><td><a href="https://github.com/Donchitos/Claude-Code-Game-Studios">Claude-Code-Game-Studios</a></td></tr>
@@ -495,12 +549,12 @@
     </div>
     <div class="col">
       <table class="ref">
-        <tr><td>SO architecture</td><td><a href="https://unity.com/how-to/architect-game-code-scriptable-objects">Ryan Hipple's Unite '17 pattern</a></td></tr>
+        <tr><td>SO architecture</td><td><a href="https://unity.com/how-to/architect-game-code-scriptable-objects">Hipple's Unite '17 pattern</a></td></tr>
         <tr><td>Level-as-data</td><td><a href="https://ldtk.io">LDtk</a> · <a href="https://www.mapeditor.org">Tiled</a> · <a href="https://ledoux.itch.io/bitsy">Bitsy</a></td></tr>
         <tr><td>Playwright</td><td><a href="https://playwright.dev">playwright.dev</a></td></tr>
         <tr><td>itch.io tooling</td><td><a href="https://itch.io/docs/creators/html5">HTML5 docs</a> · <a href="https://itch.io/docs/butler/">butler</a></td></tr>
         <tr><td>My games</td><td><a href="https://yanaifraimov.itch.io/">yanaifraimov.itch.io</a></td></tr>
-        <tr><td>These slides</td><td><a href="https://github.com/Yana205/claude-code-for-game-jams">github.com/Yana205/claude-code-for-game-jams</a></td></tr>
+        <tr><td>These slides</td><td><a href="https://github.com/Yana205/claude-code-for-game-jams">this repo ← the QR</a></td></tr>
       </table>
     </div>
   </div>
@@ -517,8 +571,15 @@
 <div class="navzone" id="zprev" title="Previous"></div>
 <div class="navzone" id="znext" title="Next"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 (function(){
+  try{
+    if(window.QRCode) new QRCode(document.getElementById('qr'),{
+      text:'https://github.com/Yana205/claude-code-for-game-jams',
+      width:210,height:210,correctLevel:QRCode.CorrectLevel.M
+    });
+  }catch(e){}
   var slides=[].slice.call(document.querySelectorAll('.slide'));
   var i=0, n=slides.length;
   var notesOn=false;
