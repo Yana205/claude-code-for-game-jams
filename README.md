@@ -17,6 +17,17 @@ Slides for the Oct 13, 2026 meetup talk by [@yan](https://yanaifraimov.itch.io/)
 
 Slides are deep-linkable: `#/5` jumps to slide 5.
 
+### Instant video playback (optional, offline-safe)
+
+Video slides stream from YouTube on click. For instant, Wi-Fi-proof playback,
+drop short MP4 clips (your own recordings) into `assets/clips/` with these names —
+the deck probes for them on load and plays the local file instead:
+
+`hungry-knight.mp4` · `celeste-pico8.mp4` · `toodee.mp4` · `uvsu-jam.mp4` ·
+`uvsu-trailer.mp4` · `veggie-top20.mp4` · `gmtk-100.mp4`
+
+Missing clips fall back to the YouTube embed automatically.
+
 ## What's inside
 
 A single-file deck (`index.html`, no build step) covering:
