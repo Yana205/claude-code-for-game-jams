@@ -164,6 +164,13 @@
   .beam .pan.up{left:-30px}
   .beam .pan.down{right:-30px;border-color:var(--accent4)}
 
+  /* linklist (closing slide) */
+  .linklist{gap:20px}
+  .linklist li{padding-left:0;display:flex;gap:16px;align-items:flex-start;font-size:21px}
+  .linklist li::before{content:none}
+  .li-ic{width:30px;height:30px;flex:none;margin-top:3px;border-radius:6px}
+  .li-em{font-size:26px;flex:none;width:30px;text-align:center}
+
   /* chips */
   .chips{display:flex;gap:16px;flex-wrap:wrap}
   .chip{
@@ -522,20 +529,23 @@
 </section>
 
 <!-- 18 · REFERENCES -->
-<section class="slide" data-notes="Leave this up during Q&A. The QR goes to the repo — its README carries the full reference sheet (SO architecture, LDtk, butler, Playwright, GDD links, MCP…), so people can find the niche tools on their own time.">
+<section class="slide" data-notes="Leave this up during Q&A. The QR opens these slides live; the repo (link under the QR) carries the full reference sheet. Shout-outs: Shahar Bar's blog on the Unity CLI + his AI-gamedev WhatsApp group and meetups; GameIS, the Israeli game-dev community; GameDevTLV — next meetup Nov 11: Concept Art for Gaming (Tamar Gin, Art Director @ Casual Friday) and Ads in Games (Idan Tabachnik, VP Product @ Anzu).">
   <span class="kicker">Thanks! · Q&amp;A</span>
-  <h2>Take the links home</h2>
   <div class="cols" style="align-items:center">
     <div class="qrcol">
       <div class="qrbox" id="qr"></div>
-      <p class="mono small" style="font-size:15px;text-align:center">github.com/Yana205/<br>claude-code-for-game-jams</p>
+      <p class="mono small" style="font-size:15px;text-align:center;line-height:1.7">these slides, live ↑<br><span class="muted">full reference sheet:<br>github.com/Yana205/claude-code-for-game-jams</span></p>
     </div>
     <div class="col">
-      <ul style="gap:28px">
-        <li><b>Official Unity CLI</b> + Claude Code plugin<br><span class="mono small muted">unity.com/blog/meet-the-unity-cli</span></li>
-        <li><b>Ivan Murzak's Unity-MCP</b><br><span class="mono small muted">github.com/IvanMurzak/Unity-MCP</span></li>
-        <li><b>My games</b><br><span class="mono small muted">yanaifraimov.itch.io</span></li>
-        <li class="win"><b>These slides + the full reference sheet</b><br><span class="mono small" style="color:var(--accent2)">← scan the QR</span></li>
+      <ul class="linklist">
+        <li>
+          <svg class="li-ic" viewBox="0 0 448 512" aria-label="LinkedIn"><path fill="#0a66c2" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+          <span><b>Yana Ifraimov</b><br><span class="mono small muted">linkedin.com/in/yana-ifraimov · yanaifraimov.itch.io</span></span>
+        </li>
+        <li><span class="li-em">📝</span><span><b>Shahar Bar — Unity CLI &amp; AI-gamedev blog</b><br><span class="mono small muted">sbsgames.dev/blog/codex-unity-plugin</span></span></li>
+        <li><span class="li-em">💬</span><span><b>AI GameDev — WhatsApp group &amp; meetups</b> <span class="muted small">(by Shahar)</span><br><span class="mono small muted">chat.whatsapp.com/K9dNTd4quzw5gLxn7a0VT5</span></span></li>
+        <li><span class="li-em">🕹️</span><span><b>GameIS</b> — the Israeli game-dev community<br><span class="mono small muted">facebook.com → GameIS group</span></span></li>
+        <li><span class="li-em">📅</span><span><b>GameDevTLV — next meetup 11.11</b><br><span class="small muted">Concept Art for Gaming · Tamar Gin (Casual Friday) &nbsp;+&nbsp; Ads in Games · Idan Tabachnik (Anzu)</span><br><span class="mono small muted">meetup.com/game-dev-israel</span></span></li>
       </ul>
     </div>
   </div>
@@ -557,7 +567,7 @@
 (function(){
   try{
     if(window.QRCode) new QRCode(document.getElementById('qr'),{
-      text:'https://github.com/Yana205/claude-code-for-game-jams',
+      text:'https://yana205.github.io/claude-code-for-game-jams/',
       width:310,height:310,correctLevel:QRCode.CorrectLevel.M
     });
   }catch(e){}

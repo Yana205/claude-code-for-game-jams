@@ -45,6 +45,16 @@ A single-file deck (`index.html`, no build step) covering:
 | itch.io HTML5 + butler | Hosting rules the zip-build tools target, and the upload CLI | [HTML5 docs](https://itch.io/docs/creators/html5) · [butler](https://itch.io/docs/butler/) |
 | My portfolio | Both jam games live here | [yanaifraimov.itch.io](https://yanaifraimov.itch.io/) |
 
+### Community 🇮🇱
+
+| Who | What | Link |
+| --- | --- | --- |
+| Yana Ifraimov | The speaker — say hi! | [LinkedIn](https://www.linkedin.com/in/yana-ifraimov/) · [itch.io](https://yanaifraimov.itch.io/) |
+| Shahar Bar | Blog on the Unity CLI & AI gamedev | [sbsgames.dev/blog/codex-unity-plugin](https://sbsgames.dev/blog/codex-unity-plugin) |
+| AI GameDev (by Shahar) | WhatsApp group & meetups | [Join the WhatsApp group](https://chat.whatsapp.com/K9dNTd4quzw5gLxn7a0VT5) |
+| GameIS | The Israeli game-dev community | [Facebook group](https://www.facebook.com/share/g/1QhqD5TDvj/) |
+| GameDevTLV | Next meetup **Nov 11**: Concept Art for Gaming (Tamar Gin, Art Director @ Casual Friday) · Ads in Games (Idan Tabachnik, VP Product @ Anzu) | [meetup.com/game-dev-israel](https://www.meetup.com/game-dev-israel/events/316593508/) |
+
 ### Inspiration — jam games that made it big
 
 | Game | Credit · jam origin | Link |
