@@ -113,6 +113,18 @@
     animation:bob 3.2s ease-in-out infinite;
   }
   @keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-16px) rotate(2deg)}}
+  .mymascot{
+    width:420px;flex:none;image-rendering:pixelated;
+    filter:drop-shadow(0 16px 26px rgba(0,0,0,.55));
+    animation:bob 3.6s ease-in-out infinite;
+  }
+  .flames{display:flex;gap:26px;justify-content:center;font-size:46px}
+  .slide.active .flames span{display:inline-block;animation:flick .8s ease-in-out infinite alternate}
+  .slide.active .flames span:nth-child(2){animation-delay:.15s}
+  .slide.active .flames span:nth-child(3){animation-delay:.3s}
+  .slide.active .flames span:nth-child(4){animation-delay:.45s}
+  .slide.active .flames span:nth-child(5){animation-delay:.6s}
+  @keyframes flick{from{transform:scale(.9) rotate(-7deg)}to{transform:scale(1.2) rotate(7deg)}}
   @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
   .slide.active li,.slide.active .card,.slide.active .chip,.slide.active .step,
   .slide.active .fcard,.slide.active .ytcard,.slide.active .wanted,.slide.active .jamcard,
@@ -400,7 +412,7 @@
   <span class="kicker pink">Hi!</span>
   <h2>About me</h2>
   <div class="cols" style="align-items:center">
-    <div class="avatar"><span class="init">YI</span><span class="ph">📷 photo here</span></div>
+    <img class="mymascot" src="assets/yana-mascot.png" alt="Yana's pixel mascot — ninja headband, headphones, retro PC, ramen and art tablet">
     <div class="col">
       <ul>
         <li><b>Yana Ifraimov</b> (24)</li>
@@ -437,15 +449,6 @@
     </div>
   </div>
   <p class="punch">"A BRUTAL, BEAUTIFUL<br>SEARCH FOR FUN"</p>
-</section>
-
-<!-- 4 · THE LOOP -->
-<section class="slide" data-notes="The loop every jammer knows: theme, panic, core loop, cut scope to 30%, greybox, art, theme fit, upload at 4am.">
-  <span class="kicker">01 · Why we jam</span>
-  <h2>The loop every jammer knows</h2>
-  <div class="bigshot">
-    <div class="shot contain"><img src="assets/jam-loop.jpg" alt="Eight-step game jam loop comic"></div>
-  </div>
 </section>
 
 <!-- 5 · HOLLOW KNIGHT -->
@@ -580,6 +583,24 @@
   </div>
 </section>
 
+<!-- 12 · GMTK @ XSOLLA CLUB -->
+<section class="slide" data-notes="And this summer the GMTK Game Jam came to Tel Aviv — I hosted the community site at Xsolla Club. 23-26 July, open to everyone, no experience needed, and the room was FULL. Huge thanks to Xsolla Club, GameDevelop{Her}, GameIS and GameDev Drinkup TLV — and to all the friends who helped make it happen.">
+  <span class="kicker blue">Local pride 🇮🇱 · and then…</span>
+  <h2>I hosted one! <span class="hl2">GMTK @ Xsolla Club</span></h2>
+  <div class="cols" style="flex:1;min-height:0">
+    <div class="col" style="flex:.9;display:flex"><div class="shot contain" style="flex:1;background:#14102a"><img src="assets/gmtk-tlv-poster.png" alt="GMTK Game Jam 2026 community site at Xsolla Club TLV — poster"></div></div>
+    <div class="col" style="display:flex;flex-direction:column;justify-content:center;gap:22px">
+      <ul class="tight">
+        <li><b>23–26.07.2026</b> · the community site of GMTK Game Jam, in Tel Aviv</li>
+        <li>Open to everyone — <b>no experience needed</b></li>
+        <li class="win">Thank you <b class="hl">Xsolla Club</b>, <b class="hl4">GameDevelop{Her}</b>, <b class="hl3">GameIS</b> &amp; <b>GameDev Drinkup TLV</b></li>
+        <li class="win">…and <b>all the friends who helped make it happen</b> 💜</li>
+      </ul>
+      <div class="flames"><span>🔥</span><span>🎉</span><span>🔥</span><span>🕹️</span><span>🔥</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- 11 · THE SHIFT -->
 <section class="slide" data-notes="From GGJ 2025 to GMTK 2026 the room changed completely. With tools like Claude Code the panic is gone — you can physically SEE developers relaxing. Less 3am panic-typing, more time at the art table. (Swap the panels for your own meme image when ready: assets/shift-meme.png)">
   <span class="kicker pink">02 · The shift</span>
@@ -591,7 +612,16 @@
   <p class="impact">GGJ 2025 → GMTK 2026: THE PANIC IS GONE</p>
 </section>
 
-<!-- 12 · DEEP DIVE 1 -->
+<!-- 13 · THE LOOP (before the demos) -->
+<section class="slide" data-notes="Before the demos — the loop every jammer knows: theme, panic, core loop, cut scope to 30%, greybox, art, theme fit, upload at 4am. Both of my games lived this exact loop.">
+  <span class="kicker orange">03 · Into the demos</span>
+  <h2>The loop every jammer knows</h2>
+  <div class="bigshot">
+    <div class="shot contain"><img src="assets/jam-loop.jpg" alt="Eight-step game jam loop comic"></div>
+  </div>
+</section>
+
+<!-- 14 · DEEP DIVE 1 -->
 <section class="slide" data-notes="Deep dive 1: Tavern Stew — GMTK jam, Unity point & click: read the customer, cook the right stew. Artists became the most precious resource in the room… so yes, I tried to steal some from the IAC jam site. (Swap the poster for your meme when ready: assets/artist-meme.png)">
   <span class="kicker orange">03 · Deep dive 1</span>
   <h2>Tavern Stew <span class="muted">· GMTK jam · Unity</span></h2>
