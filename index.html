@@ -775,6 +775,16 @@
   </div>
 </section>
 
+<!-- 19a · BUNNY BOO: THE GAME -->
+<section class="slide" data-notes="And this is Bunny Boo: wander the house, talk to the dolls at the tea party — the bunny tells you things, and some of them are lies. Spot the tells. Footage runs by itself.">
+  <span class="kicker blue">04 · Bunny Boo</span>
+  <h2>The game 🐰</h2>
+  <div class="bigshot">
+    <div class="shot" style="background:#000"><video class="autovid" data-trim-end="2" src="assets/clips/bunny-gameplay.mp4" muted loop playsinline preload="auto" style="width:100%;height:100%;object-fit:contain;display:block"></video></div>
+  </div>
+  <p class="caption">Trust no one — the bunny might be lying</p>
+</section>
+
 <!-- 19b · THE PIPELINE -->
 <section class="slide" data-notes="The actual pipeline, start to finish: a GDD skill structured the design and — crucially — listed the OPEN QUESTIONS. Those became story-flow ideas (the teach → contradict → betray arc). Then prototype and playtest the design directly in the web testbed — every feature traces back to one of those questions. And it finishes there too: all the real art authored in Figma, baked into the engine 1:1.">
   <span class="kicker blue">04 · Bunny Boo</span>
@@ -978,6 +988,14 @@ Running <b>34</b> tests using 4 workers
   });
   document.getElementById('znext').addEventListener('click',function(){go(i+1)});
   document.getElementById('zprev').addEventListener('click',function(){go(i-1)});
+
+  /* trimmed autoplay clips: loop back before the last N seconds */
+  document.querySelectorAll('video.autovid[data-trim-end]').forEach(function(v){
+    var cut=parseFloat(v.dataset.trimEnd)||0;
+    v.addEventListener('timeupdate',function(){
+      if(v.duration && v.currentTime > v.duration - cut) v.currentTime = 0;
+    });
+  });
 
   /* local clips: probe assets/clips/ once; existing files play instantly offline */
   var clipsAvailable={};
