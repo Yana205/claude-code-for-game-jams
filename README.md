@@ -49,6 +49,7 @@ A single-file deck (`index.html`, no build step) covering:
 
 | Who | What | Link |
 | --- | --- | --- |
+| ☁️ Indie Games Cloud | Games by the Claude Code Community Meetup devs — **drop yours in!** | [yana205.github.io/indie-games-cloud](https://yana205.github.io/indie-games-cloud/) |
 | Yana Ifraimov | The speaker — say hi! | [LinkedIn](https://www.linkedin.com/in/yana-ifraimov/) · [itch.io](https://yanaifraimov.itch.io/) |
 | Shahar Bar | Blog on the Unity CLI & AI gamedev | [sbsgames.dev/blog/codex-unity-plugin](https://sbsgames.dev/blog/codex-unity-plugin) |
 | AI GameDev (by Shahar) | WhatsApp group & meetups | [Join the WhatsApp group](https://chat.whatsapp.com/K9dNTd4quzw5gLxn7a0VT5) |
