@@ -134,6 +134,40 @@
   .bigshot .shot{flex:1;min-height:0}
   .bigshot .shot img{height:100%}
 
+  /* clickable video thumbs */
+  a.vid{position:relative;display:flex;flex-direction:column;flex:1;min-height:0;color:inherit}
+  a.vid .shot{flex:1;min-height:0}
+  a.vid .shot img{height:100%}
+  a.vid .play{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    background:rgba(205,32,31,.92);color:#fff;font-size:26px;line-height:1;
+    padding:12px 26px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.6);
+    pointer-events:none;
+  }
+  a.vid:hover .play{background:#ff0033}
+  .vidpair{align-items:center !important}
+  .vidpair .proto,.vidpair .final{flex:1 !important}
+  .vidpair .proto,.vidpair .final{align-self:center !important}
+  .vidpair a.vid{flex:none}
+  .vidpair .shot{aspect-ratio:16/9;flex:none !important;width:100%}
+  .vidpair .shot img{width:100%;height:100%;object-fit:cover}
+  .ytcard{
+    margin:0 auto;max-width:620px;display:flex;flex-direction:column;gap:0;
+    background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;
+    box-shadow:var(--shadow);color:inherit;text-align:left;
+  }
+  .ytcard:hover{border-color:var(--accent3)}
+  .ytcard .thumbwrap{position:relative}
+  .ytcard .thumbwrap img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+  .ytcard .thumbwrap .play{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    background:rgba(205,32,31,.92);color:#fff;font-size:30px;line-height:1;
+    padding:14px 32px;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.6);
+  }
+  .ytcard .meta{padding:18px 24px}
+  .ytcard .meta b{font-size:23px}
+  .ytcard .meta p{font-size:17px;color:var(--muted);margin-top:4px}
+
   /* meme panels */
   .meme{display:grid;grid-template-columns:1fr 1fr;gap:0;border:3px solid #fff;border-radius:8px;overflow:hidden;box-shadow:var(--shadow)}
   .meme .half{padding:40px 24px;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center}
@@ -382,7 +416,7 @@
   <h2>Hollow Knight</h2>
   <div class="cols">
     <div class="imgs">
-      <div class="proto"><div class="shot"><img src="assets/hungry-knight.png" alt="Hungry Knight jam prototype"></div><p class="caption">Hungry Knight (Ludum Dare 27, 2013)</p></div>
+      <div class="proto"><a class="vid" href="https://www.youtube.com/watch?v=TChCmqqQiAs" target="_blank" rel="noopener"><div class="shot"><img src="assets/hungry-knight.png" alt="Hungry Knight jam prototype"></div><span class="play">▶</span></a><p class="caption">▶ Hungry Knight (Ludum Dare 27, 2013)</p></div>
       <span class="jarrow">→</span>
       <div class="final"><div class="shot"><img src="assets/hollow-knight.webp" alt="Hollow Knight"></div><p class="caption">Hollow Knight (2017)</p></div>
     </div>
@@ -403,7 +437,7 @@
   <h2>Celeste</h2>
   <div class="cols">
     <div class="imgs">
-      <div class="proto"><div class="shot"><img src="assets/celeste-pico8.png" alt="Celeste Classic PICO-8 prototype"></div><p class="caption">Celeste Classic (4-day PICO-8 jam, 2015)</p></div>
+      <div class="proto"><a class="vid" href="https://www.youtube.com/watch?v=cjenZS4xa3o" target="_blank" rel="noopener"><div class="shot"><img src="assets/celeste-pico8.png" alt="Celeste Classic PICO-8 prototype"></div><span class="play">▶</span></a><p class="caption">▶ Celeste Classic (4-day PICO-8 jam, 2015)</p></div>
       <span class="jarrow">→</span>
       <div class="final"><div class="shot"><img src="assets/celeste.webp" alt="Celeste"></div><p class="caption">Celeste (2018)</p></div>
     </div>
@@ -439,6 +473,16 @@
   </div>
 </section>
 
+<!-- 7b · GMTK PROOF VIDEO -->
+<section class="slide center" data-notes="Don't take my word for it — Game Maker's Toolkit counted ONE HUNDRED Steam games that started life during his jam alone. Click opens the video on YouTube if anyone wants it.">
+  <span class="kicker gold">Born in a jam · the proof</span>
+  <h2>Don't take my word for it</h2>
+  <a class="ytcard" href="https://www.youtube.com/watch?v=usF4cpcxbZc&amp;list=PLc38fcMFcV_s7Lf6xbeRfWYRt7-Vmi_X9" target="_blank" rel="noopener">
+    <span class="thumbwrap"><img src="https://i.ytimg.com/vi/usF4cpcxbZc/hqdefault.jpg" alt="GMTK video thumbnail"><span class="play">▶</span></span>
+    <span class="meta"><b>100 Steam Games that started life during GMTK Game Jam</b><p>Game Maker's Toolkit · YouTube</p></span>
+  </a>
+</section>
+
 <!-- 8 · TOODEE AND TOPDEE -->
 <section class="slide game" data-notes="Same magic in our jam rooms. Toodee and Topdee by Gonen & Ori Gutholtz (dietzribi) — a platformer and a top-down puzzler merged into one game. 93% positive on Steam across 860+ reviews.">
   <span class="kicker blue">Local pride 🇮🇱 · 1/3</span>
@@ -464,16 +508,15 @@
   <span class="kicker blue">Local pride 🇮🇱 · 2/3</span>
   <h2>UVSU — you vs you</h2>
   <div class="cols">
-    <div class="imgs">
-      <div class="proto"><div class="shot contain" style="background:#120a1e"><img src="assets/uvsu-cover.png" alt="UVSU cover"></div></div>
-      <span class="jarrow">·</span>
-      <div class="final"><div class="shot contain" style="background:#0a1410"><img src="assets/uvsu-steam.png" alt="UVSU Steam capsule"></div></div>
+    <div class="imgs vidpair">
+      <div class="proto"><a class="vid" href="https://www.youtube.com/watch?v=NVX4J4R_lRw" target="_blank" rel="noopener"><div class="shot"><img src="https://i.ytimg.com/vi/NVX4J4R_lRw/hqdefault.jpg" alt="UVSU jam version gameplay video"></div><span class="play">▶</span></a><p class="caption">▶ GMTK jam version</p></div>
+      <span class="jarrow">→</span>
+      <div class="final"><a class="vid" href="https://www.youtube.com/watch?v=rCWRr4-V_wM" target="_blank" rel="noopener"><div class="shot"><img src="https://i.ytimg.com/vi/rCWRr4-V_wM/hqdefault.jpg" alt="UVSU official trailer"></div><span class="play">▶</span></a><p class="caption">▶ Official trailer · Thinky Direct 2026</p></div>
     </div>
     <div class="col">
       <ul class="tight">
         <li><b>Gonen Gutholtz</b> (dietzribi)</li>
         <li>On <b>Steam</b> (2025) · <a href="https://www.crazygames.com/game/uvsu-demo">browser demo on CrazyGames</a></li>
-        <li>Trailer: <a class="mono" href="https://youtube.com/watch?v=rCWRr4-V_wM">youtube.com/watch?v=rCWRr4-V_wM</a></li>
       </ul>
     </div>
   </div>
