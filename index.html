@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code for Game Jams</title>
+<meta name="description" content="Meetup talk — Claude Code didn't make the games, it built the tools that let a tiny jam team make the games.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik:ital,wght@0,400;0,500;0,700;0,900;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0d17;
+    --bg2:#121527;
+    --panel:#171b33;
+    --ink:#e8eaf6;
+    --muted:#9aa1c4;
+    --accent:#d97757;       /* claude clay */
+    --accent2:#7ee787;      /* terminal green */
+    --accent3:#79c0ff;      /* sky */
+    --accent4:#ff7bc1;      /* pink */
+    --gold:#ffd66e;
+    --line:#2a2f52;
+    --shadow:0 18px 50px rgba(0,0,0,.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Rubik",system-ui,sans-serif;
+    overflow:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.5;
+    background:repeating-linear-gradient(0deg,rgba(255,255,255,.015) 0 1px,transparent 1px 3px);
+  }
+  #viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;}
+  #stage{
+    width:1280px;height:720px;position:relative;flex:none;
+    transform-origin:center center;
+  }
+  .slide{
+    position:absolute;inset:0;padding:72px 90px;
+    display:flex;flex-direction:column;justify-content:center;gap:28px;
+    opacity:0;visibility:hidden;transform:translateX(40px);
+    transition:opacity .35s ease,transform .35s ease,visibility .35s;
+    background:
+      radial-gradient(1200px 600px at 80% -10%,rgba(217,119,87,.08),transparent 60%),
+      radial-gradient(900px 500px at 10% 110%,rgba(121,192,255,.07),transparent 60%),
+      var(--bg);
+  }
+  .slide.active{opacity:1;visibility:visible;transform:none}
+  .slide.prev{transform:translateX(-40px)}
+
+  .kicker{
+    font-family:"Press Start 2P",monospace;font-size:13px;letter-spacing:1px;
+    color:var(--accent2);text-transform:uppercase;
+  }
+  .kicker.orange{color:var(--accent)} .kicker.blue{color:var(--accent3)} .kicker.pink{color:var(--accent4)}
+  h1{font-family:"Press Start 2P",monospace;font-size:52px;line-height:1.35;text-shadow:4px 4px 0 rgba(217,119,87,.35)}
+  h2{font-family:"Press Start 2P",monospace;font-size:30px;line-height:1.5;color:var(--ink)}
+  h3{font-size:24px;font-weight:700}
+  p,li{font-size:23px;line-height:1.5;color:var(--ink)}
+  .muted{color:var(--muted)}
+  .small{font-size:18px}
+  ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+  ul.tight{gap:9px}
+  li{padding-left:34px;position:relative}
+  li::before{content:"▸";position:absolute;left:0;color:var(--accent);font-weight:900}
+  li.win::before{content:"★";color:var(--gold)}
+  b{color:#fff}
+  .hl{color:var(--accent)} .hl2{color:var(--accent2)} .hl3{color:var(--accent3)} .hl4{color:var(--accent4)}
+  code,.mono{font-family:"JetBrains Mono",monospace;font-size:.92em;color:var(--accent2);background:rgba(126,231,135,.08);padding:2px 8px;border-radius:6px}
+
+  .cols{display:flex;gap:36px;align-items:stretch}
+  .col{flex:1;min-width:0}
+  .card{
+    background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:24px 26px;box-shadow:var(--shadow);
+  }
+  .card h3{margin-bottom:10px}
+  .card .tag{font-family:"JetBrains Mono",monospace;font-size:15px;color:var(--accent3);display:block;margin-bottom:6px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+
+  .shot{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#000;box-shadow:var(--shadow)}
+  .shot img{display:block;width:100%;height:100%;object-fit:cover}
+  .shot.contain img{object-fit:contain}
+  .caption{font-size:16px;color:var(--muted);margin-top:8px;text-align:center}
+
+  /* hero / title */
+  .center{align-items:center;text-align:center}
+  .center ul li{padding-left:0}
+  .center ul li::before{content:none}
+  .titlebadge{
+    font-family:"Press Start 2P",monospace;font-size:14px;color:var(--bg);
+    background:var(--accent2);padding:10px 18px;border-radius:8px;display:inline-block;
+    box-shadow:0 6px 0 rgba(126,231,135,.3);
+  }
+  .byline{font-size:22px;color:var(--muted)}
+  .pressstart{font-family:"Press Start 2P",monospace;font-size:15px;color:var(--muted);animation:blink 1.4s steps(2) infinite}
+  @keyframes blink{50%{opacity:.15}}
+
+  blockquote{
+    font-size:40px;line-height:1.5;font-weight:500;max-width:1000px;
+    border-left:6px solid var(--accent);padding-left:34px;text-align:left;
+  }
+  blockquote .q2{color:var(--accent)}
+
+  /* evolution pairs */
+  .pairs{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .pair .duo{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
+  .pair .shot{aspect-ratio:1/1}
+  .pair .arrow{font-size:26px;color:var(--accent2);font-weight:900}
+  .pair .label{text-align:center;margin-top:10px;font-size:19px}
+  .pair .label b{display:block;font-size:21px}
+  .pair .label span{color:var(--muted);font-size:16px}
+
+  .games3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .games3 .shot{aspect-ratio:16/10}
+
+  .bigshot{flex:1;min-height:0;display:flex;flex-direction:column}
+  .bigshot .shot{flex:1;min-height:0}
+  .bigshot .shot img{height:100%}
+
+  /* then / now */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:26px;flex:1;min-height:0}
+  .vs .card{display:flex;flex-direction:column;gap:12px}
+  .vs .card h3{font-family:"Press Start 2P",monospace;font-size:17px;line-height:1.6}
+
+  .lesson{display:flex;gap:22px;align-items:flex-start}
+  .lesson .num{
+    font-family:"Press Start 2P",monospace;font-size:26px;color:var(--bg);
+    background:var(--accent);border-radius:10px;padding:14px 16px;flex:none;
+    box-shadow:0 5px 0 rgba(217,119,87,.35);
+  }
+  .lesson h3{margin-bottom:6px}
+
+  table.ref{width:100%;border-collapse:collapse;font-size:19px}
+  table.ref td{padding:8px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.ref td:first-child{color:var(--accent2);font-weight:700;white-space:nowrap}
+  a{color:var(--accent3);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* chrome */
+  #hud{
+    position:fixed;left:0;right:0;bottom:0;height:5px;z-index:60;background:rgba(255,255,255,.06);
+  }
+  #hudbar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent4));transition:width .3s ease}
+  #pager{
+    position:fixed;right:18px;bottom:14px;z-index:60;
+    font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--muted);
+    background:rgba(11,13,23,.7);padding:4px 10px;border-radius:8px;border:1px solid var(--line);
+  }
+  #hint{
+    position:fixed;left:18px;bottom:14px;z-index:60;font-family:"JetBrains Mono",monospace;
+    font-size:12px;color:var(--muted);opacity:.8;background:rgba(11,13,23,.7);
+    padding:4px 10px;border-radius:8px;border:1px solid var(--line);
+  }
+  #notes{
+    position:fixed;left:50%;bottom:30px;transform:translateX(-50%);z-index:70;width:min(900px,92vw);
+    background:rgba(15,18,35,.96);border:1px solid var(--accent2);border-radius:12px;
+    padding:16px 22px;font-size:17px;line-height:1.5;color:var(--ink);display:none;box-shadow:var(--shadow);
+  }
+  #notes.show{display:block}
+  #notes .nlabel{font-family:"Press Start 2P",monospace;font-size:10px;color:var(--accent2);margin-bottom:8px}
+  .navzone{position:fixed;top:0;bottom:0;width:18%;z-index:55;cursor:pointer}
+  #zprev{left:0}#znext{right:0}
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage">
+
+<!-- 1 · TITLE -->
+<section class="slide center" data-notes="Welcome. Tonight: two of my own jam repos, and the surprising thing Claude Code actually did in them.">
+  <span class="titlebadge">MEETUP · OCT 13 2026</span>
+  <h1>CLAUDE CODE<br><span class="hl">FOR GAME JAMS</span></h1>
+  <p class="byline">How AI changed the 48-hour game &nbsp;·&nbsp; @yan &nbsp;·&nbsp; <a href="https://yanaifraimov.itch.io/">yanaifraimov.itch.io</a></p>
+  <p class="pressstart">▶ PRESS SPACE TO START</p>
+</section>
+
+<!-- 2 · THESIS -->
+<section class="slide" data-notes="One sentence thesis — land it slowly, then move.">
+  <span class="kicker">The one-sentence thesis</span>
+  <blockquote>Claude Code didn't make the games —<br><span class="q2">it built the tools</span> that let a tiny jam team make the games.</blockquote>
+  <p class="muted small">Two real jam repos tonight. In both, the AI's most valuable output wasn't gameplay code.</p>
+</section>
+
+<!-- 3 · WHY WE JAM -->
+<section class="slide" data-notes="A jam is NOT a hackathon. Hackathon = MVP for a business problem. Jam = brutal, beautiful search for fun: code, art, music and emotion merged before the clock runs out.">
+  <span class="kicker">01 · Why we jam</span>
+  <h2>A jam is not a hackathon</h2>
+  <div class="cols">
+    <div class="col card">
+      <span class="tag">hackathon.exe</span>
+      <h3>🏢 Hackathon</h3>
+      <ul class="tight">
+        <li>Functional MVP</li>
+        <li>Solves a business problem</li>
+        <li>Ends in a pitch deck</li>
+      </ul>
+    </div>
+    <div class="col card" style="border-color:var(--accent)">
+      <span class="tag" style="color:var(--accent)">game_jam.exe</span>
+      <h3>🎮 Game Jam</h3>
+      <ul class="tight">
+        <li><b>48–72 hours</b>, from scratch</li>
+        <li>Secret <b>theme</b> revealed at start</li>
+        <li>A brutal, beautiful <b class="hl">search for fun</b></li>
+        <li>Code + art + music + <b>human emotion</b>, before the clock runs out</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · JAM LOOP -->
+<section class="slide" data-notes="The loop every jammer knows: theme, panic, core loop, cut scope to 30%, greybox, art, theme fit, upload at 4am.">
+  <span class="kicker">01 · Why we jam</span>
+  <h2>The loop every jammer knows</h2>
+  <div class="bigshot">
+    <div class="shot contain"><img src="assets/jam-loop.jpg" alt="Eight-step game jam loop comic"></div>
+  </div>
+</section>
+
+<!-- 5 · BORN IN A JAM -->
+<section class="slide" data-notes="Don't underestimate jam games. Hungry Knight at Ludum Dare became Hollow Knight. A 4-day PICO-8 prototype became Celeste. Nordic Game Jam 2017 gave us Baba Is You. And Superhot started as a 7DFPS entry in 2013. Point, one sentence on whichever gets a reaction, move on.">
+  <span class="kicker gold" style="color:var(--gold)">01 · Why we jam</span>
+  <h2>Weekend experiment → commercial hit</h2>
+  <div class="pairs">
+    <div class="pair">
+      <div class="duo">
+        <div class="shot"><img src="assets/hungry-knight.png" alt="Hungry Knight jam prototype"></div>
+        <div class="arrow">→</div>
+        <div class="shot"><img src="assets/hollow-knight.webp" alt="Hollow Knight"></div>
+      </div>
+      <p class="label"><b>Hollow Knight</b><span>Team Cherry · Ludum Dare's <i>Hungry Knight</i></span></p>
+    </div>
+    <div class="pair">
+      <div class="duo">
+        <div class="shot"><img src="assets/celeste-pico8.png" alt="Celeste PICO-8 prototype"></div>
+        <div class="arrow">→</div>
+        <div class="shot"><img src="assets/celeste.webp" alt="Celeste"></div>
+      </div>
+      <p class="label"><b>Celeste</b><span>Maddy Thorson · 4-day PICO-8 jam</span></p>
+    </div>
+    <div class="pair">
+      <div class="duo">
+        <div class="shot"><img src="assets/baba-sprite.png" alt="Baba sprite"></div>
+        <div class="arrow">→</div>
+        <div class="shot"><img src="assets/baba-is-you.png" alt="Baba Is You"></div>
+      </div>
+      <p class="label"><b>Baba Is You</b><span>Arvi "Hempuli" Teikari · Nordic Game Jam 2017</span></p>
+    </div>
+  </div>
+  <p class="muted small" style="text-align:center">…and <b>Superhot</b> began as a 7DFPS jam entry (2013).</p>
+</section>
+
+<!-- 6 · ISRAELI PRIDE -->
+<section class="slide" data-notes="Same magic in our rooms. Toodee and Topdee — Gonen & Ori Gutholtz. UVSU — Gonen Gutholtz. Veggie Brawl just won the GMTK jam at Xsolla Club — names are on the slide, point, don't read.">
+  <span class="kicker blue">01 · Why we jam</span>
+  <h2>The same magic, in our jam rooms 🇮🇱</h2>
+  <div class="games3">
+    <div>
+      <div class="shot"><img src="assets/toodee-banner.png" alt="Toodee and Topdee"></div>
+      <p class="label" style="text-align:center;margin-top:10px"><b>Toodee and Topdee</b><br><span class="muted small">Gonen &amp; Ori Gutholtz</span></p>
+    </div>
+    <div>
+      <div class="shot"><img src="assets/uvsu-steam.png" alt="UVSU"></div>
+      <p class="label" style="text-align:center;margin-top:10px"><b>UVSU</b><br><span class="muted small">Gonen Gutholtz</span></p>
+    </div>
+    <div>
+      <div class="shot"><img src="assets/veggie-brawl-title.png" alt="Veggie Brawl"></div>
+      <p class="label" style="text-align:center;margin-top:10px"><b>Veggie Brawl</b> <span class="hl2">★ GMTK winner @ Xsolla Club</span><br><span class="muted small">Yoav Kagan · Shelly Rosenbaum · Shahar Tropp · Tal Rozenberg · Shachar Dahari</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · THE SHIFT -->
+<section class="slide" data-notes="GGJ 2025 → GGJ 2026 → GMTK 2026: you can physically SEE developers relaxing. Less 3am panic-typing, more time at the art table. Coding used to dictate scope; now artists and designers are the most precious resource.">
+  <span class="kicker pink">02 · The shift</span>
+  <h2>The AI revolution in the jam room</h2>
+  <ul>
+    <li><b>GGJ 2025 → GGJ 2026 → GMTK 2026:</b> the vibe completely changed — less 3 a.m. panic-typing, more time at the art table</li>
+    <li><b>The roles have flipped:</b> coding was the bottleneck that dictated scope. Now <span class="hl4">artists &amp; designers are the most precious resource</span> in the room</li>
+    <li>AI writes the boilerplate; <b>humans write the soul</b></li>
+    <li><b>Tonight's evidence:</b> in both of my jam repos, the AI's best output was <span class="hl2">editor tools, build pipelines &amp; test instruments</span> — work a jam team never had time for before</li>
+  </ul>
+</section>
+
+<!-- 8 · TAVERN STEW INTRO -->
+<section class="slide" data-notes="GMTK jam, Unity point-and-click: read the customer, cook the right stew. Me as dev/designer plus artists. Headline: we didn't just build the game — we built the factory. DEMO MOMENT: switch to Unity, Tavern Stew ▸ Studio, flip Tavern/Kitchen, load a visitor, run Audit Slots, show PASS.">
+  <span class="kicker orange">03 · Deep dive 1</span>
+  <h2>Tavern Stew <span class="muted">· GMTK jam · Unity</span></h2>
+  <div class="cols">
+    <div class="col" style="flex:1.3">
+      <div class="shot"><img src="assets/tavern-stew-studio.gif" alt="TavernStewStudio editor window"></div>
+      <p class="caption">TavernStewStudio — a bespoke EditorWindow (⌘⇧T)</p>
+    </div>
+    <div class="col">
+      <ul>
+        <li>Point &amp; click: <b>read the customer, cook the right stew</b></li>
+        <li>UI/Canvas-heavy · me (dev/designer) + artists</li>
+        <li class="win">We didn't just build the game —<br><b class="hl">we built the factory</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · TAVERN TOOLS -->
+<section class="slide" data-notes="Studio treats each customer as a LEVEL — pick a visitor, their whole level loads, editable without Play mode. AuditSlots: empty inspector slot = visible bug, caught broken refs after every scene rebuild. BuildWebGL: one click to itch-ready zip. Scene as code: we redid the layout 3 times as a re-run. Insight: one-click asset testing killed the waiting-for-the-programmer bottleneck.">
+  <span class="kicker orange">03 · Tavern Stew</span>
+  <h2>Custom dev tools &gt; game code</h2>
+  <div class="grid2">
+    <div class="card"><span class="tag">EditorWindow · ⌘⇧T</span><h3>TavernStewStudio</h3><p class="small">Each customer is a <b>level</b>: pick a visitor → portrait, order, napkin note &amp; unlocks load into the scene. No Play mode. Sprite fitting + bulk fixes.</p></div>
+    <div class="card"><span class="tag">reflection linter</span><h3>AuditSlots</h3><p class="small">Scans every <code>[SerializeField]</code> in the scene — an empty slot is a visible bug. Caught broken refs after <b>every</b> scene rebuild.</p></div>
+    <div class="card"><span class="tag">one menu click</span><h3>BuildWebGL</h3><p class="small">itch.io-ready WebGL build (Gzip + fallback, responsive 16:9) → zip → upload. Snapshot every milestone.</p></div>
+    <div class="card"><span class="tag">idempotent builders</span><h3>Scene as code</h3><p class="small"><code>BuildMainScene</code> · <code>WireScene</code> · <code>CreateJarPrefab</code> — we redid the whole layout <b>three times</b> as a re-run, not an afternoon of dragging.</p></div>
+  </div>
+  <p class="small"><span class="hl2">★ Insight:</span> giving artists a one-click way to test assets in-scene eliminated the "waiting for the programmer" bottleneck.</p>
+</section>
+
+<!-- 10 · THEN VS NOW -->
+<section class="slide" data-notes="Credit Ivan Murzak — the community trailblazer. His Unity-MCP generated 126 agent skills so Claude could read the console, create GameObjects, open scenes, screenshot Scene View to check its own work. Before the bridge: disposable editor scripts via batch-mode CLI — same result, reviewable as code first. NOW Unity shipped the official CLI + Claude Code plugin: C# runs live in the Editor, no recompile, no domain reload. If time: ls .claude/skills shows the 126 skills.">
+  <span class="kicker orange">03 · Tavern Stew</span>
+  <h2>Then vs. now: talking to Unity</h2>
+  <div class="vs">
+    <div class="card">
+      <h3 style="color:var(--accent4)">THEN · the workaround era</h3>
+      <ul class="tight">
+        <li><b>Ivan Murzak's Unity-MCP</b> — the community trailblazer</li>
+        <li>Generated <b>126 agent skills</b> in <code>.claude/skills/</code></li>
+        <li>Claude reads the console, creates GameObjects, screenshots Scene View to <b>check its own work</b></li>
+        <li>Pre-bridge: disposable editor scripts via <b>batch-mode CLI</b> — reviewable as code first</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:var(--accent2)">
+      <h3 style="color:var(--accent2)">NOW · native &amp; official</h3>
+      <ul class="tight">
+        <li><b>Unity CLI</b> + <b>unity-agent-plugin</b> — official Claude Code plugin</li>
+        <li>Claude runs C# <b>live inside a running Editor</b></li>
+        <li>No project recompile · no domain reload</li>
+        <li>The AI workflow is <b class="hl2">native, structured, far less fragile</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 11 · TAVERN TECH BEATS -->
+<section class="slide" data-notes="Every gameplay number in ScriptableObjects — SO edits during Play mode persist, that IS the tuning workflow. Wiring is SerializeField + C# events, no Find(), no singletons — exactly why AuditSlots can verify the scene mechanically. BUILD_PLAN.md single source of truth, PROGRESS.md after every change, 22 gameplay scripts declared FINAL — the human stays the approval gate.">
+  <span class="kicker orange">03 · Tavern Stew</span>
+  <h2>Tech beats worth stealing</h2>
+  <ul>
+    <li><b>Every number is data:</b> ScriptableObject assets (GameConfig, feel, story) — zero hardcoded values, and SO edits <b>persist through Play mode</b> → that's the tuning workflow</li>
+    <li><b>Wiring:</b> <code>[SerializeField]</code> slots + C# events — no <code>Find()</code>, no singletons → which is exactly what lets <b>AuditSlots verify the scene mechanically</b></li>
+    <li><b>Process:</b> <code>BUILD_PLAN.md</code> is the single source of truth · <code>PROGRESS.md</code> updates after every change</li>
+    <li class="win">22 gameplay scripts declared <b>FINAL</b> — any change needs my explicit approval. <span class="hl">The human stays the approval gate.</span></li>
+  </ul>
+</section>
+
+<!-- 12 · BUNNY BOO INTRO -->
+<section class="slide" data-notes="Brackeys jam, theme Trust No One. A trust-horror game: a bunny tells you things that may be lies. Sometimes Unity is too heavy — to answer the GDD's open questions FAST we built a standalone web engine: one index.html, playable on GitHub Pages and itch. The GDD skill structured design first — floors, teach→contradict→betray, and an explicit list of open questions. The testbed exists to answer those; every feature traces to one.">
+  <span class="kicker blue">04 · Deep dive 2</span>
+  <h2>Bunny Boo <span class="muted">· Brackeys "Trust No One" · pure web</span></h2>
+  <ul>
+    <li>Trust-horror: <b>a bunny tells you things… that may be lies</b> 🐰</li>
+    <li>Sometimes Unity is too heavy → Claude helped build a <b>standalone web engine</b>: one <code>index.html</code>, playable on GitHub Pages &amp; itch.io</li>
+    <li>A <b>GDD skill</b> structured the design first: floors, the <i>teach → contradict → betray</i> arc, and an explicit list of <b class="hl3">open questions</b></li>
+    <li class="win">The testbed exists to answer those questions — <b>every feature traces back to one</b></li>
+  </ul>
+</section>
+
+<!-- 13 · DESIGNER MODE -->
+<section class="slide" data-notes="DEMO MOMENT: open live build ?mode=designer. Backtick toggles the rail, drag a chest, floating inspector, press T to playtest and T back, SHARE LINK. RPG-Maker-style: click-select, drag-move, snap grid, hitbox overlay, Ctrl+Z. Music window: global track + per-room overrides. Locations, music, text — all data, not code.">
+  <span class="kicker blue">04 · Bunny Boo</span>
+  <h2>An RPG-Maker editor… in the browser</h2>
+  <div class="cols">
+    <div class="col">
+      <ul class="tight">
+        <li><code>?mode=designer</code> — click-select, drag-move, snap grid, hitbox overlay, <b>Ctrl+Z</b></li>
+        <li>Floating inspector: x/y/size/reach/label/scale/z-order</li>
+        <li><b class="hl2">T</b> flips into playtest and back — artists drag, snap and <b>feel the room</b> instantly</li>
+        <li>Music window: global track + per-room overrides</li>
+        <li class="win">Locations, music, text — <b>all data, not code</b></li>
+      </ul>
+    </div>
+    <div class="col card" style="display:flex;flex-direction:column;justify-content:center;gap:14px">
+      <span class="tag">live demo</span>
+      <p class="mono small" style="color:var(--accent2)">bbpt-mock/?mode=designer</p>
+      <p class="small muted">drag a chest → inspector → <b>T</b> to play → <b>T</b> back → SHARE LINK</p>
+    </div>
+  </div>
+</section>
+
+<!-- 14 · FIGMA -->
+<section class="slide" data-notes="Artists authored rooms, dialog boxes, portraits in a shared Figma file at the game's native 320x180 — x/y transfers verbatim. Claude read the frames straight from Figma and baked the tea-party room 1:1 — diffed to ZERO differing pixels. Real gotchas Claude handled: flipped layers report transform origin not visual bounds; cropped fills need node screenshots; flood-fill flat backgrounds; palette-snap blurred exports back to 6 colors. New art loop stayed one step: drop PNGs, npm run assets.">
+  <span class="kicker blue">04 · Bunny Boo</span>
+  <h2>Figma is the level editor</h2>
+  <div class="cols">
+    <div class="col" style="flex:1.25">
+      <div class="shot contain" style="background:#1e1e1e"><img src="assets/bunny-boo-figma.webp" alt="BB Figma file — tea party room and text boxes"></div>
+      <p class="caption">The "BB" file: tea-party room + dialog skins, drawn at native <b>320×180</b></p>
+    </div>
+    <div class="col">
+      <ul class="tight">
+        <li>Frames at native res → layer x/y transfer <b>verbatim</b></li>
+        <li>Claude read Figma, baked the room <b class="hl2">1:1 — diffed to 0 differing pixels</b></li>
+        <li>Dialog boxes &amp; portraits are the artists' frames (tea skin / horror skin)</li>
+        <li>Gotchas handled: flipped-layer origins · cropped-fill exports · flood-fill · palette-snap to 6 colors</li>
+        <li>New art = <code>art/runtime/</code> + <code>npm run assets</code> — <b>one step, all jam</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 15 · TESTING -->
+<section class="slide" data-notes="Writing automated tests during a 48h jam used to be a joke. 34 Playwright smoke tests drive the game through a window.BB hook — boot, seed determinism, full floor flows, session export. Playtests are URL-driven: scenario + seed, mulberry32 RNG, every run reproducible. Session recorder logs each claim/decision/ms-to-decide; EXPORT SESSION hands testers JSON with detection-rate and false-alarm metrics. Claude writing regression tests is the luxury that saves the final hours.">
+  <span class="kicker blue">04 · Bunny Boo</span>
+  <h2>Testing. In a game jam?!</h2>
+  <ul>
+    <li><b>34 Playwright smoke tests</b> drive the game end-to-end via a <code>window.BB</code> hook — boot, seed determinism, full floor flows, session export</li>
+    <li>Playtests are URL-driven: <code>?scenario=bluff&amp;seed=9</code> — seeded RNG, <b>every run reproducible</b></li>
+    <li>Session recorder logs each claim / decision / ms-to-decide → <b>EXPORT SESSION</b> = JSON with detection-rate &amp; false-alarm metrics</li>
+    <li>One <code>DEF</code> config: URL params ▸ localStorage ▸ defaults — every tunable shareable &amp; exported · <b>COPY CONFIG</b> emits Unity-shaped <code>TuningSO</code> JSON</li>
+    <li class="win"><span class="hl2">Insight:</span> tests in a 48-hour jam used to be a joke. Claude writing regression tests is <b>the luxury that saves the final hours</b> from a debugging nightmare.</li>
+  </ul>
+</section>
+
+<!-- 16 · LESSONS -->
+<section class="slide" data-notes="1 Scope: AI lowers the coding barrier but doesn't speed up SOUL — in Bunny Boo every AI placeholder was replaced by hand-drawn art before deadline. Small polished beats massive broken. 2 Forcing function: jams teach fail-fast; AI makes each iteration faster — use the speed to try MORE ideas, not ship bigger ones. 3 Collaboration over automation: AI is the co-pilot, community is the compass — artists pixel-for-pixel, playtesters settling arguments with exported data, a teammate saying 'this is hideous' and being right.">
+  <span class="kicker">05 · The humane lessons</span>
+  <h2>What stays human</h2>
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <div class="lesson"><div class="num">1</div><div><h3>Scope &amp; ambition</h3><p class="small muted">AI lowers the coding barrier — it does <b style="color:var(--ink)">not</b> speed up the creation of <i>soul</i>. A small, polished game always beats a massive, broken one.</p></div></div>
+    <div class="lesson"><div class="num">2</div><div><h3>The ultimate forcing function</h3><p class="small muted">Jams teach you to fail fast and abandon bad ideas. AI just makes each iteration faster — <b style="color:var(--ink)">use the speed to try more ideas, not to ship bigger ones</b>.</p></div></div>
+    <div class="lesson"><div class="num">3</div><div><h3>Collaboration &gt; automation</h3><p class="small muted">AI is a fantastic co-pilot, but <b style="color:var(--ink)">community is your compass</b> — artists defining the look pixel-for-pixel, playtesters settling arguments with data, a teammate saying "this is hideous" and being right.</p></div></div>
+  </div>
+</section>
+
+<!-- 17 · CLOSING -->
+<section class="slide center" data-notes="Last line, verbatim. Pause. Then Q&A.">
+  <blockquote style="border:none;padding:0;text-align:center;font-size:44px">"Claude Code never decided<br>what the game was.<br><br>It just made sure that deciding<br>was <span class="q2">the only hard part left</span>."</blockquote>
+</section>
+
+<!-- 18 · REFERENCES -->
+<section class="slide" data-notes="Reference sheet — this deck is online, link on screen. Q&A.">
+  <span class="kicker">Thanks! · Q&amp;A</span>
+  <h2>Take the links home</h2>
+  <div class="cols">
+    <div class="col">
+      <table class="ref">
+        <tr><td>Unity CLI</td><td><a href="https://unity.com/blog/meet-the-unity-cli">unity.com/blog/meet-the-unity-cli</a></td></tr>
+        <tr><td>Unity × Claude Code</td><td><a href="https://github.com/Unity-Technologies/unity-agent-plugin">github.com/Unity-Technologies/unity-agent-plugin</a></td></tr>
+        <tr><td>Unity-MCP</td><td><a href="https://github.com/IvanMurzak/Unity-MCP">github.com/IvanMurzak/Unity-MCP</a> · Ivan Murzak</td></tr>
+        <tr><td>MCP</td><td><a href="https://modelcontextprotocol.io">modelcontextprotocol.io</a></td></tr>
+        <tr><td>Claude Code</td><td><a href="https://docs.claude.com/en/docs/claude-code/overview">docs.claude.com</a></td></tr>
+        <tr><td>GDD skills</td><td><a href="https://github.com/Donchitos/Claude-Code-Game-Studios">Claude-Code-Game-Studios</a></td></tr>
+      </table>
+    </div>
+    <div class="col">
+      <table class="ref">
+        <tr><td>SO architecture</td><td><a href="https://unity.com/how-to/architect-game-code-scriptable-objects">Ryan Hipple's Unite '17 pattern</a></td></tr>
+        <tr><td>Level-as-data</td><td><a href="https://ldtk.io">LDtk</a> · <a href="https://www.mapeditor.org">Tiled</a> · <a href="https://ledoux.itch.io/bitsy">Bitsy</a></td></tr>
+        <tr><td>Playwright</td><td><a href="https://playwright.dev">playwright.dev</a></td></tr>
+        <tr><td>itch.io tooling</td><td><a href="https://itch.io/docs/creators/html5">HTML5 docs</a> · <a href="https://itch.io/docs/butler/">butler</a></td></tr>
+        <tr><td>My games</td><td><a href="https://yanaifraimov.itch.io/">yanaifraimov.itch.io</a></td></tr>
+        <tr><td>These slides</td><td><a href="https://github.com/Yana205/claude-code-for-game-jams">github.com/Yana205/claude-code-for-game-jams</a></td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+</div></div>
+
+<div id="hud"><div id="hudbar"></div></div>
+<div id="pager">1 / 1</div>
+<div id="hint">← → navigate · F fullscreen · N notes</div>
+<div id="notes"><div class="nlabel">SPEAKER NOTES</div><div id="notesbody"></div></div>
+<div class="navzone" id="zprev" title="Previous"></div>
+<div class="navzone" id="znext" title="Next"></div>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var i=0, n=slides.length;
+  var notesOn=false;
+
+  function fit(){
+    var s=Math.min(innerWidth/1280, innerHeight/720);
+    document.getElementById('stage').style.transform='scale('+s+')';
+  }
+  addEventListener('resize',fit); fit();
+
+  function go(k,push){
+    k=Math.max(0,Math.min(n-1,k));
+    slides.forEach(function(s,j){
+      s.classList.toggle('active',j===k);
+      s.classList.toggle('prev',j<k);
+    });
+    i=k;
+    document.getElementById('pager').textContent=(k+1)+' / '+n;
+    document.getElementById('hudbar').style.width=((k+1)/n*100)+'%';
+    document.getElementById('notesbody').textContent=slides[k].dataset.notes||'—';
+    if(push!==false) location.hash='#/'+(k+1);
+  }
+  function fromHash(){
+    var m=location.hash.match(/#\/(\d+)/);
+    go(m?+m[1]-1:0,false);
+  }
+  addEventListener('hashchange',fromHash);
+
+  addEventListener('keydown',function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    switch(e.key){
+      case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown': go(i+1); e.preventDefault(); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp': go(i-1); e.preventDefault(); break;
+      case 'Home': go(0); break;
+      case 'End': go(n-1); break;
+      case 'f': case 'F':
+        document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+        break;
+      case 'n': case 'N':
+        notesOn=!notesOn;
+        document.getElementById('notes').classList.toggle('show',notesOn);
+        break;
+    }
+  });
+  document.getElementById('znext').addEventListener('click',function(){go(i+1)});
+  document.getElementById('zprev').addEventListener('click',function(){go(i-1)});
+  fromHash();
+})();
+</script>
+</body>
+</html>
