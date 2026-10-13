@@ -310,6 +310,15 @@
   .jamcard .jc2{font-family:"Press Start 2P",monospace;font-size:34px;color:var(--accent4);line-height:1.6;text-shadow:3px 3px 0 rgba(0,0,0,.6)}
   .jamcard p{margin-top:18px;color:var(--muted);font-size:19px}
 
+  /* framed video with margin callouts */
+  .vfwrap{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+  .vframe{
+    width:64%;height:100%;border:3px solid var(--accent3);border-radius:16px;overflow:hidden;
+    background:#000;box-shadow:0 0 0 6px rgba(121,192,255,.12),var(--shadow);
+  }
+  .vframe video{width:100%;height:100%;object-fit:contain;display:block}
+  .vfwrap .note{white-space:normal;max-width:200px;line-height:1.6;text-align:center}
+
   /* annotated screenshot */
   .shotwrap{position:relative;flex:1;min-height:0;display:flex;flex-direction:column}
   .shotwrap .shot{flex:1;min-height:0}
@@ -889,16 +898,15 @@
 </section>
 
 <!-- 18 · THE WEB EDITOR -->
-<section class="slide" data-notes="One index.html — a full in-browser editor. Admin rail on the left (backtick hides it), floors as tabs, click-select and drag with snap grid, and T flips straight into playtest. CLICK THE SCREENSHOT: it toggles to VIVI selected with the floating Inspector open — the click-select transition. DEMO MOMENT: hit OPEN LIVE, drag a chest, T to play, T back, SHARE LINK.">
+<section class="slide" data-notes="The editor in motion — this runs by itself: content changes live, story flows switch with ONE click, modes flip between edit and playtest, the floating inspector follows whatever you drag, and the Figma connection loads the artists' assets straight in. DEMO MOMENT: hit OPEN LIVE if you want to drive it for real — drag a chest, T to play, SHARE LINK.">
   <span class="kicker blue">04 · Bunny Boo · one index.html</span>
-  <div class="shotwrap" style="cursor:pointer" onclick="this.classList.toggle('alt2');var m=this.querySelector('img');m.src=this.classList.contains('alt2')?'assets/web-editor-2.png':'assets/web-editor.png'" title="Click: select VIVI ⇄ back">
-    <div class="shot"><img src="assets/web-editor.png" alt="Bunny Boo web editor in designer mode"></div>
-    <span class="note s1" style="left:2%;top:40%">⬅ ADMIN RAIL (`)</span>
-    <span class="note s1 g" style="left:61%;top:0%">⬅ FLOORS AS TABS</span>
-    <span class="note s1 p" style="right:1%;top:11%">T = FEEL IT AS PLAYER ⬆</span>
-    <span class="note s1 b" style="left:38%;top:80%">🖱 CLICK ME: SELECT AN OBJECT</span>
-    <span class="note s2 g" style="right:24%;top:14%">CLICK-SELECT → INSPECTOR OPENS ➡</span>
-    <span class="note s2 b" style="left:38%;top:80%">🖱 CLICK AGAIN: DESELECT</span>
+  <div class="vfwrap">
+    <div class="vframe"><video class="autovid" src="assets/clips/web-editor-tour.mp4" muted loop playsinline preload="auto"></video></div>
+    <span class="note g" style="left:0;top:6%">CHANGE THE GAME'S<br>CONTENT — LIVE ➡</span>
+    <span class="note b" style="left:0;top:40%">STORY FLOWS —<br>SWITCH WITH A CLICK ➡</span>
+    <span class="note" style="left:0;top:74%">MODES:<br>EDIT ⇄ PLAYTEST ➡</span>
+    <span class="note p" style="right:0;top:14%">⬅ FLOATING INSPECTOR<br>FOLLOWS EVERY DRAG</span>
+    <span class="note g" style="right:0;top:60%">⬅ FIGMA CONNECTION —<br>ASSETS LOAD 1:1</span>
   </div>
   <p class="caption" style="font-size:19px"><a class="mono" href="https://yana205.github.io/bbpt-mock/?mode=designer" target="_blank" rel="noopener">▶ OPEN LIVE: yana205.github.io/bbpt-mock/?mode=designer</a></p>
 </section>
