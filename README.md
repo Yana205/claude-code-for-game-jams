@@ -67,6 +67,14 @@ A single-file deck (`index.html`, no build step) covering:
 | GameIS | The Israeli game-dev community | [Facebook group](https://www.facebook.com/share/g/1QhqD5TDvj/) |
 | GameDevTLV | Next meetup **Nov 11**: Concept Art for Gaming (Tamar Gin, Art Director @ Casual Friday) · Ads in Games (Idan Tabachnik, VP Product @ Anzu) | [meetup.com/game-dev-israel](https://www.meetup.com/game-dev-israel/events/316593508/) |
 
+### Jam with us — upcoming jams
+
+| Jam | When | Link |
+| --- | --- | --- |
+| Global Game Jam 2027 | Jan 25–31, 2027 | [globalgamejam.org](https://globalgamejam.org) |
+| Brackeys Game Jam 17 | Feb 14–21, 2027 | [itch.io/jam/brackeys-17](https://itch.io/jam/brackeys-17) |
+| GMTK Game Jam + thousands more | all year | [itch.io/jams](https://itch.io/jams) |
+
 ### Inspiration — jam games that made it big
 
 | Game | Credit · jam origin | Link |
