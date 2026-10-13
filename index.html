@@ -362,8 +362,18 @@
     border:2px solid var(--line);box-shadow:var(--shadow);
   }
   .bub img{width:100%;height:100%;object-fit:cover;display:block}
-  .slide.active .bub{animation:bubfloat var(--d,6s) ease-in-out var(--dl,0s) infinite alternate}
-  @keyframes bubfloat{from{transform:translateY(-12px) rotate(-2deg)}to{transform:translateY(14px) rotate(2deg)}}
+  .slide.active .bub{
+    animation:bubpop .55s cubic-bezier(.25,1.7,.45,1) var(--pdl,0s) both,
+              bubfloat var(--d,6s) ease-in-out calc(var(--pdl,0s) + .55s) infinite alternate;
+  }
+  @keyframes bubpop{from{transform:scale(0) rotate(-25deg)}to{transform:scale(1) rotate(0)}}
+  @keyframes bubfloat{from{transform:scale(1) translateY(-12px) rotate(-2deg)}to{transform:scale(1) translateY(14px) rotate(2deg)}}
+  .slide.active.takehome .tk1{animation:pop .5s cubic-bezier(.2,1.6,.4,1) .9s both}
+  .slide.active.takehome .tk2{animation:rise .5s ease 1.4s both}
+  .slide.active.takehome .tk3{animation:rise .5s ease 1.8s both}
+  .takehome .wink{display:inline-block}
+  .slide.active.takehome .wink{animation:winkpop .6s cubic-bezier(.3,2,.5,1) 2.5s both}
+  @keyframes winkpop{from{opacity:0;transform:scale(0) rotate(-30deg)}to{opacity:1;transform:scale(1) rotate(0)}}
 
   /* link grid (closing slide) */
   .lgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
@@ -916,24 +926,24 @@ Running <b>34</b> tests using 4 workers
 </section>
 
 <!-- 20z · TAKE THIS HOME -->
-<section class="slide center" data-notes="The wrap: every game tonight came out of a jam. Fail fast, prototype HARD — in the browser, in a testbed, wherever iteration is cheapest. Bring the AI into your editor: Ivan's Unity-MCP, the official Unity CLI and the new plugins. And when the prototype earns it — graduate to Unity or any engine. Or maybe you won't need to.">
+<section class="slide center takehome" data-notes="The wrap: every game tonight came out of a jam. Fail fast, prototype HARD — in the browser, in a testbed, wherever iteration is cheapest. Bring the AI into your editor: Ivan's Unity-MCP, the official Unity CLI and the new plugins. And when the prototype earns it — graduate to Unity or any engine. Or maybe you won't need to.">
   <div class="bubbles" aria-hidden="true">
-    <span class="bub" style="left:50px;top:80px;width:130px;height:130px;--d:5.2s"><img src="assets/hungry-knight.png" alt=""></span>
-    <span class="bub" style="left:1075px;top:55px;width:150px;height:150px;--d:6.4s;--dl:.6s"><img src="assets/celeste.webp" alt=""></span>
-    <span class="bub" style="left:150px;top:490px;width:140px;height:140px;--d:5.8s;--dl:1.1s"><img src="assets/baba-jam.png" alt=""></span>
-    <span class="bub" style="left:1000px;top:470px;width:160px;height:160px;--d:7s;--dl:.3s"><img src="assets/toodee-gameplay.webp" alt=""></span>
-    <span class="bub" style="left:565px;top:30px;width:110px;height:110px;--d:6s;--dl:1.5s"><img src="assets/uvsu-cover.png" alt=""></span>
-    <span class="bub" style="left:35px;top:300px;width:105px;height:105px;--d:5.5s;--dl:.9s"><img src="assets/veggie-brawl-title.png" alt=""></span>
-    <span class="bub" style="left:1160px;top:285px;width:100px;height:100px;--d:6.8s;--dl:1.8s"><img src="assets/hollow-knight.webp" alt=""></span>
-    <span class="bub" style="left:390px;top:555px;width:120px;height:120px;--d:5.4s;--dl:.4s"><img src="assets/gmtk-2026.png" alt=""></span>
-    <span class="bub" style="left:820px;top:575px;width:115px;height:115px;--d:6.2s;--dl:1.3s;background:#fff"><img src="assets/brackeys-jam.png" alt="" style="object-fit:contain"></span>
-    <span class="bub" style="left:300px;top:60px;width:95px;height:95px;--d:7.2s;--dl:.7s"><img src="assets/celeste-pico8.png" alt=""></span>
+    <span class="bub" style="left:50px;top:80px;width:130px;height:130px;--d:5.2s;--pdl:0s"><img src="assets/hungry-knight.png" alt=""></span>
+    <span class="bub" style="left:1075px;top:55px;width:150px;height:150px;--d:6.4s;--dl:.6s;--pdl:.15s"><img src="assets/celeste.webp" alt=""></span>
+    <span class="bub" style="left:150px;top:490px;width:140px;height:140px;--d:5.8s;--dl:1.1s;--pdl:.3s"><img src="assets/baba-jam.png" alt=""></span>
+    <span class="bub" style="left:1000px;top:470px;width:160px;height:160px;--d:7s;--dl:.3s;--pdl:.45s"><img src="assets/toodee-gameplay.webp" alt=""></span>
+    <span class="bub" style="left:565px;top:30px;width:110px;height:110px;--d:6s;--dl:1.5s;--pdl:.6s"><img src="assets/uvsu-cover.png" alt=""></span>
+    <span class="bub" style="left:35px;top:300px;width:105px;height:105px;--d:5.5s;--dl:.9s;--pdl:.75s"><img src="assets/veggie-brawl-title.png" alt=""></span>
+    <span class="bub" style="left:1160px;top:285px;width:100px;height:100px;--d:6.8s;--dl:1.8s;--pdl:.9s"><img src="assets/hollow-knight.webp" alt=""></span>
+    <span class="bub" style="left:390px;top:555px;width:120px;height:120px;--d:5.4s;--dl:.4s;--pdl:1.05s"><img src="assets/gmtk-2026.png" alt=""></span>
+    <span class="bub" style="left:820px;top:575px;width:115px;height:115px;--d:6.2s;--dl:1.3s;background:#fff;--pdl:1.2s"><img src="assets/brackeys-jam.png" alt="" style="object-fit:contain"></span>
+    <span class="bub" style="left:300px;top:60px;width:95px;height:95px;--d:7.2s;--dl:.7s;--pdl:1.35s"><img src="assets/celeste-pico8.png" alt=""></span>
   </div>
   <div style="position:relative;z-index:2;display:flex;flex-direction:column;gap:30px;align-items:center;max-width:760px">
     <span class="kicker">05 · Take this home</span>
-    <h2 style="font-size:30px;line-height:1.6">Fail fast.<br><span class="hl4">Prototype HARD.</span></h2>
-    <p style="font-size:23px;text-align:center">Bring AI into the editor →<br><b class="hl2">Unity-MCP · Unity CLI · the new plugins</b></p>
-    <p style="font-size:23px;text-align:center">Then graduate to <b>Unity</b> (or any engine)<br>if the prototype earns it… <span class="muted">or maybe not 😉</span></p>
+    <h2 class="tk1" style="font-size:30px;line-height:1.6">Fail fast.<br><span class="hl4">Prototype HARD.</span></h2>
+    <p class="tk2" style="font-size:23px;text-align:center">Bring AI into the editor →<br><b class="hl2">Unity-MCP · Unity CLI · the new plugins</b></p>
+    <p class="tk3" style="font-size:23px;text-align:center">Then graduate to <b>Unity</b> (or any engine)<br>if the prototype earns it… <span class="muted wink">or maybe not 😉</span></p>
   </div>
 </section>
 
