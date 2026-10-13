@@ -27,4 +27,34 @@ A single-file deck (`index.html`, no build step) covering:
 4. Deep dive 2: **Bunny Boo** (pure web engine · Figma pipeline · Playwright tests)
 5. The three humane lessons
 
+## Reference sheet
+
+### Tech & tooling
+
+| Topic | What it is | Link |
+| --- | --- | --- |
+| Unity CLI & Agent Plugin | Official — Claude runs C# live inside a running Editor | [Meet the Unity CLI](https://unity.com/blog/meet-the-unity-cli) · [unity-agent-plugin](https://github.com/Unity-Technologies/unity-agent-plugin) · [Unity plugin for Claude Code](https://unity.com/blog/unity-plugin-for-claude-code) |
+| Ivan Murzak's Unity-MCP | The community trailblazer — the Unity↔AI bridge used in Tavern Stew | [github.com/IvanMurzak/Unity-MCP](https://github.com/IvanMurzak/Unity-MCP) |
+| Model Context Protocol | The open standard for AI↔tool connections | [modelcontextprotocol.io](https://modelcontextprotocol.io) |
+| Claude Code | The agentic coding CLI driving both projects | [docs.claude.com](https://docs.claude.com/en/docs/claude-code/overview) |
+| GDD skills for Claude Code | Public repo of game-studio skills (incl. GDD) | [github.com/Donchitos/Claude-Code-Game-Studios](https://github.com/Donchitos/Claude-Code-Game-Studios) |
+| Unity editor scripting | Official docs for EditorWindow, MenuItem, batch mode | [Extending the Editor](https://docs.unity3d.com/Manual/ExtendingTheEditor.html) |
+| ScriptableObject architecture | Ryan Hipple's Unite 2017 pattern — "all numbers in SO assets" | [unity.com how-to](https://unity.com/how-to/architect-game-code-scriptable-objects) |
+| Data-driven level design | LDtk · Tiled · Bitsy | [ldtk.io](https://ldtk.io) · [mapeditor.org](https://www.mapeditor.org) · [ledoux.itch.io/bitsy](https://ledoux.itch.io/bitsy) |
+| Playwright | Web testing — smoke-tests Bunny Boo end to end | [playwright.dev](https://playwright.dev) |
+| itch.io HTML5 + butler | Hosting rules the zip-build tools target, and the upload CLI | [HTML5 docs](https://itch.io/docs/creators/html5) · [butler](https://itch.io/docs/butler/) |
+| My portfolio | Both jam games live here | [yanaifraimov.itch.io](https://yanaifraimov.itch.io/) |
+
+### Inspiration — jam games that made it big
+
+| Game | Credit · jam origin | Link |
+| --- | --- | --- |
+| Baba Is You | Arvi "Hempuli" Teikari · Nordic Game Jam 2017 | [hempuli.itch.io](https://hempuli.itch.io) |
+| Celeste | Maddy Thorson · 4-day PICO-8 jam prototype | [maddymakesgamesinc.itch.io](https://maddymakesgamesinc.itch.io) |
+| Superhot | SUPERHOT Team · 7DFPS 2013 | [superhotgame.com](https://superhotgame.com) |
+| Hollow Knight | Team Cherry · Ludum Dare's *Hungry Knight* | [hollowknight.com](https://www.hollowknight.com) |
+| Toodee and Topdee | Gonen & Ori Gutholtz | [trailer](https://youtube.com/watch?v=gIXExDcV1q0) |
+| UVSU | Gonen Gutholtz | [trailer](https://youtube.com/watch?v=rCWRr4-V_wM) |
+| Veggie Brawl | Yoav Kagan, Shelly Rosenbaum, Shahar Tropp, Tal Rozenberg, Shachar Dahari · GMTK jam winner at Xsolla Club | [therozental.itch.io/veggie-brawl](https://therozental.itch.io/veggie-brawl) |
+
 Game art belongs to the respective developers (Team Cherry, Maddy Makes Games, Hempuli, diet zribi, and the Veggie Brawl team) and appears here for a non-commercial community talk.

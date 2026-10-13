@@ -164,6 +164,20 @@
   .beam .pan.up{left:-30px}
   .beam .pan.down{right:-30px;border-color:var(--accent4)}
 
+  /* chips */
+  .chips{display:flex;gap:16px;flex-wrap:wrap}
+  .chip{
+    font-family:"JetBrains Mono",monospace;font-size:19px;color:var(--accent3);
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 20px;
+  }
+  .chip.hot{color:var(--accent2);border-color:var(--accent2)}
+
+  /* big icon cards */
+  .bigicon{text-align:center;padding:36px 22px}
+  .bigicon .pic{font-size:74px;display:block;margin-bottom:16px}
+  .bigicon h3{font-family:"Press Start 2P",monospace;font-size:17px;margin-bottom:14px}
+  .bigicon p{font-size:21px}
+
   /* qr */
   .qrcol{flex:none;display:flex;flex-direction:column;align-items:center;gap:12px;justify-content:center}
   .qrbox{background:#fff;padding:14px;border-radius:12px;box-shadow:var(--shadow)}
@@ -457,69 +471,48 @@
 </section>
 
 <!-- 13 · DESIGNER MODE -->
-<section class="slide" data-notes="DEMO MOMENT: open live build ?mode=designer. Backtick toggles the rail, drag a chest, floating inspector, press T to playtest and T back, SHARE LINK. RPG-Maker-style: click-select, drag-move, snap grid, hitbox overlay, Ctrl+Z. Music window: global track + per-room overrides. Locations, music, text — all data, not code.">
+<section class="slide" data-notes="We built a standalone web engine so artists can drag, snap and FEEL the room instantly — no Unity compiles. You hit T, you're playing the game. DEMO MOMENT: open live build ?mode=designer — backtick toggles the rail, drag a chest, floating inspector, T to playtest, T back, SHARE LINK. Also: music window with per-room overrides.">
   <span class="kicker blue">04 · Bunny Boo</span>
-  <h2>An RPG-Maker editor… in the browser</h2>
-  <div class="cols">
-    <div class="col">
-      <ul class="tight">
-        <li><code>?mode=designer</code> — click-select, drag-move, snap grid, hitbox overlay, <b>Ctrl+Z</b></li>
-        <li>Floating inspector: x/y/size/reach/label/scale/z-order</li>
-        <li><b class="hl2">T</b> flips into playtest and back — artists drag, snap and <b>feel the room</b> instantly</li>
-        <li>Music window: global track + per-room overrides</li>
-        <li class="win">Locations, music, text — <b>all data, not code</b></li>
-      </ul>
-    </div>
-    <div class="col card" style="display:flex;flex-direction:column;justify-content:center;gap:14px">
-      <span class="tag">live demo</span>
-      <p class="mono small" style="color:var(--accent2)">bbpt-mock/?mode=designer</p>
-      <p class="small muted">drag a chest → inspector → <b>T</b> to play → <b>T</b> back → SHARE LINK</p>
-    </div>
+  <h2>An RPG-Maker editor…<br>in the browser</h2>
+  <p style="font-size:38px"><b class="hl3">Data, not code.</b></p>
+  <div class="chips">
+    <span class="chip">?mode=designer</span>
+    <span class="chip">drag · snap · inspect · ⌘Z</span>
+    <span class="chip hot">T = instant playtest</span>
   </div>
+  <p class="mono small muted">▶ live: bbpt-mock/?mode=designer</p>
 </section>
 
 <!-- 14 · FIGMA -->
-<section class="slide" data-notes="Artists authored rooms, dialog boxes, portraits in a shared Figma file at the game's native 320x180 — x/y transfers verbatim. Claude read the frames straight from Figma and baked the tea-party room 1:1 — diffed to ZERO differing pixels. Real gotchas Claude handled: flipped layers report transform origin not visual bounds; cropped fills need node screenshots; flood-fill flat backgrounds; palette-snap blurred exports back to 6 colors. New art loop stayed one step: drop PNGs, npm run assets.">
+<section class="slide" data-notes="Artists just drew in Figma at the game's native 320x180 — so x/y transfers verbatim. Claude read the file, handled the weird layer flips and coordinate math (flipped-layer origins, cropped-fill exports, flood-fill, palette-snap back to 6 colors) and baked the room exactly as drawn. One step: drop PNGs, npm run assets. Zero differing pixels. Dialog boxes and portraits are the artists' frames too — tea skin and horror skin.">
   <span class="kicker blue">04 · Bunny Boo</span>
   <h2>Figma is the level editor</h2>
-  <div class="cols">
-    <div class="col" style="flex:1.25">
-      <div class="shot contain" style="background:#1e1e1e"><img src="assets/bunny-boo-figma.webp" alt="BB Figma file — tea party room and text boxes"></div>
-      <p class="caption">The "BB" file: tea-party room + dialog skins, drawn at native <b>320×180</b></p>
-    </div>
-    <div class="col">
-      <ul class="tight">
-        <li>Frames at native res → layer x/y transfer <b>verbatim</b></li>
-        <li>Claude read Figma, baked the room <b class="hl2">1:1 — diffed to 0 differing pixels</b></li>
-        <li>Dialog boxes &amp; portraits are the artists' frames (tea skin / horror skin)</li>
-        <li>Gotchas handled: flipped-layer origins · cropped-fill exports · flood-fill · palette-snap to 6 colors</li>
-        <li>New art = <code>art/runtime/</code> + <code>npm run assets</code> — <b>one step, all jam</b></li>
-      </ul>
-    </div>
+  <div class="bigshot">
+    <div class="shot contain" style="background:#1e1e1e"><img src="assets/bunny-boo-figma.webp" alt="BB Figma file — tea party room and text boxes"></div>
   </div>
+  <p style="text-align:center;font-size:26px">Drawn at native <b>320×180</b> → baked <b class="hl2">1:1 · zero differing pixels</b></p>
 </section>
 
 <!-- 15 · TESTING -->
-<section class="slide" data-notes="Writing automated tests during a 48h jam used to be a joke. 34 Playwright smoke tests drive the game through a window.BB hook — boot, seed determinism, full floor flows, session export. Playtests are URL-driven: scenario + seed, mulberry32 RNG, every run reproducible. Session recorder logs each claim/decision/ms-to-decide; EXPORT SESSION hands testers JSON with detection-rate and false-alarm metrics. Claude writing regression tests is the luxury that saves the final hours.">
+<section class="slide" data-notes="Having AI write regression tests during a jam sounds insane, but it's real. 34 Playwright smoke tests drive the game through a window.BB hook — boot, seed determinism, full floor flows, session export. Every run is URL-seeded and reproducible; the session recorder logs each claim/decision/ms-to-decide and EXPORT SESSION hands testers JSON with detection-rate and false-alarm metrics. It's the ultimate luxury that saves your final hours from being a debugging nightmare.">
   <span class="kicker blue">04 · Bunny Boo</span>
-  <h2>Testing. In a game jam?!</h2>
-  <ul>
-    <li><b>34 Playwright smoke tests</b> drive the game end-to-end via a <code>window.BB</code> hook — boot, seed determinism, full floor flows, session export</li>
-    <li>Playtests are URL-driven: <code>?scenario=bluff&amp;seed=9</code> — seeded RNG, <b>every run reproducible</b></li>
-    <li>Session recorder logs each claim / decision / ms-to-decide → <b>EXPORT SESSION</b> = JSON with detection-rate &amp; false-alarm metrics</li>
-    <li>One <code>DEF</code> config: URL params ▸ localStorage ▸ defaults — every tunable shareable &amp; exported · <b>COPY CONFIG</b> emits Unity-shaped <code>TuningSO</code> JSON</li>
-    <li class="win"><span class="hl2">Insight:</span> tests in a 48-hour jam used to be a joke. Claude writing regression tests is <b>the luxury that saves the final hours</b> from a debugging nightmare.</li>
-  </ul>
+  <h2>34 automated smoke tests.<br><span class="hl4">In a 48-hour jam.</span></h2>
+  <div class="chips">
+    <span class="chip">?scenario=bluff&amp;seed=9</span>
+    <span class="chip">seeded RNG → every run reproducible</span>
+    <span class="chip hot">EXPORT SESSION → JSON metrics</span>
+  </div>
+  <p style="font-size:26px"><span class="hl2">★</span> The luxury that saves the final hours from a debugging nightmare.</p>
 </section>
 
 <!-- 16 · LESSONS -->
 <section class="slide" data-notes="1 Scope: AI lowers the coding barrier but doesn't speed up SOUL — in Bunny Boo every AI placeholder was replaced by hand-drawn art before deadline. Small polished beats massive broken. 2 Forcing function: jams teach fail-fast; AI makes each iteration faster — use the speed to try MORE ideas, not ship bigger ones. 3 Collaboration over automation: AI is the co-pilot, community is the compass — artists pixel-for-pixel, playtesters settling arguments with exported data, a teammate saying 'this is hideous' and being right.">
   <span class="kicker">05 · The humane lessons</span>
   <h2>What stays human</h2>
-  <div style="display:flex;flex-direction:column;gap:24px">
-    <div class="lesson"><div class="num">1</div><div><h3>Scope &amp; ambition</h3><p class="small muted">AI lowers the coding barrier — it does <b style="color:var(--ink)">not</b> speed up the creation of <i>soul</i>. A small, polished game always beats a massive, broken one.</p></div></div>
-    <div class="lesson"><div class="num">2</div><div><h3>The ultimate forcing function</h3><p class="small muted">Jams teach you to fail fast and abandon bad ideas. AI just makes each iteration faster — <b style="color:var(--ink)">use the speed to try more ideas, not to ship bigger ones</b>.</p></div></div>
-    <div class="lesson"><div class="num">3</div><div><h3>Collaboration &gt; automation</h3><p class="small muted">AI is a fantastic co-pilot, but <b style="color:var(--ink)">community is your compass</b> — artists defining the look pixel-for-pixel, playtesters settling arguments with data, a teammate saying "this is hideous" and being right.</p></div></div>
+  <div class="games3" style="margin-top:10px">
+    <div class="card bigicon"><span class="pic">🎯</span><h3>SCOPE</h3><p>Use speed for <b class="hl2">more ideas</b>,<br>not bigger ones.</p></div>
+    <div class="card bigicon"><span class="pic">❤️</span><h3>SOUL</h3><p>AI lowers the barrier —<br><b class="hl4">humans create the magic</b>.</p></div>
+    <div class="card bigicon"><span class="pic">🔥</span><h3>COMMUNITY</h3><p><b class="hl">Collaboration</b> &gt; automation.</p></div>
   </div>
 </section>
 
@@ -529,33 +522,21 @@
 </section>
 
 <!-- 18 · REFERENCES -->
-<section class="slide" data-notes="Reference sheet — this deck is online, link on screen. Q&A.">
+<section class="slide" data-notes="Leave this up during Q&A. The QR goes to the repo — its README carries the full reference sheet (SO architecture, LDtk, butler, Playwright, GDD links, MCP…), so people can find the niche tools on their own time.">
   <span class="kicker">Thanks! · Q&amp;A</span>
-  <h2>Scan for tech, tooling &amp; repos</h2>
-  <div class="cols">
+  <h2>Take the links home</h2>
+  <div class="cols" style="align-items:center">
     <div class="qrcol">
       <div class="qrbox" id="qr"></div>
-      <p class="mono small" style="font-size:14px">github.com/Yana205/<br>claude-code-for-game-jams</p>
+      <p class="mono small" style="font-size:15px;text-align:center">github.com/Yana205/<br>claude-code-for-game-jams</p>
     </div>
     <div class="col">
-      <table class="ref">
-        <tr><td>Unity CLI</td><td><a href="https://unity.com/blog/meet-the-unity-cli">Meet the Unity CLI</a></td></tr>
-        <tr><td>Unity × Claude Code</td><td><a href="https://github.com/Unity-Technologies/unity-agent-plugin">unity-agent-plugin</a></td></tr>
-        <tr><td>Unity-MCP</td><td><a href="https://github.com/IvanMurzak/Unity-MCP">IvanMurzak/Unity-MCP</a></td></tr>
-        <tr><td>MCP</td><td><a href="https://modelcontextprotocol.io">modelcontextprotocol.io</a></td></tr>
-        <tr><td>Claude Code</td><td><a href="https://docs.claude.com/en/docs/claude-code/overview">docs.claude.com</a></td></tr>
-        <tr><td>GDD skills</td><td><a href="https://github.com/Donchitos/Claude-Code-Game-Studios">Claude-Code-Game-Studios</a></td></tr>
-      </table>
-    </div>
-    <div class="col">
-      <table class="ref">
-        <tr><td>SO architecture</td><td><a href="https://unity.com/how-to/architect-game-code-scriptable-objects">Hipple's Unite '17 pattern</a></td></tr>
-        <tr><td>Level-as-data</td><td><a href="https://ldtk.io">LDtk</a> · <a href="https://www.mapeditor.org">Tiled</a> · <a href="https://ledoux.itch.io/bitsy">Bitsy</a></td></tr>
-        <tr><td>Playwright</td><td><a href="https://playwright.dev">playwright.dev</a></td></tr>
-        <tr><td>itch.io tooling</td><td><a href="https://itch.io/docs/creators/html5">HTML5 docs</a> · <a href="https://itch.io/docs/butler/">butler</a></td></tr>
-        <tr><td>My games</td><td><a href="https://yanaifraimov.itch.io/">yanaifraimov.itch.io</a></td></tr>
-        <tr><td>These slides</td><td><a href="https://github.com/Yana205/claude-code-for-game-jams">this repo ← the QR</a></td></tr>
-      </table>
+      <ul style="gap:28px">
+        <li><b>Official Unity CLI</b> + Claude Code plugin<br><span class="mono small muted">unity.com/blog/meet-the-unity-cli</span></li>
+        <li><b>Ivan Murzak's Unity-MCP</b><br><span class="mono small muted">github.com/IvanMurzak/Unity-MCP</span></li>
+        <li><b>My games</b><br><span class="mono small muted">yanaifraimov.itch.io</span></li>
+        <li class="win"><b>These slides + the full reference sheet</b><br><span class="mono small" style="color:var(--accent2)">← scan the QR</span></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -577,7 +558,7 @@
   try{
     if(window.QRCode) new QRCode(document.getElementById('qr'),{
       text:'https://github.com/Yana205/claude-code-for-game-jams',
-      width:210,height:210,correctLevel:QRCode.CorrectLevel.M
+      width:310,height:310,correctLevel:QRCode.CorrectLevel.M
     });
   }catch(e){}
   var slides=[].slice.call(document.querySelectorAll('.slide'));
