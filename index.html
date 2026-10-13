@@ -355,6 +355,16 @@
   .slide.active .flowscroll img{animation:flowpan 40s ease-in-out 1s infinite alternate}
   @keyframes flowpan{0%{transform:translateY(0)}100%{transform:translateY(-1530px)}}
 
+  /* floating game bubbles */
+  .bubbles{position:absolute;inset:0;overflow:hidden;z-index:1}
+  .bub{
+    position:absolute;border-radius:50%;overflow:hidden;opacity:.88;
+    border:2px solid var(--line);box-shadow:var(--shadow);
+  }
+  .bub img{width:100%;height:100%;object-fit:cover;display:block}
+  .slide.active .bub{animation:bubfloat var(--d,6s) ease-in-out var(--dl,0s) infinite alternate}
+  @keyframes bubfloat{from{transform:translateY(-12px) rotate(-2deg)}to{transform:translateY(14px) rotate(2deg)}}
+
   /* link grid (closing slide) */
   .lgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
   .lcard{
@@ -822,6 +832,22 @@
   </div>
 </section>
 
+<!-- 19b · THE PIPELINE -->
+<section class="slide" data-notes="The actual pipeline, start to finish: a GDD skill structured the design and — crucially — listed the OPEN QUESTIONS. Those became story-flow ideas (the teach → contradict → betray arc). Then prototype and playtest the design directly in the web testbed — every feature traces back to one of those questions. And it finishes there too: all the real art authored in Figma, baked into the engine 1:1.">
+  <span class="kicker blue">04 · Bunny Boo</span>
+  <h2>The pipeline: idea → shipped,<br>without leaving the browser</h2>
+  <div class="flow">
+    <div class="fcard"><span class="pic">📝</span><b>GDD</b><p>a Claude skill writes the design +<br><b style="color:var(--ink)">open questions</b></p></div>
+    <span class="farrow">→</span>
+    <div class="fcard"><span class="pic">💡</span><b>Story flow</b><p>teach → contradict<br>→ betray</p></div>
+    <span class="farrow">→</span>
+    <div class="fcard"><span class="pic">🧪</span><b>Prototype &amp; test</b><p>game design playtested<br><b style="color:var(--ink)">in the web editor</b></p></div>
+    <span class="farrow">→</span>
+    <div class="fcard" style="border-color:var(--accent2)"><span class="pic">🎨</span><b>Finish + assets</b><p>art authored in <b style="color:var(--ink)">Figma</b>,<br>baked 1:1</p></div>
+  </div>
+  <p class="small" style="text-align:center"><span class="hl2">★</span> Every feature traces back to an open question from the GDD.</p>
+</section>
+
 <!-- 19x · THE DESIGN STRUGGLE -->
 <section class="slide" data-notes="Honestly? The game design was the HARD part. A liar has to feel FAIR — lie chances, tells that escalate (face flip → text glitch → the mirror itself), petals as the cost of wrong trust. I worked the whole flow out with Claude in an artifact: the teach → contradict → betray spine, every room's claim, tell and cost — and a list of open questions I could NOT answer alone, like 'is the mirror tell readable at pixel scale?'. Click the chart to open the real artifact.">
   <span class="kicker blue">04 · Bunny Boo</span>
@@ -850,22 +876,6 @@
     <div class="shot" style="background:#000"><video class="autovid" data-trim-end="2" src="assets/clips/bunny-gameplay.mp4" muted loop playsinline preload="auto" style="width:100%;height:100%;object-fit:contain;display:block"></video></div>
   </div>
   <p class="caption">Trust no one — the bunny might be lying</p>
-</section>
-
-<!-- 19b · THE PIPELINE -->
-<section class="slide" data-notes="The actual pipeline, start to finish: a GDD skill structured the design and — crucially — listed the OPEN QUESTIONS. Those became story-flow ideas (the teach → contradict → betray arc). Then prototype and playtest the design directly in the web testbed — every feature traces back to one of those questions. And it finishes there too: all the real art authored in Figma, baked into the engine 1:1.">
-  <span class="kicker blue">04 · Bunny Boo</span>
-  <h2>The pipeline: idea → shipped,<br>without leaving the browser</h2>
-  <div class="flow">
-    <div class="fcard"><span class="pic">📝</span><b>GDD</b><p>a Claude skill writes the design +<br><b style="color:var(--ink)">open questions</b></p></div>
-    <span class="farrow">→</span>
-    <div class="fcard"><span class="pic">💡</span><b>Story flow</b><p>teach → contradict<br>→ betray</p></div>
-    <span class="farrow">→</span>
-    <div class="fcard"><span class="pic">🧪</span><b>Prototype &amp; test</b><p>game design playtested<br><b style="color:var(--ink)">in the web editor</b></p></div>
-    <span class="farrow">→</span>
-    <div class="fcard" style="border-color:var(--accent2)"><span class="pic">🎨</span><b>Finish + assets</b><p>art authored in <b style="color:var(--ink)">Figma</b>,<br>baked 1:1</p></div>
-  </div>
-  <p class="small" style="text-align:center"><span class="hl2">★</span> Every feature traces back to an open question from the GDD.</p>
 </section>
 
 <!-- 18 · THE WEB EDITOR -->
@@ -903,6 +913,28 @@ Running <b>34</b> tests using 4 workers
 <span class="dots">··································</span>
 
 <span class="ok">  34 passed</span> (2.1m)</div>
+</section>
+
+<!-- 20z · TAKE THIS HOME -->
+<section class="slide center" data-notes="The wrap: every game tonight came out of a jam. Fail fast, prototype HARD — in the browser, in a testbed, wherever iteration is cheapest. Bring the AI into your editor: Ivan's Unity-MCP, the official Unity CLI and the new plugins. And when the prototype earns it — graduate to Unity or any engine. Or maybe you won't need to.">
+  <div class="bubbles" aria-hidden="true">
+    <span class="bub" style="left:50px;top:80px;width:130px;height:130px;--d:5.2s"><img src="assets/hungry-knight.png" alt=""></span>
+    <span class="bub" style="left:1075px;top:55px;width:150px;height:150px;--d:6.4s;--dl:.6s"><img src="assets/celeste.webp" alt=""></span>
+    <span class="bub" style="left:150px;top:490px;width:140px;height:140px;--d:5.8s;--dl:1.1s"><img src="assets/baba-jam.png" alt=""></span>
+    <span class="bub" style="left:1000px;top:470px;width:160px;height:160px;--d:7s;--dl:.3s"><img src="assets/toodee-gameplay.webp" alt=""></span>
+    <span class="bub" style="left:565px;top:30px;width:110px;height:110px;--d:6s;--dl:1.5s"><img src="assets/uvsu-cover.png" alt=""></span>
+    <span class="bub" style="left:35px;top:300px;width:105px;height:105px;--d:5.5s;--dl:.9s"><img src="assets/veggie-brawl-title.png" alt=""></span>
+    <span class="bub" style="left:1160px;top:285px;width:100px;height:100px;--d:6.8s;--dl:1.8s"><img src="assets/hollow-knight.webp" alt=""></span>
+    <span class="bub" style="left:390px;top:555px;width:120px;height:120px;--d:5.4s;--dl:.4s"><img src="assets/gmtk-2026.png" alt=""></span>
+    <span class="bub" style="left:820px;top:575px;width:115px;height:115px;--d:6.2s;--dl:1.3s;background:#fff"><img src="assets/brackeys-jam.png" alt="" style="object-fit:contain"></span>
+    <span class="bub" style="left:300px;top:60px;width:95px;height:95px;--d:7.2s;--dl:.7s"><img src="assets/celeste-pico8.png" alt=""></span>
+  </div>
+  <div style="position:relative;z-index:2;display:flex;flex-direction:column;gap:30px;align-items:center;max-width:760px">
+    <span class="kicker">05 · Take this home</span>
+    <h2 style="font-size:30px;line-height:1.6">Fail fast.<br><span class="hl4">Prototype HARD.</span></h2>
+    <p style="font-size:23px;text-align:center">Bring AI into the editor →<br><b class="hl2">Unity-MCP · Unity CLI · the new plugins</b></p>
+    <p style="font-size:23px;text-align:center">Then graduate to <b>Unity</b> (or any engine)<br>if the prototype earns it… <span class="muted">or maybe not 😉</span></p>
+  </div>
 </section>
 
 <!-- 21 · THE BOTTOM LINE -->
