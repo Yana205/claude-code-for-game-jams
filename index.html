@@ -143,7 +143,7 @@
   @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
   .slide.active li,.slide.active .card,.slide.active .chip,.slide.active .step,
   .slide.active .fcard,.slide.active .ytcard,.slide.active .wanted,.slide.active .jamcard,
-  .slide.active .term,.slide.active .meme,.slide.active .avatar{animation:rise .5s ease both}
+  .slide.active .term,.slide.active .meme,.slide.active .avatar,.slide.active .lcard{animation:rise .5s ease both}
   .slide.active li:nth-child(2){animation-delay:.08s}
   .slide.active li:nth-child(3){animation-delay:.16s}
   .slide.active li:nth-child(4){animation-delay:.24s}
@@ -345,6 +345,28 @@
   }
   .avatar .init{font-size:64px;color:var(--accent4)}
   .avatar .ph{font-size:11px;color:var(--muted)}
+
+  /* link grid (closing slide) */
+  .lgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+  .lcard{
+    display:flex;gap:14px;align-items:center;color:inherit;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 16px;
+  }
+  a.lcard:hover{border-color:var(--accent3);text-decoration:none;transform:translateY(-2px)}
+  .lcard{transition:border-color .15s,transform .15s}
+  .lcard .ic{
+    width:46px;height:46px;flex:none;display:flex;align-items:center;justify-content:center;
+    font-size:26px;border-radius:12px;background:rgba(121,192,255,.1);
+  }
+  .lcard .ic svg{width:30px;height:30px;border-radius:6px}
+  .lcard .tx{min-width:0}
+  .lcard b{display:block;font-size:17.5px;line-height:1.3}
+  .lcard .sub{display:block;font-size:14px;color:var(--muted);line-height:1.35}
+  .lcard .lk{display:block;font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--accent2);margin-top:2px}
+  .lcard.span{grid-column:1/-1}
+  .lcard.cloud{border-color:var(--accent2);background:rgba(126,231,135,.07)}
+  .lcard.cloud b{color:var(--accent2);font-size:21px}
+  .lcard.cloud .ic{background:rgba(126,231,135,.14)}
 
   /* linklist (closing slide) */
   .linklist{gap:13px}
@@ -852,21 +874,36 @@ Running <b>34</b> tests using 4 workers
       <p class="mono small" style="font-size:15px;text-align:center;line-height:1.7">these slides, live ↑<br><a class="muted" href="https://github.com/Yana205/claude-code-for-game-jams">full reference sheet:<br>github.com/Yana205/claude-code-for-game-jams</a></p>
     </div>
     <div class="col">
-      <ul class="linklist">
-        <li style="background:rgba(126,231,135,.07);border:1px solid var(--accent2);border-radius:14px;padding:14px 18px">
-          <span class="li-em">☁️</span>
-          <span><b class="hl2" style="font-size:24px">Indie Games Cloud — drop YOUR game in!</b><br><span class="small muted">games by this community · add yours tonight</span><br><a class="mono small" href="https://yana205.github.io/indie-games-cloud/" target="_blank" rel="noopener">yana205.github.io/indie-games-cloud</a></span>
-        </li>
-        <li>
-          <svg class="li-ic" viewBox="0 0 448 512" aria-label="LinkedIn"><path fill="#0a66c2" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
-          <span><b>Yana Ifraimov</b><br><span class="mono small"><a href="https://www.linkedin.com/in/yana-ifraimov/">linkedin.com/in/yana-ifraimov</a> · <a href="https://yanaifraimov.itch.io/">yanaifraimov.itch.io</a></span></span>
-        </li>
-        <li><span class="li-em">📝</span><span><b>Shahar Bar — Unity CLI &amp; AI-gamedev blog</b><br><a class="mono small" href="https://sbsgames.dev/blog/codex-unity-plugin">sbsgames.dev/blog/codex-unity-plugin</a></span></li>
-        <li><span class="li-em">💬</span><span><b>AI GameDev — WhatsApp group &amp; meetups</b> <span class="muted small">(by Shahar)</span><br><a class="mono small" href="https://chat.whatsapp.com/K9dNTd4quzw5gLxn7a0VT5">chat.whatsapp.com/K9dNTd4quzw5gLxn7a0VT5</a></span></li>
-        <li><span class="li-em">🕹️</span><span><b>GameIS</b> — the Israeli game-dev community<br><a class="mono small" href="https://www.facebook.com/share/g/1QhqD5TDvj/">facebook.com → GameIS group</a></span></li>
-        <li><span class="li-em">📅</span><span><b>GameDevTLV — next meetup 11.11</b><br><span class="small muted">Concept Art for Gaming · Tamar Gin (Casual Friday) &nbsp;+&nbsp; Ads in Games · Idan Tabachnik (Anzu)</span><br><a class="mono small" href="https://www.meetup.com/game-dev-israel/events/316593508/">meetup.com/game-dev-israel</a></span></li>
-        <li><span class="li-em">🎮</span><span><b>Jam with us — join the next ones!</b><br><span class="small muted"><b>GGJ 2027</b> · Jan 25–31 · <a class="mono small" href="https://globalgamejam.org">globalgamejam.org</a> &nbsp;·&nbsp; <b>Brackeys 17</b> · Feb 14–21 · <a class="mono small" href="https://itch.io/jam/brackeys-17">itch.io/jam/brackeys-17</a> &nbsp;·&nbsp; <b>GMTK</b> + thousands more · <a class="mono small" href="https://itch.io/jams">itch.io/jams</a></span></span></li>
-      </ul>
+      <div class="lgrid">
+        <a class="lcard cloud span" href="https://yana205.github.io/indie-games-cloud/" target="_blank" rel="noopener">
+          <span class="ic">☁️</span>
+          <span class="tx"><b>Indie Games Cloud — drop YOUR game in!</b><span class="lk">yana205.github.io/indie-games-cloud</span></span>
+        </a>
+        <div class="lcard">
+          <span class="ic"><svg viewBox="0 0 448 512" aria-label="LinkedIn"><path fill="#0a66c2" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></span>
+          <span class="tx"><b>Yana Ifraimov</b><span class="lk"><a href="https://www.linkedin.com/in/yana-ifraimov/">in/yana-ifraimov</a> · <a href="https://yanaifraimov.itch.io/">yanaifraimov.itch.io</a></span></span>
+        </div>
+        <a class="lcard" href="https://sbsgames.dev/blog/codex-unity-plugin" target="_blank" rel="noopener">
+          <span class="ic">📝</span>
+          <span class="tx"><b>Shahar Bar — Unity CLI &amp; AI blog</b><span class="lk">sbsgames.dev</span></span>
+        </a>
+        <a class="lcard" href="https://chat.whatsapp.com/K9dNTd4quzw5gLxn7a0VT5" target="_blank" rel="noopener">
+          <span class="ic" style="background:rgba(37,211,102,.12)">💬</span>
+          <span class="tx"><b>AI GameDev — WhatsApp group</b><span class="sub">&amp; meetups, by Shahar</span><span class="lk">chat.whatsapp.com/K9dNTd…</span></span>
+        </a>
+        <a class="lcard" href="https://www.facebook.com/share/g/1QhqD5TDvj/" target="_blank" rel="noopener">
+          <span class="ic" style="background:rgba(255,123,193,.12)">🕹️</span>
+          <span class="tx"><b>GameIS</b><span class="sub">the Israeli game-dev community</span><span class="lk">facebook → GameIS group</span></span>
+        </a>
+        <a class="lcard" href="https://www.meetup.com/game-dev-israel/events/316593508/" target="_blank" rel="noopener">
+          <span class="ic" style="background:rgba(255,214,110,.12)">📅</span>
+          <span class="tx"><b>GameDevTLV — meetup 11.11</b><span class="sub">Concept Art · Tamar Gin &nbsp;+&nbsp; Ads in Games · Idan Tabachnik</span><span class="lk">meetup.com/game-dev-israel</span></span>
+        </a>
+        <div class="lcard span">
+          <span class="ic" style="background:rgba(217,119,87,.14)">🎮</span>
+          <span class="tx"><b>Jam with us — join the next ones!</b><span class="lk"><a href="https://globalgamejam.org">GGJ 2027 · Jan 25–31</a> &nbsp;·&nbsp; <a href="https://itch.io/jam/brackeys-17">Brackeys 17 · Feb 14–21</a> &nbsp;·&nbsp; <a href="https://itch.io/jams">GMTK + thousands more · itch.io/jams</a></span></span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
