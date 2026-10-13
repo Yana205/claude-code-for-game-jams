@@ -10,7 +10,7 @@ Slides for the Oct 13, 2026 meetup talk by [@yan](https://yanaifraimov.itch.io/)
 
 | Key | Action |
 | --- | --- |
-| `←` `→` / `Space` | Previous / next slide |
+| `←` `→` / `Space` | Previous / next slide (on the *guess the hit* slides, the first `→` reveals the answer) |
 | `F` | Fullscreen |
 | `N` | Toggle speaker notes |
 | `Home` / `End` | First / last slide |
@@ -23,7 +23,7 @@ Video slides stream from YouTube on click. For instant, Wi-Fi-proof playback,
 drop short MP4 clips (your own recordings) into `assets/clips/` with these names —
 the deck probes for them on load and plays the local file instead:
 
-`hungry-knight.mp4` · `celeste-pico8.mp4` · `toodee.mp4` · `uvsu-jam.mp4` ·
+`hungry-knight.mp4` · `celeste-pico8.mp4` · `baba-jam.mp4` · `toodee.mp4` · `uvsu-jam.mp4` ·
 `uvsu-trailer.mp4` · `veggie-top20.mp4` · `gmtk-100.mp4`
 
 Missing clips fall back to the YouTube embed automatically.
@@ -32,7 +32,7 @@ Missing clips fall back to the YouTube embed automatically.
 
 A single-file deck (`index.html`, no build step) covering:
 
-1. Why we jam (and why it's not a hackathon) — jam hits born in jams, global + Israeli
+1. Why we jam (and why it's not a hackathon) — a *guess the hit* round (jam video → click → the Steam hit), then Israeli jam games
 2. The shift: AI in the jam room
 3. Deep dive 1: **Tavern Stew** (Unity · MCP → Unity CLI · custom editor tools)
 4. Deep dive 2: **Bunny Boo** (pure web engine · Figma pipeline · Playwright tests)

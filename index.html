@@ -214,6 +214,25 @@
   .game li{font-size:21px}
   .game .mono{font-size:15px}
 
+  /* guess & tell: first click reveals, second advances */
+  .guess .imgs{flex:1;height:auto}
+  .guess .ans{display:none}
+  .guess.revealed .ans{display:inline}
+  .guess.revealed .q{display:none}
+  .guess.revealed h2 .ans{display:inline-block;animation:pop .5s cubic-bezier(.2,1.6,.4,1) both}
+  .guess .mystery{position:relative}
+  .guess .mystery img{filter:blur(26px) brightness(.35) saturate(.5);transform:scale(1.2);transition:filter .8s ease,transform .8s ease}
+  .guess.revealed .mystery img{filter:none;transform:none}
+  .guess .qmark{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:"Press Start 2P",monospace;font-size:96px;color:var(--gold);
+    text-shadow:5px 5px 0 rgba(0,0,0,.6);transition:opacity .4s ease,transform .4s ease;
+  }
+  .slide.active.guess .qmark{animation:wob 2.4s ease-in-out infinite}
+  .slide.guess.revealed .qmark{opacity:0;transform:scale(2.2);animation:none}
+  .guess .verdict{text-align:center;font-size:24px;visibility:hidden}
+  .guess.revealed .verdict{visibility:visible;animation:rise .5s ease .35s both}
+
   .bigshot{flex:1;min-height:0;display:flex;flex-direction:column}
   .bigshot .shot{flex:1;min-height:0}
   .bigshot .shot img{height:100%}
@@ -552,67 +571,40 @@
   <p class="punch">"A <span class="brutal">BRUTAL</span>, <span class="beautiful">BEAUTIFUL<span class="petal p1">🌸</span><span class="petal p2">🌸</span><span class="petal p3">🌸</span><span class="petal p4">🌸</span><span class="petal p5">🌸</span><span class="petal p6">🌸</span></span><br>SEARCH FOR FUN"</p>
 </section>
 
-<!-- 5 · HOLLOW KNIGHT -->
-<section class="slide game" data-notes="Don't underestimate jam games. Team Cherry made Hungry Knight for Ludum Dare 27 (2013, theme '10 Seconds') — it got 1/5 stars on Newgrounds at first! It became Hollow Knight: 2.8M+ copies by 2019, one of the most beloved indies ever.">
-  <span class="kicker gold">Born in a jam · 1/3</span>
-  <h2>Hollow Knight</h2>
-  <div class="cols">
-    <div class="imgs">
-      <div class="proto"><a class="vid" data-yt="TChCmqqQiAs" data-clip="assets/clips/hungry-knight.mp4" href="https://www.youtube.com/watch?v=TChCmqqQiAs" target="_blank" rel="noopener"><div class="shot"><img src="assets/hungry-knight.png" alt="Hungry Knight jam prototype"></div><span class="play">▶</span></a><p class="caption">▶ Hungry Knight (Ludum Dare 27, 2013)</p></div>
-      <span class="jarrow">→</span>
-      <div class="final"><div class="shot"><img src="assets/hollow-knight.webp" alt="Hollow Knight"></div><p class="caption">Hollow Knight (2017)</p></div>
-    </div>
-    <div class="col">
-      <ul class="tight">
-        <li><b>Team Cherry</b></li>
-        <li>Jam original: <a class="mono" href="https://www.newgrounds.com/portal/view/643636">newgrounds.com/portal/view/643636</a></li>
-        <li class="win"><b class="hl2">2.8M+ copies by 2019</b> · Overwhelmingly Positive</li>
-        <li>Steam: <a class="mono" href="https://store.steampowered.com/app/367520/Hollow_Knight/">store.steampowered.com/app/367520</a></li>
-      </ul>
-    </div>
+<!-- 5 · GUESS THE HIT: HOLLOW KNIGHT -->
+<section class="slide game guess" data-notes="GUESS & TELL — the easy one. Click the left video: Team Cherry's Hungry Knight, Ludum Dare 27 (2013, theme '10 Seconds'). It got 1/5 stars on Newgrounds at first! Ask the room: which hit is this? Then → reveals: Hollow Knight — 2.8M+ copies by 2019, Overwhelmingly Positive on Steam.">
+  <span class="kicker gold">Born in a jam · guess the hit 1/3</span>
+  <h2><span class="q">Which hit is this? 🤔</span><span class="ans">Hollow Knight</span></h2>
+  <div class="imgs">
+    <div class="proto"><a class="vid" data-yt="TChCmqqQiAs" data-clip="assets/clips/hungry-knight.mp4" href="https://www.youtube.com/watch?v=TChCmqqQiAs" target="_blank" rel="noopener"><div class="shot"><img src="assets/hungry-knight.png" alt="The jam prototype"></div><span class="play">▶</span></a><p class="caption">▶ Ludum Dare · 2013 · 48 hours<span class="ans"> · <b>Hungry Knight</b></span></p></div>
+    <span class="jarrow">→</span>
+    <div class="final"><div class="shot mystery"><img src="assets/hollow-knight.webp" alt="Hollow Knight"><span class="qmark">?</span></div><p class="caption"><span class="q">???</span><span class="ans">Hollow Knight · 2017</span></p></div>
   </div>
+  <p class="verdict">★ <b class="hl2">2.8M+ copies</b> · Team Cherry · <a href="https://store.steampowered.com/app/367520/Hollow_Knight/" target="_blank" rel="noopener">Steam ↗</a></p>
 </section>
 
-<!-- 6 · CELESTE -->
-<section class="slide game" data-notes="Maddy Thorson & Noel Berry made Celeste Classic in 4 days on PICO-8 (2015) for a local jam — it became the most-starred cart on the PICO-8 BBS, then grew into Celeste: 1M+ copies by 2019 and Best Independent Game at The Game Awards 2018. The original is hidden inside the full game as an easter egg.">
-  <span class="kicker gold">Born in a jam · 2/3</span>
-  <h2>Celeste</h2>
-  <div class="cols">
-    <div class="imgs">
-      <div class="proto"><a class="vid" data-yt="cjenZS4xa3o" data-clip="assets/clips/celeste-pico8.mp4" href="https://www.youtube.com/watch?v=cjenZS4xa3o" target="_blank" rel="noopener"><div class="shot"><img src="assets/celeste-pico8.png" alt="Celeste Classic PICO-8 prototype"></div><span class="play">▶</span></a><p class="caption">▶ Celeste Classic (4-day PICO-8 jam, 2015)</p></div>
-      <span class="jarrow">→</span>
-      <div class="final"><div class="shot"><img src="assets/celeste.webp" alt="Celeste"></div><p class="caption">Celeste (2018)</p></div>
-    </div>
-    <div class="col">
-      <ul class="tight">
-        <li><b>Maddy Thorson &amp; Noel Berry</b></li>
-        <li>Jam original: <a class="mono" href="https://maddymakesgamesinc.itch.io/celesteclassic">maddymakesgamesinc.itch.io/celesteclassic</a></li>
-        <li class="win"><b class="hl2">1M+ copies by 2019</b> · TGA 2018 Best Independent Game</li>
-        <li>Steam: <a class="mono" href="https://store.steampowered.com/app/504230/Celeste/">store.steampowered.com/app/504230</a></li>
-      </ul>
-    </div>
+<!-- 6 · GUESS THE HIT: CELESTE -->
+<section class="slide game guess" data-notes="GUESS & TELL 2/3 — a bit harder. Click the video: made in 4 days on PICO-8 (2015) by Maddy Thorson & Noel Berry for a local jam. Which hit? → reveals: Celeste — 1M+ copies by 2019, Best Independent Game at The Game Awards 2018. The jam original (Celeste Classic) is hidden inside the full game as an easter egg.">
+  <span class="kicker gold">Born in a jam · guess the hit 2/3</span>
+  <h2><span class="q">Which hit is this? 🤔</span><span class="ans">Celeste</span></h2>
+  <div class="imgs">
+    <div class="proto"><a class="vid" data-yt="cjenZS4xa3o" data-clip="assets/clips/celeste-pico8.mp4" href="https://www.youtube.com/watch?v=cjenZS4xa3o" target="_blank" rel="noopener"><div class="shot"><img src="assets/celeste-pico8.png" alt="The jam prototype"></div><span class="play">▶</span></a><p class="caption">▶ PICO-8 jam · 2015 · 4 days<span class="ans"> · <b>Celeste Classic</b></span></p></div>
+    <span class="jarrow">→</span>
+    <div class="final"><div class="shot mystery"><img src="assets/celeste.webp" alt="Celeste"><span class="qmark">?</span></div><p class="caption"><span class="q">???</span><span class="ans">Celeste · 2018</span></p></div>
   </div>
+  <p class="verdict">★ <b class="hl2">TGA Best Independent Game</b> · 1M+ copies · <a href="https://store.steampowered.com/app/504230/Celeste/" target="_blank" rel="noopener">Steam ↗</a></p>
 </section>
 
-<!-- 7 · BABA IS YOU -->
-<section class="slide game" data-notes="Arvi 'Hempuli' Teikari built Baba Is You at Nordic Game Jam 2017 (theme: 'Not There') — and WON the jam. Full release 2019; IGF 2018 double-winner (Excellence in Design + Best Student Game). The jam prototype is still on Hempuli's itch page.">
-  <span class="kicker gold">Born in a jam · 3/3</span>
-  <h2>Baba Is You</h2>
-  <div class="cols">
-    <div class="imgs">
-      <div class="proto"><div class="shot contain" style="background:#041204"><img src="assets/baba-jam.png" alt="Baba Is You jam prototype gameplay"></div><p class="caption">Jam prototype (Nordic Game Jam 2017)</p></div>
-      <span class="jarrow">→</span>
-      <div class="final"><div class="shot contain" style="background:#0a0a0a"><img src="assets/baba-is-you.png" alt="Baba Is You"></div><p class="caption">Baba Is You (2019)</p></div>
-    </div>
-    <div class="col">
-      <ul class="tight">
-        <li><b>Arvi "Hempuli" Teikari</b></li>
-        <li class="win"><b class="hl2">Won Nordic Game Jam 2017</b> → IGF 2018 double-winner</li>
-        <li>Jam original: <a class="mono" href="https://hempuli.itch.io">hempuli.itch.io</a></li>
-        <li>Steam: <a class="mono" href="https://store.steampowered.com/app/736260/Baba_Is_You/">store.steampowered.com/app/736260</a> · Overwhelmingly Positive</li>
-      </ul>
-    </div>
+<!-- 7 · GUESS THE HIT: BABA IS YOU -->
+<section class="slide game guess" data-notes="GUESS & TELL 3/3 — the hardest. Click the video: Arvi 'Hempuli' Teikari at Nordic Game Jam 2017 (theme: 'Not There') — and it WON the jam. Push words around to rewrite the rules. Which hit? → reveals: Baba Is You — full release 2019, IGF 2018 double-winner (Excellence in Design + Best Student Game), Overwhelmingly Positive on Steam. The jam build is still free on Hempuli's itch page.">
+  <span class="kicker gold">Born in a jam · guess the hit 3/3</span>
+  <h2><span class="q">Which hit is this? 🤔</span><span class="ans">Baba Is You</span></h2>
+  <div class="imgs">
+    <div class="proto"><a class="vid" data-yt="0LnHQcZF-w8" data-clip="assets/clips/baba-jam.mp4" href="https://www.youtube.com/watch?v=0LnHQcZF-w8" target="_blank" rel="noopener"><div class="shot contain" style="background:#041204"><img src="assets/baba-jam.png" alt="The jam prototype"></div><span class="play">▶</span></a><p class="caption">▶ Nordic Game Jam · 2017 · <b>won it</b></p></div>
+    <span class="jarrow">→</span>
+    <div class="final"><div class="shot contain mystery" style="background:#0a0a0a"><img src="assets/baba-is-you.png" alt="Baba Is You"><span class="qmark">?</span></div><p class="caption"><span class="q">???</span><span class="ans">Baba Is You · 2019</span></p></div>
   </div>
+  <p class="verdict">★ <b class="hl2">IGF double-winner</b> · Hempuli · <a href="https://store.steampowered.com/app/736260/Baba_Is_You/" target="_blank" rel="noopener">Steam ↗</a></p>
 </section>
 
 <!-- 7b · GMTK PROOF VIDEO -->
@@ -638,8 +630,7 @@
     <div class="col">
       <ul class="tight">
         <li><b>Gonen &amp; Ori Gutholtz</b> (dietzribi)</li>
-        <li class="win"><b class="hl2">93% positive</b> on Steam · 860+ reviews</li>
-        <li>Steam: <a class="mono" href="https://store.steampowered.com/app/1303950/Toodee_and_Topdee/">store.steampowered.com/app/1303950</a></li>
+        <li class="win"><b class="hl2">93% positive</b> on <a href="https://store.steampowered.com/app/1303950/Toodee_and_Topdee/" target="_blank" rel="noopener">Steam ↗</a></li>
       </ul>
     </div>
   </div>
@@ -658,14 +649,14 @@
     <div class="col">
       <ul class="tight">
         <li><b>Gonen Gutholtz</b> (dietzribi)</li>
-        <li>On <b>Steam</b> (2025) · <a href="https://www.crazygames.com/game/uvsu-demo">browser demo on CrazyGames</a></li>
+        <li class="win">Jam → <b>Steam</b> (2025) · <a href="https://www.crazygames.com/game/uvsu-demo" target="_blank" rel="noopener">demo ↗</a></li>
       </ul>
     </div>
   </div>
 </section>
 
 <!-- 10 · VEGGIE BRAWL -->
-<section class="slide game" data-notes="Veggie Brawl — WON the GMTK jam at Xsolla Club… and then Mark Brown put them in his TOP 20 — out of more than TEN THOUSAND submissions. (Confetti pops ~1.5s after you land here — time the '20 out of 10,000' line to it.) Click the right video: it starts right at their reveal. Names are on the slide — point, don't read.">
+<section class="slide game" data-notes="Veggie Brawl — WON the GMTK jam at Xsolla Club… and then Mark Brown put them in his TOP 20 — out of more than TEN THOUSAND submissions. (Confetti pops ~1.5s after you land here — time the '20 out of 10,000' line to it.) Click the right video: it starts right at their reveal. Names are on the slide — point, don't read. The itch link is under the title image.">
   <div class="confetti" aria-hidden="true">
     <i style="left:4%;background:#ff7bc1;animation-delay:1.5s;--cr:520deg"></i>
     <i style="left:11%;background:#7ee787;animation-delay:1.62s;--cr:-460deg"></i>
@@ -690,16 +681,14 @@
   <h2>Veggie Brawl <span class="hl2">★ GMTK winner</span></h2>
   <div class="cols">
     <div class="imgs vidpair">
-      <div class="proto"><div class="shot"><img src="assets/veggie-brawl-title.png" alt="Veggie Brawl title"></div><p class="caption">Winner @ Xsolla Club site</p></div>
+      <div class="proto"><div class="shot"><img src="assets/veggie-brawl-title.png" alt="Veggie Brawl title"></div><p class="caption"><a href="https://therozental.itch.io/veggie-brawl" target="_blank" rel="noopener">Winner @ Xsolla Club site · play ↗</a></p></div>
       <span class="jarrow">→</span>
-      <div class="final"><a class="vid" data-yt="awegilW3DTc" data-start="232" data-clip="assets/clips/veggie-top20.mp4" href="https://youtu.be/awegilW3DTc?t=232" target="_blank" rel="noopener"><div class="shot"><img src="https://i.ytimg.com/vi/awegilW3DTc/hqdefault.jpg" alt="GMTK favourite games video"></div><span class="play">▶</span></a><p class="caption">▶ Mark Brown's Top 20 reveal — they're in it!</p></div>
+      <div class="final"><a class="vid" data-yt="awegilW3DTc" data-start="232" data-clip="assets/clips/veggie-top20.mp4" href="https://youtu.be/awegilW3DTc?t=232" target="_blank" rel="noopener"><div class="shot"><img src="https://i.ytimg.com/vi/awegilW3DTc/hqdefault.jpg" alt="GMTK favourite games video"></div><span class="play">▶</span></a><p class="caption">▶ Mark Brown's Top 20 reveal</p></div>
     </div>
     <div class="col">
       <ul class="tight">
         <li><b>Yoav Kagan · Shelly Rosenbaum · Shahar Tropp · Tal Rozenberg · Shachar Dahari</b></li>
-        <li class="win"><b class="hl2">Winner — GMTK Jam @ Xsolla Club</b></li>
-        <li class="win"><b class="hl4">GMTK Top 20 — out of 10,000+ submissions</b> 🤯</li>
-        <li>Play: <a class="mono" href="https://therozental.itch.io/veggie-brawl">therozental.itch.io/veggie-brawl</a></li>
+        <li class="win"><b class="hl4">GMTK Top 20 of 10,000+</b> 🤯</li>
       </ul>
     </div>
   </div>
@@ -733,10 +722,8 @@
     <div class="col" style="flex:.9;display:flex"><div class="shot contain" style="flex:1;background:#14102a"><img src="assets/gmtk-tlv-poster.png" alt="GMTK Game Jam 2026 community site at Xsolla Club TLV — poster"></div></div>
     <div class="col" style="display:flex;flex-direction:column;justify-content:center;gap:22px">
       <ul class="tight">
-        <li><b>23–26.07.2026</b> · the community site of GMTK Game Jam, in Tel Aviv</li>
-        <li>Open to everyone — <b>no experience needed</b></li>
-        <li class="win">Thank you <b class="hl">Xsolla Club</b>, <b class="hl4">GameDevelop{Her}</b>, <b class="hl3">GameIS</b> &amp; <b>GameDev Drinkup TLV</b></li>
-        <li class="win">…and <b>all the friends who helped make it happen</b> 💜</li>
+        <li><b>23–26.07</b> · Tel Aviv · <b>no experience needed</b></li>
+        <li class="win">Thank you <b class="hl">Xsolla Club</b>, <b class="hl4">GameDevelop{Her}</b>, <b class="hl3">GameIS</b>, <b>GameDev Drinkup TLV</b> &amp;&nbsp;all&nbsp;the&nbsp;friends&nbsp;💜</li>
       </ul>
       <div class="flames"><span>🔥</span><span>🎉</span><span>🔥</span><span>🕹️</span><span>🔥</span></div>
     </div>
@@ -760,14 +747,13 @@
 </section>
 
 <!-- 14 · DEEP DIVE 1 -->
-<section class="slide" data-notes="Deep dive 1: Tavern Stew — GMTK jam, Unity point & click: read the customer, cook the right stew. The roles in the room, as a meme: artists/designers living their best life, organizers lifting them up, coders barely keeping heads above water… and junior devs. RIP. (Pause for the laugh, then dive in.)">
+<section class="slide" data-notes="Deep dive 1: Tavern Stew — GMTK jam, Unity point & click: read the customer, cook the right stew. UI/Canvas-heavy; me as dev/designer + artists. The roles in the room, as a meme: artists/designers living their best life, organizers lifting them up, coders barely keeping heads above water… and junior devs. RIP. (Pause for the laugh, then dive in.)">
   <span class="kicker orange">03 · Deep dive 1</span>
   <h2>Tavern Stew <span class="muted">· GMTK jam · Unity</span></h2>
   <div class="cols" style="flex:1;min-height:0;align-items:center">
     <div class="col">
       <ul>
         <li>Point &amp; click: <b>read the customer,<br>cook the right stew</b> 🍲</li>
-        <li>UI/Canvas-heavy · me (dev/designer) + artists</li>
         <li class="win">The jam room, accurately: →</li>
       </ul>
     </div>
@@ -794,7 +780,7 @@
   <div class="bigshot">
     <div class="shot" style="background:#000"><video class="autovid" src="assets/clips/tavern-studio.mp4" muted loop playsinline preload="auto" style="width:100%;height:100%;object-fit:contain;display:block"></video></div>
   </div>
-  <p class="caption">TavernStewStudio — every customer is a level, editable without Play mode</p>
+  <p class="caption">TavernStewStudio — every customer is a level</p>
 </section>
 
 <!-- 15 · THE CANVAS PAIN -->
@@ -858,17 +844,17 @@
 <!-- 19b · THE PIPELINE -->
 <section class="slide" data-notes="The actual pipeline, start to finish: a GDD skill structured the design and — crucially — listed the OPEN QUESTIONS. Those became story-flow ideas (the teach → contradict → betray arc). Then prototype and playtest the design directly in the web testbed — every feature traces back to one of those questions. And it finishes there too: all the real art authored in Figma, baked into the engine 1:1.">
   <span class="kicker blue">04 · Bunny Boo</span>
-  <h2>The pipeline: idea → shipped,<br>without leaving the browser</h2>
+  <h2>Idea → shipped,<br>all in the browser</h2>
   <div class="flow">
-    <div class="fcard"><span class="pic">📝</span><b>GDD</b><p>a Claude skill writes the design +<br><b style="color:var(--ink)">open questions</b></p></div>
+    <div class="fcard"><span class="pic">📝</span><b>GDD</b><p>+ <b style="color:var(--ink)">open questions</b></p></div>
     <span class="farrow">→</span>
     <div class="fcard"><span class="pic">💡</span><b>Story flow</b><p>teach → contradict<br>→ betray</p></div>
     <span class="farrow">→</span>
-    <div class="fcard"><span class="pic">🧪</span><b>Prototype &amp; test</b><p>game design playtested<br><b style="color:var(--ink)">in the web editor</b></p></div>
+    <div class="fcard"><span class="pic">🧪</span><b>Prototype &amp; test</b><p>in the <b style="color:var(--ink)">web editor</b></p></div>
     <span class="farrow">→</span>
-    <div class="fcard" style="border-color:var(--accent2)"><span class="pic">🎨</span><b>Finish + assets</b><p>art authored in <b style="color:var(--ink)">Figma</b>,<br>baked 1:1</p></div>
+    <div class="fcard" style="border-color:var(--accent2)"><span class="pic">🎨</span><b>Finish + assets</b><p><b style="color:var(--ink)">Figma</b> → 1:1</p></div>
   </div>
-  <p class="small" style="text-align:center"><span class="hl2">★</span> Every feature traces back to an open question from the GDD.</p>
+  <p class="small" style="text-align:center"><span class="hl2">★</span> Every feature answers a GDD open question</p>
 </section>
 
 <!-- 19x · THE DESIGN STRUGGLE -->
@@ -878,13 +864,13 @@
   <div class="cols" style="flex:1;min-height:0">
     <div class="col" style="flex:.8;display:flex;flex-direction:column">
       <a style="flex:1;min-height:0;display:flex" href="https://claude.ai/artifact/GKLMzZLFQuRcYeozt2T6rP" target="_blank" rel="noopener"><span class="flowscroll" style="flex:1"><img src="assets/bb-flow-page.png" alt="Bunny Boo Flow artifact — flow chart, room cards and open questions, auto-scrolling"></span></a>
-      <p class="caption">the full flow, designed with Claude → <span class="mono" style="font-size:13px">claude.ai artifact · click to open</span></p>
+      <p class="caption">designed with Claude · click to open ↗</p>
     </div>
     <div class="col" style="display:flex;flex-direction:column;justify-content:center;gap:18px">
       <ul class="tight">
-        <li>A liar that must still feel <b>fair</b>: lie chances, escalating tells — <span class="hl4">face flip → text glitch → the mirror</span></li>
-        <li>The <b>teach → contradict → betray</b> spine, room by room, with what each wrong trust costs</li>
-        <li class="win">And the part I couldn't solve alone — <b class="hl2">my open questions:</b></li>
+        <li>A liar that still feels <b>fair</b></li>
+        <li>Tells escalate: <span class="hl4">face → text → mirror</span></li>
+        <li class="win"><b class="hl2">My open questions:</b></li>
       </ul>
       <div class="shot contain" style="background:#0e0a14;flex:none"><img src="assets/bb-flow-questions.png" alt="Open design questions list from the artifact"></div>
     </div>
@@ -906,13 +892,13 @@
   <span class="kicker blue">04 · Bunny Boo · one index.html</span>
   <div class="vfwrap">
     <div class="vframe"><video class="autovid" src="assets/clips/web-editor-tour.mp4" muted loop playsinline preload="auto"></video></div>
-    <span class="note g" style="left:0;top:6%">CHANGE THE GAME'S<br>CONTENT — LIVE ➡</span>
-    <span class="note b" style="left:0;top:40%">STORY FLOWS —<br>SWITCH WITH A CLICK ➡</span>
-    <span class="note" style="left:0;top:74%">MODES:<br>EDIT ⇄ PLAYTEST ➡</span>
-    <span class="note p" style="right:0;top:14%">⬅ FLOATING INSPECTOR<br>FOLLOWS EVERY DRAG</span>
-    <span class="note g" style="right:0;top:60%">⬅ FIGMA CONNECTION —<br>ASSETS LOAD 1:1</span>
+    <span class="note g" style="left:0;top:6%">LIVE CONTENT<br>EDITS ➡</span>
+    <span class="note b" style="left:0;top:40%">STORY FLOWS<br>· 1 CLICK ➡</span>
+    <span class="note" style="left:0;top:74%">EDIT ⇄<br>PLAYTEST ➡</span>
+    <span class="note p" style="right:0;top:14%">⬅ FLOATING<br>INSPECTOR</span>
+    <span class="note g" style="right:0;top:60%">⬅ FIGMA<br>ASSETS 1:1</span>
   </div>
-  <p class="caption" style="font-size:19px"><a class="mono" href="https://yana205.github.io/bbpt-mock/?mode=designer" target="_blank" rel="noopener">▶ OPEN LIVE: yana205.github.io/bbpt-mock/?mode=designer</a></p>
+  <p class="caption" style="font-size:19px"><a class="mono" href="https://yana205.github.io/bbpt-mock/?mode=designer" target="_blank" rel="noopener">▶ OPEN LIVE ↗</a></p>
 </section>
 
 <!-- 19 · WEB PROTOTYPING -->
@@ -922,7 +908,7 @@
   <div class="bigshot">
     <div class="shot" style="background:#000"><video class="autovid" src="assets/clips/figma-pipeline.mp4" muted loop playsinline preload="auto" style="width:100%;height:100%;object-fit:contain;display:block"></video></div>
   </div>
-  <p style="text-align:center;font-size:24px">Figma, drawn at native <b>320×180</b> → baked <b class="hl2">1:1 · zero differing pixels</b></p>
+  <p style="text-align:center;font-size:24px">Figma → engine <b class="hl2">1:1 · zero pixel diff</b></p>
 </section>
 
 <!-- 20 · TESTS IN A JAM -->
@@ -1038,7 +1024,10 @@ Running <b>34</b> tests using 4 workers
 
   function go(k,push){
     k=Math.max(0,Math.min(n-1,k));
+    var back=k<i;
     slides.forEach(function(s,j){
+      /* guess slides: fresh when entered going forward, answered when going back */
+      if(k!==i&&s.classList.contains('guess')) s.classList.toggle('revealed',j===k&&back);
       s.classList.toggle('active',j===k);
       s.classList.toggle('prev',j<k);
     });
@@ -1059,6 +1048,18 @@ Running <b>34</b> tests using 4 workers
     if(push!==false) location.hash='#/'+(k+1);
   }
 
+  /* guess slides: → reveals the answer first, ← hides it again */
+  function next(){
+    var s=slides[i];
+    if(s.classList.contains('guess')&&!s.classList.contains('revealed')){s.classList.add('revealed');return;}
+    go(i+1);
+  }
+  function prev(){
+    var s=slides[i];
+    if(s.classList.contains('guess')&&s.classList.contains('revealed')){s.classList.remove('revealed');return;}
+    go(i-1);
+  }
+
   /* gallery overview */
   var gallery=document.getElementById('gallery'),
       galgrid=document.getElementById('galgrid'),
@@ -1067,7 +1068,7 @@ Running <b>34</b> tests using 4 workers
     slides.forEach(function(s,j){
       var t=document.createElement('div'); t.className='thumb';
       var c=s.cloneNode(true);
-      c.classList.remove('active','prev');
+      c.classList.remove('active','prev','revealed');
       t.appendChild(c);
       var b=document.createElement('span'); b.className='tnum'; b.textContent=j+1;
       t.appendChild(b);
@@ -1102,8 +1103,8 @@ Running <b>34</b> tests using 4 workers
   addEventListener('keydown',function(e){
     if(e.metaKey||e.ctrlKey||e.altKey) return;
     switch(e.key){
-      case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown': go(i+1); e.preventDefault(); break;
-      case 'ArrowLeft': case 'ArrowUp': case 'PageUp': go(i-1); e.preventDefault(); break;
+      case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown': next(); e.preventDefault(); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp': prev(); e.preventDefault(); break;
       case 'Home': go(0); break;
       case 'End': go(n-1); break;
       case 'f': case 'F':
@@ -1121,8 +1122,8 @@ Running <b>34</b> tests using 4 workers
         break;
     }
   });
-  document.getElementById('znext').addEventListener('click',function(){go(i+1)});
-  document.getElementById('zprev').addEventListener('click',function(){go(i-1)});
+  document.getElementById('znext').addEventListener('click',next);
+  document.getElementById('zprev').addEventListener('click',prev);
 
   /* trimmed autoplay clips: loop back before the last N seconds */
   document.querySelectorAll('video.autovid[data-trim-end]').forEach(function(v){
