@@ -607,6 +607,20 @@
   document.getElementById('znext').addEventListener('click',function(){go(i+1)});
   document.getElementById('zprev').addEventListener('click',function(){go(i-1)});
   fromHash();
+
+  /* live reload: when a new version is deployed (or saved locally),
+     the page refreshes itself — current slide survives via the hash */
+  var versionTag=null;
+  function checkVersion(){
+    fetch(location.pathname,{method:'HEAD',cache:'no-store'}).then(function(r){
+      if(!r.ok) return;
+      var s=(r.headers.get('etag')||'')+'|'+(r.headers.get('last-modified')||'');
+      if(versionTag===null){versionTag=s;return;}
+      if(s!=='|' && s!==versionTag) location.reload();
+    }).catch(function(){});
+  }
+  setInterval(checkVersion,5000);
+  checkVersion();
 })();
 </script>
 </body>
