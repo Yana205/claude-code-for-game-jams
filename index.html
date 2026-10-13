@@ -137,8 +137,31 @@
   .slide.active .fcard:nth-child(5){animation-delay:.24s}
   .slide.active .step:nth-child(3){animation-delay:.15s}
   .slide.active .step:nth-child(5){animation-delay:.3s}
-  .slide.active .punch{animation:pop .5s cubic-bezier(.2,1.6,.4,1) .4s both}
+  .slide.active .punch{animation:pop .5s cubic-bezier(.2,1.6,.4,1) .4s both,punchglow 2.4s ease-in-out .9s 1}
   @keyframes pop{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:scale(1)}}
+  .punch{text-shadow:3px 3px 0 rgba(0,0,0,.5),0 0 16px rgba(217,119,87,.45),0 0 36px rgba(217,119,87,.25)}
+  @keyframes punchglow{0%,100%{filter:brightness(1)}35%{filter:brightness(1.45)}}
+  .punch .brutal{
+    color:#c21818;
+    text-shadow:3px 3px 0 rgba(0,0,0,.6),0 0 14px rgba(170,0,0,.85),0 0 34px rgba(110,0,0,.6);
+  }
+  .punch .beautiful{
+    position:relative;color:#ffb7d9;
+    text-shadow:3px 3px 0 rgba(0,0,0,.5),0 0 14px rgba(255,140,200,.8),0 0 32px rgba(255,120,190,.45);
+  }
+  .petal{position:absolute;left:50%;top:30%;font-size:24px;opacity:0;pointer-events:none;text-shadow:none}
+  .slide.active .petal{animation:petalfall 2.6s ease-out forwards}
+  .petal.p1{left:6%;--dx:-80px;--dy:130px;--rr:-200deg;animation-delay:.9s !important}
+  .petal.p2{left:24%;--dx:-30px;--dy:170px;--rr:160deg;animation-delay:1.05s !important}
+  .petal.p3{left:44%;--dx:25px;--dy:150px;--rr:-140deg;animation-delay:.95s !important}
+  .petal.p4{left:62%;--dx:70px;--dy:180px;--rr:220deg;animation-delay:1.15s !important}
+  .petal.p5{left:80%;--dx:110px;--dy:140px;--rr:-180deg;animation-delay:1s !important}
+  .petal.p6{left:95%;--dx:60px;--dy:120px;--rr:140deg;animation-delay:1.25s !important}
+  @keyframes petalfall{
+    0%{opacity:0;transform:translate(0,0) rotate(0) scale(.6)}
+    12%{opacity:1;transform:translate(calc(var(--dx)*.15),-14px) rotate(calc(var(--rr)*.2)) scale(1)}
+    100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--rr)) scale(.9)}
+  }
   .play{animation:pulse 1.8s ease-in-out infinite}
   @keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.1)}}
   .slide.active .jarrow{animation:nudge 1.6s ease-in-out infinite}
@@ -396,7 +419,6 @@
 
 <!-- 1 · TITLE -->
 <section class="slide center" data-notes="Welcome! Tonight: two of my own jam repos, and the surprising thing Claude Code actually did in them.">
-  <img class="mascot" src="assets/claude-mascot.png" alt="Pixel Claude mascot with headphones">
   <span class="titlebadge">TEL AVIV MEETUP · OCT 13 2026</span>
   <h1>CLAUDE FOR INDIE<br><span class="hl">GAME DEVELOPERS</span> 🎮</h1>
   <p class="byline">
@@ -416,7 +438,7 @@
     <div class="col">
       <ul>
         <li><b>Yana Ifraimov</b> (24)</li>
-        <li>Community active: <b class="hl4">GameDevelop{Her}</b> marketing &amp; <b>Women in Tech</b></li>
+        <li>Community active: <a href="https://www.gamedevelopher.com/" target="_blank" rel="noopener"><b class="hl4">GameDevelop{Her}</b></a> marketing &amp; <b>Women in Tech</b><br><a class="mono small" href="https://www.gamedevelopher.com/">gamedevelopher.com</a></li>
         <li>Future <b>Game Design &amp; Art</b> student</li>
         <li class="win"><b class="hl">Claude Code enthusiast</b> &amp; game-jam lover</li>
       </ul>
@@ -448,7 +470,7 @@
       </ul>
     </div>
   </div>
-  <p class="punch">"A BRUTAL, BEAUTIFUL<br>SEARCH FOR FUN"</p>
+  <p class="punch">"A <span class="brutal">BRUTAL</span>, <span class="beautiful">BEAUTIFUL<span class="petal p1">🌸</span><span class="petal p2">🌸</span><span class="petal p3">🌸</span><span class="petal p4">🌸</span><span class="petal p5">🌸</span><span class="petal p6">🌸</span></span><br>SEARCH FOR FUN"</p>
 </section>
 
 <!-- 5 · HOLLOW KNIGHT -->
