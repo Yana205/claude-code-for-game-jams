@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Claude Code for Game Jams</title>
-<meta name="description" content="Meetup talk — Claude Code didn't make the games, it built the tools that let a tiny jam team make the games.">
+<title>Claude for Indie Game Developers</title>
+<meta name="description" content="Tel Aviv meetup talk — Claude Code didn't make the games, it built the tools that let a tiny jam team make the games.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik:ital,wght@0,400;0,500;0,700;0,900;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -57,21 +57,24 @@
     font-family:"Press Start 2P",monospace;font-size:13px;letter-spacing:1px;
     color:var(--accent2);text-transform:uppercase;
   }
-  .kicker.orange{color:var(--accent)} .kicker.blue{color:var(--accent3)} .kicker.pink{color:var(--accent4)}
-  h1{font-family:"Press Start 2P",monospace;font-size:52px;line-height:1.35;text-shadow:4px 4px 0 rgba(217,119,87,.35)}
+  .kicker.orange{color:var(--accent)} .kicker.blue{color:var(--accent3)} .kicker.pink{color:var(--accent4)} .kicker.gold{color:var(--gold)}
+  h1{font-family:"Press Start 2P",monospace;font-size:46px;line-height:1.4;text-shadow:4px 4px 0 rgba(217,119,87,.35)}
   h2{font-family:"Press Start 2P",monospace;font-size:30px;line-height:1.5;color:var(--ink)}
   h3{font-size:24px;font-weight:700}
   p,li{font-size:23px;line-height:1.5;color:var(--ink)}
   .muted{color:var(--muted)}
   .small{font-size:18px}
   ul{list-style:none;display:flex;flex-direction:column;gap:14px}
-  ul.tight{gap:9px}
+  ul.tight{gap:10px}
   li{padding-left:34px;position:relative}
   li::before{content:"▸";position:absolute;left:0;color:var(--accent);font-weight:900}
   li.win::before{content:"★";color:var(--gold)}
   b{color:#fff}
   .hl{color:var(--accent)} .hl2{color:var(--accent2)} .hl3{color:var(--accent3)} .hl4{color:var(--accent4)}
   code,.mono{font-family:"JetBrains Mono",monospace;font-size:.92em;color:var(--accent2);background:rgba(126,231,135,.08);padding:2px 8px;border-radius:6px}
+  a{color:var(--accent3);text-decoration:none}
+  a:hover{text-decoration:underline}
+  a.mono{color:var(--accent2)}
 
   .cols{display:flex;gap:36px;align-items:stretch}
   .col{flex:1;min-width:0}
@@ -81,7 +84,6 @@
   }
   .card h3{margin-bottom:10px}
   .card .tag{font-family:"JetBrains Mono",monospace;font-size:15px;color:var(--accent3);display:block;margin-bottom:6px}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 
   .shot{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#000;box-shadow:var(--shadow)}
   .shot img{display:block;width:100%;height:100%;object-fit:cover}
@@ -97,9 +99,10 @@
     background:var(--accent2);padding:10px 18px;border-radius:8px;display:inline-block;
     box-shadow:0 6px 0 rgba(126,231,135,.3);
   }
-  .byline{font-size:22px;color:var(--muted)}
+  .byline{font-size:24px;color:var(--ink);display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap}
   .pressstart{font-family:"Press Start 2P",monospace;font-size:15px;color:var(--muted);animation:blink 1.4s steps(2) infinite}
   @keyframes blink{50%{opacity:.15}}
+  .li-ic{width:28px;height:28px;flex:none;border-radius:6px;vertical-align:middle}
 
   blockquote{
     font-size:40px;line-height:1.5;font-weight:500;max-width:1000px;
@@ -107,68 +110,126 @@
   }
   blockquote .q2{color:var(--accent)}
 
-  /* evolution pairs */
-  .pairs{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-  .pair .duo{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
-  .pair .shot{aspect-ratio:1/1}
-  .pair .arrow{font-size:26px;color:var(--accent2);font-weight:900}
-  .pair .label{text-align:center;margin-top:10px;font-size:19px}
-  .pair .label b{display:block;font-size:21px}
-  .pair .label span{color:var(--muted);font-size:16px}
+  .dim{opacity:.45;filter:saturate(.6)}
+  .punch{
+    font-family:"Press Start 2P",monospace;font-size:22px;line-height:1.7;color:var(--accent);
+    text-align:center;text-shadow:3px 3px 0 rgba(0,0,0,.5);
+  }
 
-  .games3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-  .games3 .shot{aspect-ratio:16/10}
+  /* game spotlight slides */
+  .game .cols{flex:1;min-height:0;align-items:center}
+  .game .imgs{flex:1.35;display:flex;gap:18px;align-items:center;min-width:0;min-height:0;height:100%}
+  .game .imgs .proto{flex:1.5;align-self:stretch;display:flex;flex-direction:column}
+  .game .imgs .proto .shot{flex:1;min-height:0}
+  .game .imgs .proto .shot img{height:100%}
+  .game .imgs .final{flex:1;align-self:stretch;display:flex;flex-direction:column}
+  .game .imgs .final .shot{flex:1;min-height:0}
+  .game .imgs .final .shot img{height:100%}
+  .game .imgs .jarrow{font-size:34px;color:var(--accent2);font-weight:900;flex:none}
+  .game ul{gap:16px}
+  .game li{font-size:21px}
+  .game .mono{font-size:15px}
 
   .bigshot{flex:1;min-height:0;display:flex;flex-direction:column}
   .bigshot .shot{flex:1;min-height:0}
   .bigshot .shot img{height:100%}
 
-  /* then / now */
-  .vs{display:grid;grid-template-columns:1fr 1fr;gap:26px;flex:1;min-height:0}
-  .vs .card{display:flex;flex-direction:column;gap:12px}
-  .vs .card h3{font-family:"Press Start 2P",monospace;font-size:17px;line-height:1.6}
+  /* meme panels */
+  .meme{display:grid;grid-template-columns:1fr 1fr;gap:0;border:3px solid #fff;border-radius:8px;overflow:hidden;box-shadow:var(--shadow)}
+  .meme .half{padding:40px 24px;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center}
+  .meme .half.a{background:#1a1f3d}
+  .meme .half.b{background:#3d1a2a;border-left:3px solid #fff}
+  .meme .big{font-size:88px;line-height:1.1}
+  .meme .lbl{font-family:"Press Start 2P",monospace;font-size:15px;line-height:1.8}
+  .impact{
+    font-family:"Press Start 2P",monospace;font-size:24px;line-height:1.8;text-align:center;color:#fff;
+    text-shadow:3px 3px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+  }
 
-  .lesson{display:flex;gap:22px;align-items:flex-start}
-  .lesson .num{
-    font-family:"Press Start 2P",monospace;font-size:26px;color:var(--bg);
-    background:var(--accent);border-radius:10px;padding:14px 16px;flex:none;
-    box-shadow:0 5px 0 rgba(217,119,87,.35);
+  /* wanted poster */
+  .wanted{
+    margin:0 auto;max-width:620px;background:#f0e2c0;color:#2a1f0e;border-radius:6px;
+    padding:34px 40px;text-align:center;box-shadow:var(--shadow);
+    border:10px double #6b5429;font-family:"Press Start 2P",monospace;
   }
-  .lesson h3{margin-bottom:6px}
+  .wanted .w1{font-size:30px;letter-spacing:4px;margin-bottom:16px}
+  .wanted .w2{font-size:46px;margin:8px 0 16px}
+  .wanted p{font-family:"Rubik",sans-serif;color:#4a3a1a;font-size:20px;line-height:1.55}
+  .wanted .rew{font-size:13px;margin-top:16px;color:#7a1f1f}
 
-  table.ref{width:100%;border-collapse:collapse;font-size:17px}
-  table.ref td{padding:8px 14px;border-bottom:1px solid var(--line);vertical-align:top}
-  table.ref td:first-child{color:var(--accent2);font-weight:700;white-space:nowrap}
-  a{color:var(--accent3);text-decoration:none}
-  a:hover{text-decoration:underline}
+  /* timeline */
+  .timeline3{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:16px;align-items:stretch;flex:1;min-height:0}
+  .timeline3 .step{display:flex;flex-direction:column;gap:12px;justify-content:center;text-align:center}
+  .timeline3 .step .pic{font-size:56px}
+  .timeline3 .step h3{font-family:"Press Start 2P",monospace;font-size:15px;line-height:1.7}
+  .timeline3 .step p{font-size:19px}
+  .timeline3 .tarrow{font-size:40px;color:var(--muted);align-self:center}
 
-  /* tipping scale (new bottleneck) */
-  .scalewrap{position:relative;height:380px}
-  .scalewrap .beam{
-    position:absolute;left:50%;top:240px;width:720px;height:12px;margin-left:-360px;
-    background:var(--muted);border-radius:6px;transform:rotate(8deg);
+  /* unity hierarchy mock */
+  .hier{
+    font-family:"JetBrains Mono",monospace;font-size:14.5px;line-height:1.75;color:#c8cde8;
+    background:#14172b;border:1px solid var(--line);border-radius:10px;padding:16px 20px;
+    white-space:pre;overflow:hidden;text-align:left;
   }
-  .scalewrap .pivot{
-    position:absolute;left:50%;top:252px;margin-left:-30px;
-    border-left:30px solid transparent;border-right:30px solid transparent;
-    border-bottom:110px solid var(--panel);
+  .hier .warn{color:#ff8484}
+  .hier .okk{color:var(--accent2)}
+
+  /* flow diagram */
+  .flow{display:flex;align-items:center;gap:14px;justify-content:center}
+  .flow .fcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 20px;text-align:center;flex:1;box-shadow:var(--shadow)}
+  .flow .fcard .pic{font-size:44px;display:block;margin-bottom:10px}
+  .flow .fcard b{font-size:20px}
+  .flow .fcard p{font-size:16.5px;color:var(--muted)}
+  .flow .farrow{font-size:30px;color:var(--accent2);flex:none;font-weight:900}
+
+  /* jam theme card */
+  .jamcard{
+    margin:0 auto;max-width:720px;background:linear-gradient(135deg,#1d2144,#2a1830);
+    border:2px solid var(--accent4);border-radius:18px;padding:40px 48px;text-align:center;
+    box-shadow:var(--shadow);
   }
-  .beam .pan{
-    position:absolute;bottom:12px;width:300px;display:flex;flex-direction:column;align-items:center;gap:4px;
-    background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;
-    font-family:"Press Start 2P",monospace;font-size:14px;box-shadow:var(--shadow);text-align:center;
-    transform:rotate(-8deg);transform-origin:bottom center;
+  .jamcard .jc1{font-family:"Press Start 2P",monospace;font-size:16px;color:var(--accent3);margin-bottom:22px}
+  .jamcard .jc2{font-family:"Press Start 2P",monospace;font-size:34px;color:var(--accent4);line-height:1.6;text-shadow:3px 3px 0 rgba(0,0,0,.6)}
+  .jamcard p{margin-top:18px;color:var(--muted);font-size:19px}
+
+  /* annotated screenshot */
+  .shotwrap{position:relative;flex:1;min-height:0;display:flex;flex-direction:column}
+  .shotwrap .shot{flex:1;min-height:0}
+  .shotwrap .shot img{height:100%;object-fit:contain}
+  .note{
+    position:absolute;z-index:5;font-family:"Press Start 2P",monospace;font-size:12px;line-height:1.5;
+    background:var(--accent);color:#fff;padding:9px 13px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.6);
+    white-space:nowrap;
   }
-  .beam .pan .pic{font-size:42px}
-  .beam .pan .small{font-family:"Rubik",sans-serif}
-  .beam .pan.up{left:-30px}
-  .beam .pan.down{right:-30px;border-color:var(--accent4)}
+  .note.g{background:#2ea04f}
+  .note.b{background:#2667c9}
+  .note.p{background:#c2447e}
+
+  /* test terminal */
+  .term{
+    font-family:"JetBrains Mono",monospace;font-size:24px;line-height:2;
+    background:#0d1117;border:1px solid var(--line);border-radius:14px;padding:34px 44px;
+    box-shadow:var(--shadow);white-space:pre;
+  }
+  .term .dollar{color:var(--muted)}
+  .term .ok{color:var(--accent2);font-weight:700}
+  .term .dots{color:var(--accent2)}
+
+  /* avatar */
+  .avatar{
+    width:280px;height:280px;border-radius:24px;flex:none;
+    background:linear-gradient(135deg,#2a1f4d,#4d1f3a);border:2px solid var(--accent4);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+    font-family:"Press Start 2P",monospace;box-shadow:var(--shadow);
+  }
+  .avatar .init{font-size:64px;color:var(--accent4)}
+  .avatar .ph{font-size:11px;color:var(--muted)}
 
   /* linklist (closing slide) */
   .linklist{gap:20px}
   .linklist li{padding-left:0;display:flex;gap:16px;align-items:flex-start;font-size:21px}
   .linklist li::before{content:none}
-  .li-ic{width:30px;height:30px;flex:none;margin-top:3px;border-radius:6px}
+  .linklist .li-ic{width:30px;height:30px;margin-top:3px}
   .li-em{font-size:26px;flex:none;width:30px;text-align:center}
 
   /* chips */
@@ -178,12 +239,6 @@
     background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 20px;
   }
   .chip.hot{color:var(--accent2);border-color:var(--accent2)}
-
-  /* big icon cards */
-  .bigicon{text-align:center;padding:36px 22px}
-  .bigicon .pic{font-size:74px;display:block;margin-bottom:16px}
-  .bigicon h3{font-family:"Press Start 2P",monospace;font-size:17px;margin-bottom:14px}
-  .bigicon p{font-size:21px}
 
   /* qr */
   .qrcol{flex:none;display:flex;flex-direction:column;align-items:center;gap:12px;justify-content:center}
@@ -257,26 +312,40 @@
 <div id="viewport"><div id="stage">
 
 <!-- 1 · TITLE -->
-<section class="slide center" data-notes="Welcome. Tonight: two of my own jam repos, and the surprising thing Claude Code actually did in them.">
-  <span class="titlebadge">MEETUP · OCT 13 2026</span>
-  <h1>CLAUDE CODE<br><span class="hl">FOR GAME JAMS</span></h1>
-  <p class="byline">How AI changed the 48-hour game &nbsp;·&nbsp; @yan &nbsp;·&nbsp; <a href="https://yanaifraimov.itch.io/">yanaifraimov.itch.io</a></p>
+<section class="slide center" data-notes="Welcome! Tonight: two of my own jam repos, and the surprising thing Claude Code actually did in them.">
+  <span class="titlebadge">TEL AVIV MEETUP · OCT 13 2026</span>
+  <h1>CLAUDE FOR INDIE<br><span class="hl">GAME DEVELOPERS</span> 🎮</h1>
+  <p class="byline">
+    <b>Yana Ifraimov</b>
+    <span style="display:inline-flex;align-items:center;gap:8px"><svg class="li-ic" viewBox="0 0 448 512" aria-label="LinkedIn"><path fill="#0a66c2" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg><a class="mono small" href="https://www.linkedin.com/in/yana-ifraimov/">in/yana-ifraimov</a></span>
+    <span style="display:inline-flex;align-items:center;gap:8px">🕹️<a class="mono small" href="https://yanaifraimov.itch.io/">yanaifraimov.itch.io</a></span>
+  </p>
   <p class="pressstart">▶ PRESS SPACE TO START</p>
 </section>
 
-<!-- 2 · THESIS -->
-<section class="slide" data-notes="One sentence thesis — land it slowly, then move.">
-  <span class="kicker">The one-sentence thesis</span>
-  <blockquote>Claude Code didn't make the games —<br><span class="q2">it built the tools</span> that let a tiny jam team make the games.</blockquote>
-  <p class="muted small">Two real jam repos tonight. In both, the AI's most valuable output wasn't gameplay code.</p>
+<!-- 2 · ABOUT ME -->
+<section class="slide" data-notes="Quick intro: 24, active in GameDevelop{Her} marketing and Women in Tech, starting Game Design & Art studies, Claude Code enthusiast, game-jam lover. (Replace the placeholder with a real photo: assets/yana.jpg)">
+  <span class="kicker pink">Hi!</span>
+  <h2>About me</h2>
+  <div class="cols" style="align-items:center">
+    <div class="avatar"><span class="init">YI</span><span class="ph">📷 photo here</span></div>
+    <div class="col">
+      <ul>
+        <li><b>Yana Ifraimov</b> (24)</li>
+        <li>Community active: <b class="hl4">GameDevelop{Her}</b> marketing &amp; <b>Women in Tech</b></li>
+        <li>Future <b>Game Design &amp; Art</b> student</li>
+        <li class="win"><b class="hl">Claude Code enthusiast</b> &amp; game-jam lover</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
 <!-- 3 · WHY WE JAM -->
-<section class="slide" data-notes="A jam is NOT a hackathon. Hackathon = MVP for a business problem. Jam = brutal, beautiful search for fun: code, art, music and emotion merged before the clock runs out.">
+<section class="slide" data-notes="A jam is NOT a hackathon. Hackathon = MVP for a business problem. Jam = 48-72 hours, secret theme, code+art+music+emotion merged before the clock runs out.">
   <span class="kicker">01 · Why we jam</span>
   <h2>A jam is not a hackathon</h2>
   <div class="cols">
-    <div class="col card">
+    <div class="col card dim">
       <span class="tag">hackathon.exe</span>
       <h3>🏢 Hackathon</h3>
       <ul class="tight">
@@ -285,20 +354,20 @@
         <li>Ends in a pitch deck</li>
       </ul>
     </div>
-    <div class="col card" style="border-color:var(--accent)">
+    <div class="col card dim" style="border-color:var(--accent)">
       <span class="tag" style="color:var(--accent)">game_jam.exe</span>
       <h3>🎮 Game Jam</h3>
       <ul class="tight">
         <li><b>48–72 hours</b>, from scratch</li>
         <li>Secret <b>theme</b> revealed at start</li>
-        <li>A brutal, beautiful <b class="hl">search for fun</b></li>
-        <li>Code + art + music + <b>human emotion</b>, before the clock runs out</li>
+        <li>Code + art + music + emotion</li>
       </ul>
     </div>
   </div>
+  <p class="punch">"A BRUTAL, BEAUTIFUL<br>SEARCH FOR FUN"</p>
 </section>
 
-<!-- 4 · JAM LOOP -->
+<!-- 4 · THE LOOP -->
 <section class="slide" data-notes="The loop every jammer knows: theme, panic, core loop, cut scope to 30%, greybox, art, theme fit, upload at 4am.">
   <span class="kicker">01 · Why we jam</span>
   <h2>The loop every jammer knows</h2>
@@ -307,245 +376,288 @@
   </div>
 </section>
 
-<!-- 5 · BORN IN A JAM -->
-<section class="slide" data-notes="Don't underestimate jam games. Hungry Knight at Ludum Dare became Hollow Knight. A 4-day PICO-8 prototype became Celeste. Nordic Game Jam 2017 gave us Baba Is You. And Superhot started as a 7DFPS entry in 2013. Point, one sentence on whichever gets a reaction, move on.">
-  <span class="kicker gold" style="color:var(--gold)">01 · Why we jam</span>
-  <h2>Weekend experiment → commercial hit</h2>
-  <div class="pairs">
-    <div class="pair">
-      <div class="duo">
-        <div class="shot"><img src="assets/hungry-knight.png" alt="Hungry Knight jam prototype"></div>
-        <div class="arrow">→</div>
-        <div class="shot"><img src="assets/hollow-knight.webp" alt="Hollow Knight"></div>
-      </div>
-      <p class="label"><b>Hollow Knight</b><span>Team Cherry · Ludum Dare's <i>Hungry Knight</i></span></p>
-    </div>
-    <div class="pair">
-      <div class="duo">
-        <div class="shot"><img src="assets/celeste-pico8.png" alt="Celeste PICO-8 prototype"></div>
-        <div class="arrow">→</div>
-        <div class="shot"><img src="assets/celeste.webp" alt="Celeste"></div>
-      </div>
-      <p class="label"><b>Celeste</b><span>Maddy Thorson · 4-day PICO-8 jam</span></p>
-    </div>
-    <div class="pair">
-      <div class="duo">
-        <div class="shot"><img src="assets/baba-sprite.png" alt="Baba sprite"></div>
-        <div class="arrow">→</div>
-        <div class="shot"><img src="assets/baba-is-you.png" alt="Baba Is You"></div>
-      </div>
-      <p class="label"><b>Baba Is You</b><span>Arvi "Hempuli" Teikari · Nordic Game Jam 2017</span></p>
-    </div>
-  </div>
-  <p class="muted small" style="text-align:center">…and <b>Superhot</b> began as a 7DFPS jam entry (2013).</p>
-</section>
-
-<!-- 6 · ISRAELI PRIDE -->
-<section class="slide" data-notes="Same magic in our rooms. Toodee and Topdee — Gonen & Ori Gutholtz. UVSU — Gonen Gutholtz. Veggie Brawl just won the GMTK jam at Xsolla Club — names are on the slide, point, don't read.">
-  <span class="kicker blue">01 · Why we jam</span>
-  <h2>The same magic, in our jam rooms 🇮🇱</h2>
-  <div class="games3">
-    <div>
-      <div class="shot"><img src="assets/toodee-banner.png" alt="Toodee and Topdee"></div>
-      <p class="label" style="text-align:center;margin-top:10px"><b>Toodee and Topdee</b><br><span class="muted small">Gonen &amp; Ori Gutholtz</span></p>
-    </div>
-    <div>
-      <div class="shot"><img src="assets/uvsu-steam.png" alt="UVSU"></div>
-      <p class="label" style="text-align:center;margin-top:10px"><b>UVSU</b><br><span class="muted small">Gonen Gutholtz</span></p>
-    </div>
-    <div>
-      <div class="shot"><img src="assets/veggie-brawl-title.png" alt="Veggie Brawl"></div>
-      <p class="label" style="text-align:center;margin-top:10px"><b>Veggie Brawl</b> <span class="hl2">★ GMTK winner @ Xsolla Club</span><br><span class="muted small">Yoav Kagan · Shelly Rosenbaum · Shahar Tropp · Tal Rozenberg · Shachar Dahari</span></p>
-    </div>
-  </div>
-</section>
-
-<!-- 7 · THE VIBE SHIFT -->
-<section class="slide" data-notes="From GGJ 2025 to GMTK 2026, the atmosphere in the jam room has completely transformed. With tools like Claude Code the panic is gone — you can physically SEE developers relaxing. Less 3am panic-typing, more time at the art table.">
-  <span class="kicker pink">02 · The shift</span>
-  <h2>The vibe shift</h2>
+<!-- 5 · HOLLOW KNIGHT -->
+<section class="slide game" data-notes="Don't underestimate jam games. Team Cherry made Hungry Knight for Ludum Dare 27 (2013, theme '10 Seconds') — it got 1/5 stars on Newgrounds at first! It became Hollow Knight: 2.8M+ copies by 2019, one of the most beloved indies ever.">
+  <span class="kicker gold">Born in a jam · 1/3</span>
+  <h2>Hollow Knight</h2>
   <div class="cols">
-    <div class="col card" style="text-align:center">
-      <span class="tag" style="color:var(--accent4)">GGJ 2025</span>
-      <p style="font-size:64px;line-height:1.2">😱⌨️🌙</p>
-      <h3>3 a.m. panic-typing</h3>
-      <p class="small muted">code is the clock, everyone waits on it</p>
-    </div>
-    <div class="col card" style="text-align:center;border-color:var(--accent2)">
-      <span class="tag" style="color:var(--accent2)">GGJ 2026 → GMTK 2026</span>
-      <p style="font-size:64px;line-height:1.2">☕🎨🤖</p>
-      <h3>Coffee while the tools run</h3>
-      <p class="small muted">you can physically <b style="color:var(--ink)">see</b> developers relaxing</p>
-    </div>
-  </div>
-  <p class="small"><span class="hl2">★ Tonight's evidence:</span> two of my own jam repos — where the AI's best output was <b>editor tools, build pipelines &amp; test instruments</b>, work a jam team never had time for before.</p>
-</section>
-
-<!-- 7b · THE NEW BOTTLENECK -->
-<section class="slide" data-notes="Coding used to dictate the entire scope of a jam game. Now artists and designers are the most precious resource in the room. The roles have flipped.">
-  <span class="kicker pink">02 · The shift</span>
-  <h2>The new bottleneck</h2>
-  <div class="scalewrap">
-    <div class="pivot"></div>
-    <div class="beam">
-      <div class="pan up"><span class="pic">⌨️</span><span>CODE</span><span class="small muted">boilerplate → AI</span></div>
-      <div class="pan down"><span class="pic">🎨</span><span>ART &amp; DESIGN</span><span class="small muted">the most precious resource in the room</span></div>
-    </div>
-  </div>
-  <p style="text-align:center;font-size:30px"><b>AI writes the boilerplate.</b> <span class="hl">Humans write the soul.</span></p>
-</section>
-
-<!-- 8 · TAVERN STEW INTRO -->
-<section class="slide" data-notes="GMTK jam, Unity point-and-click: read the customer, cook the right stew. Me as dev/designer plus artists. Headline: we didn't just build the game — we built the factory. DEMO MOMENT: switch to Unity, Tavern Stew ▸ Studio, flip Tavern/Kitchen, load a visitor, run Audit Slots, show PASS.">
-  <span class="kicker orange">03 · Deep dive 1</span>
-  <h2>Tavern Stew <span class="muted">· GMTK jam · Unity</span></h2>
-  <div class="cols">
-    <div class="col" style="flex:1.3">
-      <div class="shot"><img src="assets/tavern-stew-studio.gif" alt="TavernStewStudio editor window"></div>
-      <p class="caption">TavernStewStudio — a bespoke EditorWindow (⌘⇧T)</p>
+    <div class="imgs">
+      <div class="proto"><div class="shot"><img src="assets/hungry-knight.png" alt="Hungry Knight jam prototype"></div><p class="caption">Hungry Knight (Ludum Dare 27, 2013)</p></div>
+      <span class="jarrow">→</span>
+      <div class="final"><div class="shot"><img src="assets/hollow-knight.webp" alt="Hollow Knight"></div><p class="caption">Hollow Knight (2017)</p></div>
     </div>
     <div class="col">
-      <ul>
-        <li>Point &amp; click: <b>read the customer, cook the right stew</b></li>
-        <li>UI/Canvas-heavy · me (dev/designer) + artists</li>
-        <li class="win">We didn't just build the game —<br><b class="hl">we built the factory</b></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- 9 · TAVERN TOOLS -->
-<section class="slide" data-notes="Studio treats each customer as a LEVEL — pick a visitor, their whole level loads, editable without Play mode. AuditSlots: empty inspector slot = visible bug, caught broken refs after every scene rebuild. BuildWebGL: one click to itch-ready zip. Scene as code: we redid the layout 3 times as a re-run. Insight: one-click asset testing killed the waiting-for-the-programmer bottleneck.">
-  <span class="kicker orange">03 · Tavern Stew</span>
-  <h2>Custom dev tools &gt; game code</h2>
-  <div class="grid2">
-    <div class="card"><span class="tag">EditorWindow · ⌘⇧T</span><h3>TavernStewStudio</h3><p class="small">Each customer is a <b>level</b>: pick a visitor → portrait, order, napkin note &amp; unlocks load into the scene. No Play mode. Sprite fitting + bulk fixes.</p></div>
-    <div class="card"><span class="tag">reflection linter</span><h3>AuditSlots</h3><p class="small">Scans every <code>[SerializeField]</code> in the scene — an empty slot is a visible bug. Caught broken refs after <b>every</b> scene rebuild.</p></div>
-    <div class="card"><span class="tag">one menu click</span><h3>BuildWebGL</h3><p class="small">itch.io-ready WebGL build (Gzip + fallback, responsive 16:9) → zip → upload. Snapshot every milestone.</p></div>
-    <div class="card"><span class="tag">idempotent builders</span><h3>Scene as code</h3><p class="small"><code>BuildMainScene</code> · <code>WireScene</code> · <code>CreateJarPrefab</code> — we redid the whole layout <b>three times</b> as a re-run, not an afternoon of dragging.</p></div>
-  </div>
-  <p class="small"><span class="hl2">★ Insight:</span> giving artists a one-click way to test assets in-scene eliminated the "waiting for the programmer" bottleneck.</p>
-</section>
-
-<!-- 10 · THEN VS NOW -->
-<section class="slide" data-notes="Credit Ivan Murzak — the community trailblazer. His Unity-MCP generated 126 agent skills so Claude could read the console, create GameObjects, open scenes, screenshot Scene View to check its own work. Before the bridge: disposable editor scripts via batch-mode CLI — same result, reviewable as code first. NOW Unity shipped the official CLI + Claude Code plugin: C# runs live in the Editor, no recompile, no domain reload. If time: ls .claude/skills shows the 126 skills.">
-  <span class="kicker orange">03 · Tavern Stew</span>
-  <h2>Then vs. now: talking to Unity</h2>
-  <div class="vs">
-    <div class="card">
-      <h3 style="color:var(--accent4)">THEN · the workaround era</h3>
       <ul class="tight">
-        <li><b>Ivan Murzak's Unity-MCP</b> — the community trailblazer</li>
-        <li>Generated <b>126 agent skills</b> in <code>.claude/skills/</code></li>
-        <li>Claude reads the console, creates GameObjects, screenshots Scene View to <b>check its own work</b></li>
-        <li>Pre-bridge: disposable editor scripts via <b>batch-mode CLI</b> — reviewable as code first</li>
+        <li><b>Team Cherry</b></li>
+        <li>Jam original: <a class="mono" href="https://www.newgrounds.com/portal/view/643636">newgrounds.com/portal/view/643636</a></li>
+        <li class="win"><b class="hl2">2.8M+ copies by 2019</b> · Overwhelmingly Positive</li>
+        <li>Steam: <a class="mono" href="https://store.steampowered.com/app/367520/Hollow_Knight/">store.steampowered.com/app/367520</a></li>
       </ul>
     </div>
-    <div class="card" style="border-color:var(--accent2)">
-      <h3 style="color:var(--accent2)">NOW · native &amp; official</h3>
+  </div>
+</section>
+
+<!-- 6 · CELESTE -->
+<section class="slide game" data-notes="Maddy Thorson & Noel Berry made Celeste Classic in 4 days on PICO-8 (2015) for a local jam — it became the most-starred cart on the PICO-8 BBS, then grew into Celeste: 1M+ copies by 2019 and Best Independent Game at The Game Awards 2018. The original is hidden inside the full game as an easter egg.">
+  <span class="kicker gold">Born in a jam · 2/3</span>
+  <h2>Celeste</h2>
+  <div class="cols">
+    <div class="imgs">
+      <div class="proto"><div class="shot"><img src="assets/celeste-pico8.png" alt="Celeste Classic PICO-8 prototype"></div><p class="caption">Celeste Classic (4-day PICO-8 jam, 2015)</p></div>
+      <span class="jarrow">→</span>
+      <div class="final"><div class="shot"><img src="assets/celeste.webp" alt="Celeste"></div><p class="caption">Celeste (2018)</p></div>
+    </div>
+    <div class="col">
       <ul class="tight">
-        <li><b>Unity CLI</b> + <b>unity-agent-plugin</b> — official Claude Code plugin</li>
-        <li>Claude runs C# <b>live inside a running Editor</b></li>
-        <li>No project recompile · no domain reload</li>
-        <li>The AI workflow is <b class="hl2">native, structured, far less fragile</b></li>
+        <li><b>Maddy Thorson &amp; Noel Berry</b></li>
+        <li>Jam original: <a class="mono" href="https://maddymakesgamesinc.itch.io/celesteclassic">maddymakesgamesinc.itch.io/celesteclassic</a></li>
+        <li class="win"><b class="hl2">1M+ copies by 2019</b> · TGA 2018 Best Independent Game</li>
+        <li>Steam: <a class="mono" href="https://store.steampowered.com/app/504230/Celeste/">store.steampowered.com/app/504230</a></li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- 11 · TAVERN TECH BEATS -->
-<section class="slide" data-notes="Every gameplay number in ScriptableObjects — SO edits during Play mode persist, that IS the tuning workflow. Wiring is SerializeField + C# events, no Find(), no singletons — exactly why AuditSlots can verify the scene mechanically. BUILD_PLAN.md single source of truth, PROGRESS.md after every change, 22 gameplay scripts declared FINAL — the human stays the approval gate.">
-  <span class="kicker orange">03 · Tavern Stew</span>
-  <h2>Tech beats worth stealing</h2>
-  <ul>
-    <li><b>Every number is data:</b> ScriptableObject assets (GameConfig, feel, story) — zero hardcoded values, and SO edits <b>persist through Play mode</b> → that's the tuning workflow</li>
-    <li><b>Wiring:</b> <code>[SerializeField]</code> slots + C# events — no <code>Find()</code>, no singletons → which is exactly what lets <b>AuditSlots verify the scene mechanically</b></li>
-    <li><b>Process:</b> <code>BUILD_PLAN.md</code> is the single source of truth · <code>PROGRESS.md</code> updates after every change</li>
-    <li class="win">22 gameplay scripts declared <b>FINAL</b> — any change needs my explicit approval. <span class="hl">The human stays the approval gate.</span></li>
-  </ul>
-</section>
-
-<!-- 12 · BUNNY BOO INTRO -->
-<section class="slide" data-notes="Brackeys jam, theme Trust No One. A trust-horror game: a bunny tells you things that may be lies. Sometimes Unity is too heavy — to answer the GDD's open questions FAST we built a standalone web engine: one index.html, playable on GitHub Pages and itch. The GDD skill structured design first — floors, teach→contradict→betray, and an explicit list of open questions. The testbed exists to answer those; every feature traces to one.">
-  <span class="kicker blue">04 · Deep dive 2</span>
-  <h2>Bunny Boo <span class="muted">· Brackeys "Trust No One" · pure web</span></h2>
-  <ul>
-    <li>Trust-horror: <b>a bunny tells you things… that may be lies</b> 🐰</li>
-    <li><b class="hl3">Pure web engine. Zero bloat.</b> Sometimes Unity is too heavy → Claude helped build a <b>standalone engine</b>: one <code>index.html</code>, playable on GitHub Pages &amp; itch.io</li>
-    <li>A <b>GDD skill</b> structured the design first: floors, the <i>teach → contradict → betray</i> arc, and an explicit list of <b class="hl3">open questions</b></li>
-    <li class="win">The testbed exists to answer those questions — <b>every feature traces back to one</b></li>
-  </ul>
-</section>
-
-<!-- 13 · DESIGNER MODE -->
-<section class="slide" data-notes="We built a standalone web engine so artists can drag, snap and FEEL the room instantly — no Unity compiles. You hit T, you're playing the game. DEMO MOMENT: open live build ?mode=designer — backtick toggles the rail, drag a chest, floating inspector, T to playtest, T back, SHARE LINK. Also: music window with per-room overrides.">
-  <span class="kicker blue">04 · Bunny Boo</span>
-  <h2>An RPG-Maker editor…<br>in the browser</h2>
-  <p style="font-size:38px"><b class="hl3">Data, not code.</b></p>
-  <div class="chips">
-    <span class="chip">?mode=designer</span>
-    <span class="chip">drag · snap · inspect · ⌘Z</span>
-    <span class="chip hot">T = instant playtest</span>
+<!-- 7 · BABA IS YOU -->
+<section class="slide game" data-notes="Arvi 'Hempuli' Teikari built Baba Is You at Nordic Game Jam 2017 (theme: 'Not There') — and WON the jam. Full release 2019; IGF 2018 double-winner (Excellence in Design + Best Student Game). The jam prototype is still on Hempuli's itch page.">
+  <span class="kicker gold">Born in a jam · 3/3</span>
+  <h2>Baba Is You</h2>
+  <div class="cols">
+    <div class="imgs">
+      <div class="proto"><div class="shot"><img src="assets/baba-sprite.png" alt="Baba sprite"></div><p class="caption">Jam prototype (Nordic Game Jam 2017)</p></div>
+      <span class="jarrow">→</span>
+      <div class="final"><div class="shot"><img src="assets/baba-is-you.png" alt="Baba Is You"></div><p class="caption">Baba Is You (2019)</p></div>
+    </div>
+    <div class="col">
+      <ul class="tight">
+        <li><b>Arvi "Hempuli" Teikari</b></li>
+        <li class="win"><b class="hl2">Won Nordic Game Jam 2017</b> → IGF 2018 double-winner</li>
+        <li>Jam original: <a class="mono" href="https://hempuli.itch.io">hempuli.itch.io</a></li>
+        <li>Steam: <a class="mono" href="https://store.steampowered.com/app/736260/Baba_Is_You/">store.steampowered.com/app/736260</a> · Overwhelmingly Positive</li>
+      </ul>
+    </div>
   </div>
-  <p class="mono small muted">▶ live: bbpt-mock/?mode=designer</p>
 </section>
 
-<!-- 14 · FIGMA -->
-<section class="slide" data-notes="Artists just drew in Figma at the game's native 320x180 — so x/y transfers verbatim. Claude read the file, handled the weird layer flips and coordinate math (flipped-layer origins, cropped-fill exports, flood-fill, palette-snap back to 6 colors) and baked the room exactly as drawn. One step: drop PNGs, npm run assets. Zero differing pixels. Dialog boxes and portraits are the artists' frames too — tea skin and horror skin.">
-  <span class="kicker blue">04 · Bunny Boo</span>
-  <h2>Figma is the level editor</h2>
+<!-- 8 · TOODEE AND TOPDEE -->
+<section class="slide game" data-notes="Same magic in our jam rooms. Toodee and Topdee by Gonen & Ori Gutholtz (dietzribi) — a platformer and a top-down puzzler merged into one game. 93% positive on Steam across 860+ reviews.">
+  <span class="kicker blue">Local pride 🇮🇱 · 1/3</span>
+  <h2>Toodee and Topdee</h2>
+  <div class="cols">
+    <div class="imgs">
+      <div class="proto"><div class="shot"><img src="assets/toodee-gameplay.webp" alt="Toodee and Topdee gameplay"></div><p class="caption">2D platformer ⇄ top-down puzzler</p></div>
+      <span class="jarrow">→</span>
+      <div class="final"><div class="shot"><img src="assets/toodee-box.webp" alt="Toodee and Topdee Switch box"></div><p class="caption">PC · Switch · Xbox</p></div>
+    </div>
+    <div class="col">
+      <ul class="tight">
+        <li><b>Gonen &amp; Ori Gutholtz</b> (dietzribi)</li>
+        <li class="win"><b class="hl2">93% positive</b> on Steam · 860+ reviews</li>
+        <li>Steam: <a class="mono" href="https://store.steampowered.com/app/1303950/Toodee_and_Topdee/">store.steampowered.com/app/1303950</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · UVSU -->
+<section class="slide game" data-notes="UVSU by Gonen Gutholtz (dietzribi) — you versus you. On Steam (2025), with a demo playable in the browser. Watch the trailer — it's a mind-bender.">
+  <span class="kicker blue">Local pride 🇮🇱 · 2/3</span>
+  <h2>UVSU — you vs you</h2>
+  <div class="cols">
+    <div class="imgs">
+      <div class="proto"><div class="shot contain" style="background:#120a1e"><img src="assets/uvsu-cover.png" alt="UVSU cover"></div></div>
+      <span class="jarrow">·</span>
+      <div class="final"><div class="shot contain" style="background:#0a1410"><img src="assets/uvsu-steam.png" alt="UVSU Steam capsule"></div></div>
+    </div>
+    <div class="col">
+      <ul class="tight">
+        <li><b>Gonen Gutholtz</b> (dietzribi)</li>
+        <li>On <b>Steam</b> (2025) · <a href="https://www.crazygames.com/game/uvsu-demo">browser demo on CrazyGames</a></li>
+        <li>Trailer: <a class="mono" href="https://youtube.com/watch?v=rCWRr4-V_wM">youtube.com/watch?v=rCWRr4-V_wM</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · VEGGIE BRAWL -->
+<section class="slide game" data-notes="Veggie Brawl — WON the recent GMTK jam at Xsolla Club. Yoav Kagan, Shelly Rosenbaum, Shahar Tropp, Tal Rozenberg, Shachar Dahari. Names are on the slide — point, don't read.">
+  <span class="kicker blue">Local pride 🇮🇱 · 3/3</span>
+  <h2>Veggie Brawl <span class="hl2">★ GMTK winner</span></h2>
+  <div class="cols">
+    <div class="imgs">
+      <div class="proto"><div class="shot"><img src="assets/veggie-brawl-title.png" alt="Veggie Brawl title"></div></div>
+      <span class="jarrow">→</span>
+      <div class="final"><div class="shot"><img src="assets/veggie-brawl-gameplay.webp" alt="Veggie Brawl gameplay"></div></div>
+    </div>
+    <div class="col">
+      <ul class="tight">
+        <li><b>Yoav Kagan · Shelly Rosenbaum · Shahar Tropp · Tal Rozenberg · Shachar Dahari</b></li>
+        <li class="win"><b class="hl2">Winner — GMTK Jam @ Xsolla Club</b></li>
+        <li>Play: <a class="mono" href="https://therozental.itch.io/veggie-brawl">therozental.itch.io/veggie-brawl</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 11 · THE SHIFT -->
+<section class="slide" data-notes="From GGJ 2025 to GMTK 2026 the room changed completely. With tools like Claude Code the panic is gone — you can physically SEE developers relaxing. Less 3am panic-typing, more time at the art table. (Swap the panels for your own meme image when ready: assets/shift-meme.png)">
+  <span class="kicker pink">02 · The shift</span>
+  <h2>The AI revolution in the jam room</h2>
+  <div class="meme">
+    <div class="half a"><span class="big">😴💤</span><span class="lbl">CODERS<br>(the AI is typing)</span></div>
+    <div class="half b"><span class="big">🎨🔥</span><span class="lbl">ARTISTS<br>(furiously painting)</span></div>
+  </div>
+  <p class="impact">GGJ 2025 → GMTK 2026: THE PANIC IS GONE</p>
+</section>
+
+<!-- 12 · DEEP DIVE 1 -->
+<section class="slide" data-notes="Deep dive 1: Tavern Stew — GMTK jam, Unity point & click: read the customer, cook the right stew. Artists became the most precious resource in the room… so yes, I tried to steal some from the IAC jam site. (Swap the poster for your meme when ready: assets/artist-meme.png)">
+  <span class="kicker orange">03 · Deep dive 1</span>
+  <h2>Tavern Stew <span class="muted">· GMTK jam · Unity</span></h2>
+  <div class="wanted">
+    <div class="w1">WANTED</div>
+    <div class="w2">🎨</div>
+    <p><b>ARTISTS</b><br>last seen on the IAC game-jam site</p>
+    <p class="rew">REWARD: one-click asset testing · zero "waiting for the programmer"</p>
+  </div>
+</section>
+
+<!-- 13 · DEV TOOLS TO GAMEPLAY -->
+<section class="slide" data-notes="We didn't just build the game — we built the factory. TavernStewStudio: a bespoke EditorWindow where each customer is a LEVEL — pick a visitor, their portrait/order/napkin note load into the scene, editable without Play mode. AuditSlots linted every SerializeField; BuildWebGL shipped one-click itch builds. DEMO MOMENT: switch to Unity — Studio, flip Tavern/Kitchen, load a visitor, run Audit Slots, show PASS. (Replace gif with the editor→gameplay transition gif when ready)">
+  <span class="kicker orange">03 · Tavern Stew</span>
+  <h2>Custom tools &gt; game code</h2>
   <div class="bigshot">
-    <div class="shot contain" style="background:#1e1e1e"><img src="assets/bunny-boo-figma.webp" alt="BB Figma file — tea party room and text boxes"></div>
+    <div class="shot contain"><img src="assets/tavern-stew-studio.gif" alt="TavernStewStudio editor window"></div>
   </div>
-  <p style="text-align:center;font-size:26px">Drawn at native <b>320×180</b> → baked <b class="hl2">1:1 · zero differing pixels</b></p>
+  <p class="caption">TavernStewStudio — every customer is a level, editable without Play mode</p>
 </section>
 
-<!-- 15 · TESTING -->
-<section class="slide" data-notes="Having AI write regression tests during a jam sounds insane, but it's real. 34 Playwright smoke tests drive the game through a window.BB hook — boot, seed determinism, full floor flows, session export. Every run is URL-seeded and reproducible; the session recorder logs each claim/decision/ms-to-decide and EXPORT SESSION hands testers JSON with detection-rate and false-alarm metrics. It's the ultimate luxury that saves your final hours from being a debugging nightmare.">
+<!-- 14 · TALKING TO UNITY -->
+<section class="slide" data-notes="We used to do everything by hand. Then the workaround era: Ivan Murzak's Unity-MCP — 126 generated agent skills just so Claude could take a screenshot and check its own work. Credit to Ivan, the community trailblazer. NOW it's native: official Unity CLI + Claude Code plugin, C# runs live inside a running Editor — no recompile, no domain reload.">
+  <span class="kicker orange">03 · Tavern Stew</span>
+  <h2>Talking to Unity</h2>
+  <div class="timeline3">
+    <div class="step dim"><span class="pic">⛏️</span><h3>BEFORE AI</h3><p>Doing everything<br>by hand</p></div>
+    <span class="tarrow">→</span>
+    <div class="step"><span class="pic">🩹</span><h3>EARLY AI</h3><p>Messy workarounds —<br><b>126 agent skills</b> just to<br>take a screenshot</p></div>
+    <span class="tarrow">→</span>
+    <div class="step"><span class="pic">⚡</span><h3 style="color:var(--accent2)">NOW</h3><p><b>Native Unity CLI.</b><br>Claude writes C#<br><b>live in the Editor.</b></p></div>
+  </div>
+</section>
+
+<!-- 15 · THE CANVAS PAIN -->
+<section class="slide" data-notes="With the Unity MCP, I barely had to touch the scene manually. It handled the canvas nightmare for me — anchors, layout groups, wiring. The left side is every Unity dev's trauma; the right side is one sentence to Claude.">
+  <span class="kicker orange">03 · Tavern Stew</span>
+  <h2>No more UI nightmares</h2>
+  <div class="cols">
+    <div class="col">
+      <div class="hier">▼ Canvas <span class="warn">(Scale: ???)</span>
+  ▼ SafeArea
+    ▼ Panel_Main_FINAL_v2
+      ▼ Panel_Main_FINAL_v2 (1)
+        ▸ Button_Serve <span class="warn">⚠ missing ref</span>
+        ▸ Button_Serve (1)
+        ▼ dialog_old_DONT_DELETE
+          ▸ Text (Legacy) <span class="warn">⚠ overflow</span>
+          ▸ Image (23)
+      ▸ VerticalLayoutGroup <span class="warn">⚠ fighting anchors</span></div>
+      <p class="caption">the pain 😵</p>
+    </div>
+    <div class="col">
+      <div class="hier"><span class="dollar">&gt;</span> "build the kitchen canvas:
+   jar grid, hover scale,
+   napkin note, wire the events"
+
+<span class="okk">✓ Canvas built &amp; anchored
+✓ 14 slots wired
+✓ AuditSlots … PASS</span></div>
+      <p class="caption">Unity-MCP doing it smoothly 😌</p>
+    </div>
+  </div>
+</section>
+
+<!-- 16 · WHY EDITOR TOOLING -->
+<section class="slide" data-notes="The high-level insight: if you let Claude build the editor tools, it empowers the artists to test instantly — and leaves the humans to focus on the fun. AI's best output wasn't gameplay code; it was the factory around the game.">
+  <span class="kicker orange">03 · Tavern Stew</span>
+  <h2>Claude is better at building<br><span class="hl">tools</span> than building <span class="hl4">games</span></h2>
+  <div class="flow">
+    <div class="fcard"><span class="pic">🤖</span><b>Claude builds<br>the tools</b></div>
+    <span class="farrow">→</span>
+    <div class="fcard"><span class="pic">🎨</span><b>Artists test<br>instantly</b><p>no "waiting for<br>the programmer"</p></div>
+    <span class="farrow">→</span>
+    <div class="fcard" style="border-color:var(--accent2)"><span class="pic">✨</span><b>Humans focus<br>on the fun</b></div>
+  </div>
+</section>
+
+<!-- 17 · RPG MAKER DREAM -->
+<section class="slide" data-notes="As a little girl I LOVED RPG Maker games — and always dreamed of making my own engine. Brackeys jam, theme 'Trust No One': Bunny Boo, a trust-horror where a bunny tells you things that may be lies. AI made the childhood dream of building my own RPG Maker incredibly easy.">
+  <span class="kicker blue">04 · Deep dive 2</span>
+  <h2>The dream: making my own<br>RPG Maker</h2>
+  <div class="jamcard">
+    <div class="jc1">BRACKEYS GAME JAM</div>
+    <div class="jc2">"TRUST NO ONE"</div>
+    <p>→ <b style="color:var(--ink)">Bunny Boo</b> 🐰 a trust-horror where the bunny may be lying</p>
+  </div>
+</section>
+
+<!-- 18 · THE WEB EDITOR -->
+<section class="slide" data-notes="One index.html — a full in-browser editor. Admin rail on the left (backtick hides it), floors as tabs, click-select and drag with snap grid, floating inspector, and T flips straight into playtest. DEMO MOMENT: open the live build in designer mode — drag a chest, T to play, T back, SHARE LINK.">
+  <span class="kicker blue">04 · Bunny Boo · one index.html</span>
+  <div class="shotwrap">
+    <div class="shot"><img src="assets/web-editor.png" alt="Bunny Boo web editor in designer mode"></div>
+    <span class="note" style="left:2%;top:40%">⬅ ADMIN RAIL (`)</span>
+    <span class="note g" style="left:30%;top:-2%">FLOORS AS TABS ⬆</span>
+    <span class="note b" style="left:24%;top:13%">⬅ FLOATING INSPECTOR</span>
+    <span class="note p" style="right:1%;top:11%">T = FEEL IT AS PLAYER ⬆</span>
+    <span class="note" style="left:44%;top:72%">DRAG · SNAP GRID · ⌘Z</span>
+  </div>
+</section>
+
+<!-- 19 · WEB PROTOTYPING -->
+<section class="slide" data-notes="Prototyping on the web is now super easy — and checking the STORY flow is the game-changer for a non-native narrative creator. Artists drew rooms, dialog skins and portraits in Figma at native 320x180; Claude read the file and baked the tea-party room 1:1 — zero differing pixels.">
   <span class="kicker blue">04 · Bunny Boo</span>
-  <h2>34 automated smoke tests.<br><span class="hl4">In a 48-hour jam.</span></h2>
-  <div class="chips">
-    <span class="chip">?scenario=bluff&amp;seed=9</span>
-    <span class="chip">seeded RNG → every run reproducible</span>
-    <span class="chip hot">EXPORT SESSION → JSON metrics</span>
+  <h2>Web prototyping = easy story testing</h2>
+  <div class="bigshot">
+    <div class="shot contain" style="background:#1e1e1e"><img src="assets/bunny-boo-figma.webp" alt="BB Figma file — tea party room and dialog boxes"></div>
   </div>
-  <p style="font-size:26px"><span class="hl2">★</span> The luxury that saves the final hours from a debugging nightmare.</p>
+  <p style="text-align:center;font-size:24px">Figma, drawn at native <b>320×180</b> → baked <b class="hl2">1:1 · zero differing pixels</b></p>
 </section>
 
-<!-- 16 · LESSONS -->
-<section class="slide" data-notes="1 Scope: AI lowers the coding barrier but doesn't speed up SOUL — in Bunny Boo every AI placeholder was replaced by hand-drawn art before deadline. Small polished beats massive broken. 2 Forcing function: jams teach fail-fast; AI makes each iteration faster — use the speed to try MORE ideas, not ship bigger ones. 3 Collaboration over automation: AI is the co-pilot, community is the compass — artists pixel-for-pixel, playtesters settling arguments with exported data, a teammate saying 'this is hideous' and being right.">
-  <span class="kicker">05 · The humane lessons</span>
-  <h2>What stays human</h2>
-  <div class="games3" style="margin-top:10px">
-    <div class="card bigicon"><span class="pic">🎯</span><h3>SCOPE</h3><p>Use speed for <b class="hl2">more ideas</b>,<br>not bigger ones.</p></div>
-    <div class="card bigicon"><span class="pic">❤️</span><h3>SOUL</h3><p>AI lowers the barrier —<br><b class="hl4">humans create the magic</b>.</p></div>
-    <div class="card bigicon"><span class="pic">🔥</span><h3>COMMUNITY</h3><p><b class="hl">Collaboration</b> &gt; automation.</p></div>
-  </div>
+<!-- 20 · TESTS IN A JAM -->
+<section class="slide" data-notes="We wrote automated tests… but did Claude actually help? ANSWER THIS LIVE. (The honest answer: 34 Playwright smoke tests, URL-seeded and reproducible — they saved the final hours from regressions. Was some of it overkill? Maybe. Tell the room.)">
+  <span class="kicker blue">04 · Bunny Boo</span>
+  <h2>We wrote automated tests…<br><span class="hl4">but did Claude actually help?</span></h2>
+  <div class="term"><span class="dollar">$</span> npx playwright test
+
+Running <b>34</b> tests using 4 workers
+<span class="dots">··································</span>
+
+<span class="ok">  34 passed</span> (2.1m)</div>
 </section>
 
-<!-- 17 · CLOSING -->
-<section class="slide center" data-notes="Last line, verbatim. Pause. Then Q&A.">
+<!-- 21 · THE BOTTOM LINE -->
+<section class="slide center" data-notes="Let this sit for a second. This is the whole point of the AI shift in game jams. Then Q&A.">
   <blockquote style="border:none;padding:0;text-align:center;font-size:44px">"Claude Code never decided<br>what the game was.<br><br>It just made sure that deciding<br>was <span class="q2">the only hard part left</span>."</blockquote>
 </section>
 
-<!-- 18 · REFERENCES -->
+<!-- 22 · THANKS & LINKS -->
 <section class="slide" data-notes="Leave this up during Q&A. The QR opens these slides live; the repo (link under the QR) carries the full reference sheet. Shout-outs: Shahar Bar's blog on the Unity CLI + his AI-gamedev WhatsApp group and meetups; GameIS, the Israeli game-dev community; GameDevTLV — next meetup Nov 11: Concept Art for Gaming (Tamar Gin, Art Director @ Casual Friday) and Ads in Games (Idan Tabachnik, VP Product @ Anzu).">
   <span class="kicker">Thanks! · Q&amp;A</span>
   <div class="cols" style="align-items:center">
     <div class="qrcol">
       <div class="qrbox" id="qr"></div>
-      <p class="mono small" style="font-size:15px;text-align:center;line-height:1.7">these slides, live ↑<br><span class="muted">full reference sheet:<br>github.com/Yana205/claude-code-for-game-jams</span></p>
+      <p class="mono small" style="font-size:15px;text-align:center;line-height:1.7">these slides, live ↑<br><a class="muted" href="https://github.com/Yana205/claude-code-for-game-jams">full reference sheet:<br>github.com/Yana205/claude-code-for-game-jams</a></p>
     </div>
     <div class="col">
       <ul class="linklist">
         <li>
           <svg class="li-ic" viewBox="0 0 448 512" aria-label="LinkedIn"><path fill="#0a66c2" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
-          <span><b>Yana Ifraimov</b><br><span class="mono small muted">linkedin.com/in/yana-ifraimov · yanaifraimov.itch.io</span></span>
+          <span><b>Yana Ifraimov</b><br><span class="mono small"><a href="https://www.linkedin.com/in/yana-ifraimov/">linkedin.com/in/yana-ifraimov</a> · <a href="https://yanaifraimov.itch.io/">yanaifraimov.itch.io</a></span></span>
         </li>
-        <li><span class="li-em">📝</span><span><b>Shahar Bar — Unity CLI &amp; AI-gamedev blog</b><br><span class="mono small muted">sbsgames.dev/blog/codex-unity-plugin</span></span></li>
-        <li><span class="li-em">💬</span><span><b>AI GameDev — WhatsApp group &amp; meetups</b> <span class="muted small">(by Shahar)</span><br><span class="mono small muted">chat.whatsapp.com/K9dNTd4quzw5gLxn7a0VT5</span></span></li>
-        <li><span class="li-em">🕹️</span><span><b>GameIS</b> — the Israeli game-dev community<br><span class="mono small muted">facebook.com → GameIS group</span></span></li>
-        <li><span class="li-em">📅</span><span><b>GameDevTLV — next meetup 11.11</b><br><span class="small muted">Concept Art for Gaming · Tamar Gin (Casual Friday) &nbsp;+&nbsp; Ads in Games · Idan Tabachnik (Anzu)</span><br><span class="mono small muted">meetup.com/game-dev-israel</span></span></li>
+        <li><span class="li-em">📝</span><span><b>Shahar Bar — Unity CLI &amp; AI-gamedev blog</b><br><a class="mono small" href="https://sbsgames.dev/blog/codex-unity-plugin">sbsgames.dev/blog/codex-unity-plugin</a></span></li>
+        <li><span class="li-em">💬</span><span><b>AI GameDev — WhatsApp group &amp; meetups</b> <span class="muted small">(by Shahar)</span><br><a class="mono small" href="https://chat.whatsapp.com/K9dNTd4quzw5gLxn7a0VT5">chat.whatsapp.com/K9dNTd4quzw5gLxn7a0VT5</a></span></li>
+        <li><span class="li-em">🕹️</span><span><b>GameIS</b> — the Israeli game-dev community<br><a class="mono small" href="https://www.facebook.com/share/g/1QhqD5TDvj/">facebook.com → GameIS group</a></span></li>
+        <li><span class="li-em">📅</span><span><b>GameDevTLV — next meetup 11.11</b><br><span class="small muted">Concept Art for Gaming · Tamar Gin (Casual Friday) &nbsp;+&nbsp; Ads in Games · Idan Tabachnik (Anzu)</span><br><a class="mono small" href="https://www.meetup.com/game-dev-israel/events/316593508/">meetup.com/game-dev-israel</a></span></li>
       </ul>
     </div>
   </div>
@@ -628,6 +740,7 @@
   }
   document.getElementById('galbtn').addEventListener('click',function(){toggleGallery()});
   addEventListener('resize',function(){if(galOn)scaleThumbs()});
+
   function fromHash(){
     var m=location.hash.match(/#\/(\d+)/);
     go(m?+m[1]-1:0,false);
