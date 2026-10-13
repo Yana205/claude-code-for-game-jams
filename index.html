@@ -125,6 +125,18 @@
   .slide.active .flames span:nth-child(4){animation-delay:.45s}
   .slide.active .flames span:nth-child(5){animation-delay:.6s}
   @keyframes flick{from{transform:scale(.9) rotate(-7deg)}to{transform:scale(1.2) rotate(7deg)}}
+  .confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:6}
+  .confetti i{position:absolute;top:-5%;width:13px;height:21px;border-radius:3px;opacity:0}
+  .slide.active .confetti i{
+    animation-name:confall;animation-duration:2.7s;
+    animation-timing-function:cubic-bezier(.3,.4,.6,1);animation-fill-mode:forwards;
+  }
+  @keyframes confall{
+    0%{opacity:0;transform:translateY(0) rotate(0) skewX(0)}
+    6%{opacity:1}
+    80%{opacity:1}
+    100%{opacity:0;transform:translateY(800px) rotate(var(--cr,540deg)) skewX(14deg)}
+  }
   @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
   .slide.active li,.slide.active .card,.slide.active .chip,.slide.active .step,
   .slide.active .fcard,.slide.active .ytcard,.slide.active .wanted,.slide.active .jamcard,
@@ -586,19 +598,40 @@
 </section>
 
 <!-- 10 · VEGGIE BRAWL -->
-<section class="slide game" data-notes="Veggie Brawl — WON the recent GMTK jam at Xsolla Club. Yoav Kagan, Shelly Rosenbaum, Shahar Tropp, Tal Rozenberg, Shachar Dahari. Names are on the slide — point, don't read.">
+<section class="slide game" data-notes="Veggie Brawl — WON the GMTK jam at Xsolla Club… and then Mark Brown put them in his TOP 20 — out of more than TEN THOUSAND submissions. (Confetti pops ~1.5s after you land here — time the '20 out of 10,000' line to it.) Click the right video: it starts right at their reveal. Names are on the slide — point, don't read.">
+  <div class="confetti" aria-hidden="true">
+    <i style="left:4%;background:#ff7bc1;animation-delay:1.5s;--cr:520deg"></i>
+    <i style="left:11%;background:#7ee787;animation-delay:1.62s;--cr:-460deg"></i>
+    <i style="left:19%;background:#ffd66e;animation-delay:1.55s;--cr:610deg"></i>
+    <i style="left:27%;background:#79c0ff;animation-delay:1.74s;--cr:-540deg"></i>
+    <i style="left:34%;background:#d97757;animation-delay:1.58s;--cr:480deg"></i>
+    <i style="left:42%;background:#c678dd;animation-delay:1.8s;--cr:-620deg"></i>
+    <i style="left:49%;background:#7ee787;animation-delay:1.52s;--cr:560deg"></i>
+    <i style="left:57%;background:#ff7bc1;animation-delay:1.7s;--cr:-500deg"></i>
+    <i style="left:64%;background:#ffd66e;animation-delay:1.6s;--cr:590deg"></i>
+    <i style="left:71%;background:#79c0ff;animation-delay:1.85s;--cr:-470deg"></i>
+    <i style="left:78%;background:#d97757;animation-delay:1.56s;--cr:530deg"></i>
+    <i style="left:85%;background:#c678dd;animation-delay:1.72s;--cr:-580deg"></i>
+    <i style="left:92%;background:#7ee787;animation-delay:1.64s;--cr:500deg"></i>
+    <i style="left:8%;background:#ffd66e;animation-delay:1.9s;--cr:-640deg"></i>
+    <i style="left:38%;background:#ff7bc1;animation-delay:1.95s;--cr:450deg"></i>
+    <i style="left:61%;background:#7ee787;animation-delay:2s;--cr:-520deg"></i>
+    <i style="left:88%;background:#79c0ff;animation-delay:2.05s;--cr:600deg"></i>
+    <i style="left:24%;background:#d97757;animation-delay:2.1s;--cr:-490deg"></i>
+  </div>
   <span class="kicker blue">Local pride 🇮🇱 · 3/3</span>
   <h2>Veggie Brawl <span class="hl2">★ GMTK winner</span></h2>
   <div class="cols">
-    <div class="imgs">
-      <div class="proto"><div class="shot"><img src="assets/veggie-brawl-title.png" alt="Veggie Brawl title"></div></div>
+    <div class="imgs vidpair">
+      <div class="proto"><div class="shot"><img src="assets/veggie-brawl-title.png" alt="Veggie Brawl title"></div><p class="caption">Winner @ Xsolla Club site</p></div>
       <span class="jarrow">→</span>
-      <div class="final"><div class="shot"><img src="assets/veggie-brawl-gameplay.webp" alt="Veggie Brawl gameplay"></div></div>
+      <div class="final"><a class="vid" data-yt="awegilW3DTc" data-start="232" href="https://youtu.be/awegilW3DTc?t=232" target="_blank" rel="noopener"><div class="shot"><img src="https://i.ytimg.com/vi/awegilW3DTc/hqdefault.jpg" alt="GMTK favourite games video"></div><span class="play">▶</span></a><p class="caption">▶ Mark Brown's Top 20 reveal — they're in it!</p></div>
     </div>
     <div class="col">
       <ul class="tight">
         <li><b>Yoav Kagan · Shelly Rosenbaum · Shahar Tropp · Tal Rozenberg · Shachar Dahari</b></li>
         <li class="win"><b class="hl2">Winner — GMTK Jam @ Xsolla Club</b></li>
+        <li class="win"><b class="hl4">GMTK Top 20 — out of 10,000+ submissions</b> 🤯</li>
         <li>Play: <a class="mono" href="https://therozental.itch.io/veggie-brawl">therozental.itch.io/veggie-brawl</a></li>
       </ul>
     </div>
@@ -930,7 +963,7 @@ Running <b>34</b> tests using 4 workers
       box.style.position='relative';
       if(box.className.indexOf('thumbwrap')>-1) box.style.aspectRatio='16/9';
       box.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+el.dataset.yt+
-        '?autoplay=1&rel=0&modestbranding=1" title="YouTube player" '+
+        '?autoplay=1&rel=0&modestbranding=1'+(el.dataset.start?'&start='+el.dataset.start:'')+'" title="YouTube player" '+
         'allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen '+
         'style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>';
       var pl=el.querySelector('.play'); if(pl) pl.style.display='none';
