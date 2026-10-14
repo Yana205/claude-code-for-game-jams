@@ -6,8 +6,6 @@ Slides for the Oct 13, 2026 meetup talk by [@yan](https://yanaifraimov.itch.io/)
 
 **Live slides:** https://yana205.github.io/claude-code-for-game-jams/
 
-**Meetup recap (post-event):** https://yana205.github.io/claude-code-for-game-jams/recap/ — thank-yous to Tali Despins, Sivan Lavi and Emil Lager, Alpha Nomos launch congrats, and the night in photos.
-
 ## Controls
 
 | Key | Action |
